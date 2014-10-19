@@ -45,8 +45,8 @@ Mac OS不仅带了sh、bash这两个最基础的解释器，还内置了ksh、cs
 #### Windows上的模拟器
 windows出厂时没有内置shell解释器，需要自行安装，为了同时能用grep, awk, curl等工具，最好装一个cygwin或者mingw来模拟linux环境。
 
-- [cygwin](www.cygwin.com)
-- [mingw](www.mingw.org)
+- [cygwin](http://www.cygwin.com)
+- [mingw](http://www.mingw.org)
 
 ### 脚本解释器
 #### sh
@@ -275,7 +275,7 @@ sh里没有多行注释，只能每一行加一个#号。就像这样：
 
 在sh/bash里可不能这么写，如果else分支没有语句执行，就不要写这个else。
 
-还要注意，sh里的if [ $foo -eq 0 ]，这个方括号跟Java/PHP里if后面的圆括号大不相同，它是一个可执行程序（和cd, ls, grep一样），相不到吧？在CentOS上，它在/usr/bin目录下：
+还要注意，sh里的if [ $foo -eq 0 ]，这个方括号跟Java/PHP里if后面的圆括号大不相同，它是一个可执行程序（和cd, ls, grep一样），想不到吧？在CentOS上，它在/usr/bin目录下：
 
 	ll /usr/bin/[
 	-rwxr-xr-x. 1 root root 33408 6月  22 2012 /usr/bin/[
