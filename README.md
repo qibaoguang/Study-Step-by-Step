@@ -1,6 +1,6 @@
 Study-Step-by-Step
 ==================
-目录中很多是相关书籍的链接，是从(https://github.com/justjavac/free-programming-books-zh_CN)拷贝过来的。暂时放到这里，留着学习使用。
+目录中很多是相关书籍的链接，是从[justjavac](https://github.com/justjavac/free-programming-books-zh_CN)拷贝过来的。暂时放到这里，留着参考。
 ## 目录
 
 * [语言无关类](#语言无关类)
