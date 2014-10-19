@@ -29,7 +29,7 @@ Git 基本配置
  
 * 查看某个配置：
 
-`$ git config user.name`
+ `$ git config user.name`
   
 ###6. git配置文件
  * /etc/gitconfig 对所有用户有效
@@ -40,6 +40,7 @@ Git 基本配置
  * 同上
  
 对应命令：
+
   `$ git config --system`
 
   `$ git config --global`
