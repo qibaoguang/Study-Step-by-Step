@@ -36,13 +36,13 @@ AWK常用命令
 
 >test.txt文档内容:
 
-1
+>1
 
-2
+>2
 
-3
+>3
 
->列求和： `cat test.txt |awk '{a+=$1}END{print a}'`
+列求和： `cat test.txt |awk '{a+=$1}END{print a}'`
 
 列求平均值：`cat test.txt |awk '{a+=$1}END{print a/NR}'`
 
@@ -59,36 +59,38 @@ AWK常用命令
 
 >12 34 56 78
 
-24 65 87 90
+>24 65 87 90
 
-76 11 67 87
+>76 11 67 87
 
-100 89 78 99
+>100 89 78 99
 
 求最大值及位置：`for i in 'cat test.txt';do echo $i; done |sort |sed -n '1p;2p'`  
 
 例2：同样是test.txt
 
->求总和：`for i in 'cat test.txt';do echo $i ;done |awk '{a+=$1}END{print a}'`
+求总和：`for i in 'cat test.txt';do echo $i ;done |awk '{a+=$1}END{print a}'`
 
 例3：
 
 >A     88
 
-B     78
+>B     78
 
-B     89
+>B     89
 
-C     44
+>C     44
 
-A     98
+>A     98
 
-C     433
+>C     433
 
-要求输出：A：88；98
+要求输出：
 
-          B：78；89
+>A：88；98
+
+>B：78；89
           
-          C：44；433
+>C：44；433
           
 `awk '{a[$1]=a[$1]" "$2}END{for(i in a)print i,a[i]}' test.txt |awk '{print $1":",$2";",$3}'`
