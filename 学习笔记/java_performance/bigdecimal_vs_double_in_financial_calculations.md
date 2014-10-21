@@ -38,39 +38,41 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 
     {
 
-    final BigDecimal result = orig.multiply( mult, MathContext.DECIMAL64 );
+     final BigDecimal result = orig.multiply( mult, MathContext.DECIMAL64 );
     
-    if ( result != null ) res++;
+     if ( result != null ) res++;
     
     }
 
 我们使用double和long不能完全模拟上面的计算。在下面的代码中，JIT会将常量`Math.round( orig * mult )`移出循环。
 
-`final double orig = 36220; //362.2 in cents
+    final double orig = 36220; //362.2 in cents
 
-final double mult = 0.015; //1.5%
+    final double mult = 0.015; //1.5%
 
-for ( int i = 0; i < ITERS; ++i )
+    for ( int i = 0; i < ITERS; ++i )
 
-{
+    {
 
-    final long result = Math.round( orig * mult );
+     final long result = Math.round( orig * mult );
 
-    if ( result != 543 ) res++;    //543.3 cents actually
-}`
+     if ( result != 543 ) res++;    //543.3 cents actually
+     
+    }
 
 所以，我们使用下面稍微不同的测试用例以提高可比性：
 
-`final double orig = 36220; //362.2 in cents
+    final double orig = 36220; //362.2 in cents
 
-for ( long i = 0; i < ITERS; ++i )
+    for ( long i = 0; i < ITERS; ++i )
 
-{
+    {
 
     final long result = Math.round( orig * i );
     
     if ( result != 543 ) res++;    //compare with something
-}`
+    
+    }
 
 使用BigDecimal计算时花费4.899秒，使用double计算花费0.58秒。从测试结果可以看出，如果你的计算结果不超过52位(double精度)，并且你坚持遵守上面的两条规则，那你就能使用long/double完成快速，精确的货币计算！
 
