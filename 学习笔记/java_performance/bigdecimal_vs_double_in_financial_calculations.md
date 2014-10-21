@@ -79,34 +79,35 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 ###使用BigDecimal进行货币操作
 
 * 如何正确使用?
-对于BigDecimals，如果需要定义取整模式和精度，可以使用MathContext类。该类中预定义了一些常量，比如MathContext.DECIMAL32/DECIMAL64/DECIMAL128，可用于模拟float/double/decimal_128算术运算，而不会出现任何rounding问题。MathContext.UNLIMITED是MathContext默认的值。
+
+对于BigDecimals，如果需要定义取整模式和精度，可以使用MathContext类。该类中预定义了一些常量，比如`MathContext.DECIMAL32/DECIMAL64/DECIMAL128`，可用于模拟float/double/decimal_128算术运算，而不会出现任何rounding问题。`MathContext.UNLIMITED`是MathContext默认的值。
 
 >加减运算中，你可以不定义MathContext，但乘除运算中最好定义DECIMAL*上下文中的一个。因为，乘除运算在计算结果为无限小数时需要定义精度，比如１除３。否则将会抛出ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result。
 
 可以尝试运行代码：
 
-`final BigDecimal three = new BigDecimal( "3" );
-	try
-	{
-	    System.out.println( BigDecimal.ONE.divide( three ) );
-	}
-	catch ( ArithmeticException ex )
-	{
-	System.out.println( "Got an exception while calculating 1/3 ex.getMessage() );
-}`
+`final BigDecimal three = new BigDecimal( "3" );`
+`try`
+`System.out.println( BigDecimal.ONE.divide( three ) );`
+`}`
+`catch ( ArithmeticException ex )`
+`{`
+	`System.out.println( "Got an exception while calculating 1/3 ex.getMessage() );`
+`}`
 
 * BigDecimal性能如何？
+
 测试用例：计算10M E*E+E的和，其中E=Math.E
 
-`BigDecimal res = BigDecimal.ZERO;
-final BigDecimal a = new BigDecimal( Math.E, context );
-final BigDecimal b = new BigDecimal( Math.E, context );
-final BigDecimal c = new BigDecimal( Math.E, context );
-for ( int i = 0; i < 10000000; ++i )
-{
-    final BigDecimal val = a.multiply( b, context ).add( c, context );
-    res = res.add( val, context );
-}`
+`BigDecimal res = BigDecimal.ZERO;`
+`final BigDecimal a = new BigDecimal( Math.E, context );`
+``final BigDecimal b = new BigDecimal( Math.E, context );`
+`final BigDecimal c = new BigDecimal( Math.E, context );``
+`for ( int i = 0; i < 10000000; ++i )``
+`{`
+    `final BigDecimal val = a.multiply( b, context ).add( c, context );`
+   　`res = res.add( val, context );`
+`}`
 
 使用double，没有设置MathContext，设置不同的MathContext的测试结果：
 
