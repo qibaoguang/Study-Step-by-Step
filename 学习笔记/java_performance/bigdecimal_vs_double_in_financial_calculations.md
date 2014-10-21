@@ -28,21 +28,21 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 
 先看一个使用double和BigDecimal进行货币操作的测试用例，分别使用double和BigDecimal计算362.2￥的1.5%，循环100M次。
 
- `int res = 0;
+    int res = 0;
 
- final BigDecimal orig = new BigDecimal( "362.2" );
+    final BigDecimal orig = new BigDecimal( "362.2" );
 
- final BigDecimal mult = new BigDecimal( "0.015" ); //1.5%
+    final BigDecimal mult = new BigDecimal( "0.015" ); //1.5%
 
- for ( int i = 0; i < ITERS; ++i )
+    for ( int i = 0; i < ITERS; ++i )
 
- {
+    {
 
     final BigDecimal result = orig.multiply( mult, MathContext.DECIMAL64 );
     
     if ( result != null ) res++;
     
- }`
+    }
 
 我们使用double和long不能完全模拟上面的计算。在下面的代码中，JIT会将常量`Math.round( orig * mult )`移出循环。
 
