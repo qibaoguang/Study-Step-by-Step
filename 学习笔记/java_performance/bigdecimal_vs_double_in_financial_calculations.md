@@ -78,3 +78,45 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 
 ###使用BigDecimal进行货币操作
 
+* 如何正确使用?
+对于BigDecimals，如果需要定义取整模式和精度，可以使用MathContext类。该类中预定义了一些常量，比如MathContext.DECIMAL32/DECIMAL64/DECIMAL128，可用于模拟float/double/decimal_128算术运算，而不会出现任何rounding问题。MathContext.UNLIMITED是MathContext默认的值。
+
+>加减运算中，你可以不定义MathContext，但乘除运算中最好定义DECIMAL*上下文中的一个。因为，乘除运算在计算结果为无限小数时需要定义精度，比如１除３。否则将会抛出ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result。
+
+可以尝试运行代码：
+
+`final BigDecimal three = new BigDecimal( "3" );
+	try
+	{
+	    System.out.println( BigDecimal.ONE.divide( three ) );
+	}
+	catch ( ArithmeticException ex )
+	{
+	System.out.println( "Got an exception while calculating 1/3 ex.getMessage() );
+}`
+
+* BigDecimal性能如何？
+测试用例：计算10M E*E+E的和，其中E=Math.E
+
+`BigDecimal res = BigDecimal.ZERO;
+final BigDecimal a = new BigDecimal( Math.E, context );
+final BigDecimal b = new BigDecimal( Math.E, context );
+final BigDecimal c = new BigDecimal( Math.E, context );
+for ( int i = 0; i < 10000000; ++i )
+{
+    final BigDecimal val = a.multiply( b, context ).add( c, context );
+    res = res.add( val, context );
+}`
+
+使用double，没有设置MathContext，设置不同的MathContext的测试结果：
+
+|	类型	 | 	耗时(秒) |	计算结果 		|
+| -------|---------|---------------------|
+| double | 0.018Sec	| 1.010733792587689E8| 
+|noMathContext|4.1sec|101073379.273896945320908905278183855697464192452494578591950602844407036684515333035960793495178222656250000000|
+|MathContext.UNLIMITED|3.9sec|101073379.273896945320908905278183855697464192452494578591950602844407036684515333035960793495178222656250000000|
+|MathContext.DECIMAL32|4.2sec|100000000|
+|MathContext.DECIMAL64|9.5sec|101073379.2938854|
+|MathContext.DECIMAL128|13.9sec|101073379.2738969453209089052948157|
+
+从测试结果中可以看出，使用BigDecimal进行运算开销很大，在可以避免的情况下需要尽量避免。比如，有个String型的数值，需要除以10的n次方(n为输入)，采用对输入进行小数点移位会更快！对于double类型的数值，乘以或除以２的幂，一般情况都会得到正确的结果，因为浮点数值的指数部分表示２的幂。
