@@ -86,21 +86,21 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 
 可以尝试运行代码：
 
-`final BigDecimal three = new BigDecimal( "3" );`
+>final BigDecimal three = new BigDecimal( "3" );
 
-`try{`
+>try{
 
-	`System.out.println( BigDecimal.ONE.divide( three ) );`
+>	System.out.println( BigDecimal.ONE.divide( three ) );
 	
-`}`
+>}
 
-	`catch ( ArithmeticException ex )`
+>	catch ( ArithmeticException ex )
 	
-`{`
+>{
 
-	`System.out.println( "Got an exception while calculating 1/3 ex.getMessage() );`
+>	System.out.println( "Got an exception while calculating 1/3 ex.getMessage() );
 	
-`}`
+>}
 
 * BigDecimal性能如何？
 
@@ -136,3 +136,53 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 |MathContext.DECIMAL128|13.9sec|101073379.2738969453209089052948157|
 
 从测试结果中可以看出，使用BigDecimal进行运算开销很大，在可以避免的情况下需要尽量避免。比如，有个String型的数值，需要除以10的n次方(n为输入)，采用对输入进行小数点移位会更快！对于double类型的数值，乘以或除以２的幂，一般情况都会得到正确的结果，因为浮点数值的指数部分表示２的幂。
+
+###数值转字符串
+浮点数转字符串相当困难，比如双精度double转换，你需要知道浮点数的二进制表示形式(IEEE-754)，具体实现可以参考JDK sun.misc.FloatingDecimal类。
+
+* Java6转换Double对象到String需要经过一系列调用：
+>Double
+>public String toString() {
+>    return String.valueOf(value);
+>}
+ >
+>String
+>public static String valueOf(double d) {
+  >  return Double.toString(d);
+>}
+ >
+>Double
+>public static String toString(double d) {
+  >  return new FloatingDecimal(d).toJavaFormatString();
+>}
+
+* Java7中就非常直接：
+>jdk 7 Double
+>public String toString() {
+  >  return toString(value);
+>}
+
+* BigDecimal转换为String
+
+BigDecimal有３个用于转换为String的方法：toString，toPlainString和toEngineeringString。toString会缓存toEngineeringString的结果，用于后续的调用(这样做可能是因为BigDecimal的值是不可变的)。下面测试了将Math.E转为字符串10M次耗时：
+
+Double.toString(double)|BigDecimal.toPlainString|BigDecimal.toEngineeringString
+-----------------------------|---------------------------------|---------------
+4.1 sec	 |12.4 sec	|12.5 sec
+
+最好不要将double转换为BigDecimal，因为double会先转为String，然后String转为BigDecimal。如果你的算法输入为String，那就直接将它转换为BigDecimal，这样你可以避免rounding错误！
+
+###总结
+* 如果你想使用Java实现快速且正确的货币计算操作，你应该遵守以下规则：
+1. 将货币值以最小的货币单位(比如分)存放到long类型变量中。
+2. 如果以最小的货币单位计算时使用了double类型，要避免产生非整数的值，否则会产生精度问题。
+3. 使用long类型进行加减运算。
+4. 根据系统需求，使用Math.round/rint/ceil/floor对乘除结果进行取整。
+5. 计算要满足double精度（52位）。
+
+* 为了避免产生无限小数时抛出ArithmeticException，在BigDecimal乘法和除法运算中需要使用MathContext。由于MathContext.UNLIMITED相当与没有使用上下文，所以不建议使用它。
+
+* 可能的情况，不要将double转化为BigDecimal，而是将String转化为BigDecimal。
+
+See alse：
+[实现一个高性能的Money类](http://java-performance.info/high-performance-money-class/)
