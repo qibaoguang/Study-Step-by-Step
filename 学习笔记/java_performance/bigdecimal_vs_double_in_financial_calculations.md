@@ -44,35 +44,35 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
     
     }
 
-我们使用double和long不能完全模拟上面的计算。在下面的代码中，JIT会将常量`Math.round( orig * mult )`移出循环。
+我们使用double和long不能完全模拟上面的计算。在下面的代码中，JIT会将常量Math.round( orig * mult )移出循环。
 
-    final double orig = 36220; //362.2 in cents
+>    final double orig = 36220; //362.2 in cents
 
-    final double mult = 0.015; //1.5%
+>    final double mult = 0.015; //1.5%
 
-    for ( int i = 0; i < ITERS; ++i )
+>    for ( int i = 0; i < ITERS; ++i )
 
-    {
+>    {
 
-     final long result = Math.round( orig * mult );
+>     final long result = Math.round( orig * mult );
 
-     if ( result != 543 ) res++;    //543.3 cents actually
+>     if ( result != 543 ) res++;    //543.3 cents actually
      
-    }
+>    }
 
 所以，我们使用下面稍微不同的测试用例以提高可比性：
 
-    final double orig = 36220; //362.2 in cents
+>    final double orig = 36220; //362.2 in cents
 
-    for ( long i = 0; i < ITERS; ++i )
+>    for ( long i = 0; i < ITERS; ++i )
 
-    {
+>    {
 
-    final long result = Math.round( orig * i );
+>    final long result = Math.round( orig * i );
     
-    if ( result != 543 ) res++;    //compare with something
+>    if ( result != 543 ) res++;    //compare with something
     
-    }
+>   }
 
 使用BigDecimal计算时花费4.899秒，使用double计算花费0.58秒。从测试结果可以看出，如果你的计算结果不超过52位(double精度)，并且你坚持遵守上面的两条规则，那你就能使用long/double完成快速，精确的货币计算！
 
@@ -80,7 +80,7 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 
 * 如何正确使用?
 
-对于BigDecimals，如果需要定义取整模式和精度，可以使用MathContext类。该类中预定义了一些常量，比如`MathContext.DECIMAL32/DECIMAL64/DECIMAL128`，可用于模拟float/double/decimal_128算术运算，而不会出现任何rounding问题。`MathContext.UNLIMITED`是MathContext默认的值。
+对于BigDecimals，如果需要定义取整模式和精度，可以使用MathContext类。该类中预定义了一些常量，比如MathContext.DECIMAL32/DECIMAL64/DECIMAL128，可用于模拟float/double/decimal_128算术运算，而不会出现任何rounding问题。MathContext.UNLIMITED是MathContext默认的值。
 
 >加减运算中，你可以不定义MathContext，但乘除运算中最好定义DECIMAL*上下文中的一个。因为，乘除运算在计算结果为无限小数时需要定义精度，比如１除３。否则将会抛出ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result。
 
@@ -106,23 +106,23 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 
 测试用例：计算10M E*E+E的和，其中E=Math.E
 
-`BigDecimal res = BigDecimal.ZERO;`
+>BigDecimal res = BigDecimal.ZERO;
 
-`final BigDecimal a = new BigDecimal( Math.E, context );`
+>final BigDecimal a = new BigDecimal( Math.E, context );
 
-`final BigDecimal b = new BigDecimal( Math.E, context );`
+>final BigDecimal b = new BigDecimal( Math.E, context );
 
-`final BigDecimal c = new BigDecimal( Math.E, context );``
+>final BigDecimal c = new BigDecimal( Math.E, context );
 
-`for ( int i = 0; i < 10000000; ++i )``
+>for ( int i = 0; i < 10000000; ++i )
 
-`{`
+>{
 
-    `final BigDecimal val = a.multiply( b, context ).add( c, context );`
+>    final BigDecimal val = a.multiply( b, context ).add( c, context );
     
-   　`res = res.add( val, context );`
+>   　res = res.add( val, context );
    　
-`}`
+>}
 
 使用double，没有设置MathContext，设置不同的MathContext的测试结果：
 
@@ -141,25 +141,40 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 浮点数转字符串相当困难，比如双精度double转换，你需要知道浮点数的二进制表示形式(IEEE-754)，具体实现可以参考JDK sun.misc.FloatingDecimal类。
 
 * Java6转换Double对象到String需要经过一系列调用：
+
 >Double
+
 >public String toString() {
+
 >    return String.valueOf(value);
->}
- >
->String
->public static String valueOf(double d) {
-  >  return Double.toString(d);
->}
- >
->Double
->public static String toString(double d) {
-  >  return new FloatingDecimal(d).toJavaFormatString();
+
 >}
 
+>String
+
+>public static String valueOf(double d) {
+
+>  return Double.toString(d);
+  
+>}
+
+>Double
+
+>public static String toString(double d) {
+
+>  return new FloatingDecimal(d).toJavaFormatString();
+
+>}
+
+
 * Java7中就非常直接：
+
 >jdk 7 Double
+
 >public String toString() {
-  >  return toString(value);
+
+>  return toString(value);
+
 >}
 
 * BigDecimal转换为String
@@ -174,11 +189,11 @@ Double.toString(double)|BigDecimal.toPlainString|BigDecimal.toEngineeringString
 
 ###总结
 * 如果你想使用Java实现快速且正确的货币计算操作，你应该遵守以下规则：
-1. 将货币值以最小的货币单位(比如分)存放到long类型变量中。
-2. 如果以最小的货币单位计算时使用了double类型，要避免产生非整数的值，否则会产生精度问题。
-3. 使用long类型进行加减运算。
-4. 根据系统需求，使用Math.round/rint/ceil/floor对乘除结果进行取整。
-5. 计算要满足double精度（52位）。
+	1. 将货币值以最小的货币单位(比如分)存放到long类型变量中。
+	2. 如果以最小的货币单位计算时使用了double类型，要避免产生非整数的值，否则会产生精度问题。
+	3. 使用long类型进行加减运算。
+	4. 根据系统需求，使用Math.round/rint/ceil/floor对乘除结果进行取整。
+	5. 计算要满足double精度（52位）。
 
 * 为了避免产生无限小数时抛出ArithmeticException，在BigDecimal乘法和除法运算中需要使用MathContext。由于MathContext.UNLIMITED相当与没有使用上下文，所以不建议使用它。
 
