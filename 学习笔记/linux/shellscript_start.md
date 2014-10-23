@@ -2,29 +2,29 @@ shell监控脚本-准备工作
 ============
 ###准备监控机 
 
->linux 系统,普通服务器即可,要求: 
+linux 系统,普通服务器即可,要求: 
 
->安装ssh 客户端,如果要发送手机短信,还需准备短信猫并且安装 gnokii或者 gammu。
+安装ssh 客户端,如果要发送手机短信,还需准备短信猫并且安装 gnokii或者 gammu。
 
 ###编辑ssh_config配置文件 
 
->/etc/ssh/ssh_config 配置文件，设置"GSSAPIAuthentication no"。
+/etc/ssh/ssh_config 配置文件，设置"GSSAPIAuthentication no"。
 
->被监控的linux 编辑 /etc/ssh/sshd_config ，添加 UseDNS no ，最后重启sshd。
+被监控的linux 编辑 /etc/ssh/sshd_config ，添加 UseDNS no ，最后重启sshd。
 
 ###使用密匙登录linux主机 
 
 ###建立sh目录，用于存放shell脚本 
 
->mkdir -p /root/sh/crontab/log
+`mkdir -p /root/sh/crontab/log`
 
->sh目录存放shell脚本 
+sh目录存放shell脚本 
 
->crontab/log目录存放错误信息 
+crontab/log目录存放错误信息 
 
 ###准备配置文件 
 
->cat /root/sh/CONFIG
+>`cat /root/sh/CONFIG
 
 >MOBILES="13xxxxxxxxx 18xxxxxxxxx 13xxxxxxxxx" 
 
@@ -41,13 +41,13 @@ shell监控脚本-准备工作
 
 >DB_SLAVE_HOSTS="10.0.100.82" 
 
->ALLHOSTS="\$ESXI_HOSTS \$PHYSICAL_HOSTS \$LINUX_WEB_HOSTS \$WIN_WEB_HOSTS \$DB_SLAVE_HOSTS"
+>ALLHOSTS="\$ESXI_HOSTS \$PHYSICAL_HOSTS \$LINUX_WEB_HOSTS \$WIN_WEB_HOSTS \$DB_SLAVE_HOSTS"`
 
 注意:此配置文件用于定义全局变量，包括ip 地址，邮件地址，电话号码等等。
 
 ###crontab任务计划
 
->crontab -l
+>`crontab -l
 
 >\#ping
 
@@ -67,7 +67,7 @@ shell监控脚本-准备工作
 
 >\#web
 
->*/1 * * * * /root/sh/chk_web.sh >> /root/sh/cron.log 2>&1
+>*/1 * * * * /root/sh/chk_web.sh >> /root/sh/cron.log 2>&1`
 
 注意:脚本执行时间]需按照脚本实际功能来制定，例如 chk_df。 
 
