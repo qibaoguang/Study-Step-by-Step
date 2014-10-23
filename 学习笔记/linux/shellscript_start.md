@@ -1,11 +1,13 @@
 shell监控脚本-准备工作 
 ============
 1. 准备监控机 
+
 >linux 系统,普通服务器即可,要求: 
 
 >安装ssh 客户端,如果要发送手机短信,还需准备短信猫并且安装 gnokii或者 gammu。
 
 2. 编辑ssh_config配置文件 
+
 >/etc/ssh/ssh_config 配置文件，设置"GSSAPIAuthentication no"。
 
 >被监控的linux 编辑 /etc/ssh/sshd_config ，添加 UseDNS no ，最后重启sshd。
@@ -13,6 +15,7 @@ shell监控脚本-准备工作
 3. 使用密匙登录linux主机 
 
 4. 建立sh目录，用于存放shell脚本 
+
 >mkdir -p /root/sh/crontab/log
 
 >sh目录存放shell脚本 
@@ -20,6 +23,7 @@ shell监控脚本-准备工作
 >crontab/log目录存放错误信息 
 
 5. 准备配置文件 
+
 >cat /root/sh/CONFIG
 
 >MOBILES="13xxxxxxxxx 18xxxxxxxxx 13xxxxxxxxx" 
@@ -42,6 +46,7 @@ shell监控脚本-准备工作
  注意:此配置文件用于定义全局变量，包括ip 地址，邮件地址，电话号码等等。
 
 6. crontab任务计划
+
 >crontab -l
 
 >\#ping
