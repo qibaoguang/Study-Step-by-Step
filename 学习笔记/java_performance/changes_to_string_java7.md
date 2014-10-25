@@ -6,7 +6,7 @@ Java1.7之前，String内部有４个非静态字段：
 >
 >int offset;	   //value中第一个有效字符的索引
 >
->int count;   //value中有效字的数量
+>int count;   //value中有效字符的数量
 >
 >int hash;　//缓存的String hash码
 
@@ -42,9 +42,7 @@ String.hash32()方法不是public的，所以我需要查看HashMap的实现，�
 **本段适用于Java 7 build 6(包括)到build 40(不包括)，这些代码在Java8中已移除。查看下个段落可以了解到关于Java 7u40+的信息**
 
 Oracle在以下类的hash算法实现中留下个bug：HashMap，Hashtable，HashSet，LinkedHashMap，LinkedHashSet和WeakHashMap。只有ConcurrentHashMap不受影响。原因在于所有的非并发类都有下面的字段：
->/**
- >\* A randomizing value associated with this instance that is applied to
- >\* hash code of keys to make hash collisions harder to find.
+>/** A randomizing value associated with this instance that is applied to hash code of keys to make hash collisions harder to find.
  >*/
  >
 >transient final int hashSeed = sun.misc.Hashing.randomHashSeed(this);
@@ -55,23 +53,28 @@ Oracle在以下类的hash算法实现中留下个bug：HashMap，Hashtable，Has
 
 如何解决该问题？
 
-1. ConcurrentHashMap方式：只有在系统属性jdk.map.althashing.threshold设置的时候才调用randomHashSed方法。不幸的是，只有JDK核心开发人员才能使用。
+1. 像ConcurrentHashMap那样：只有在系统属性jdk.map.althashing.threshold设置的时候才调用randomHashSed方法。不幸的是，只有JDK核心开发人员才能这么干。
 
 >/** A randomizing value associated with this instance that is applied to hash code of keys to make hash collisions harder to find.
- >*/
+>*/
 >
 >private transient final int hashSeed = randomHashSeed(this);
 >
 >private static int randomHashSeed(ConcurrentHashMap instance) {
 >
 > if (sun.misc.VM.isBooted() && Holder.ALTERNATIVE_HASHING) {
+>
 >     return sun.misc.Hashing.randomHashSeed(instance);
+>
 >}
+>
 >  return 0;
+>
 >}
 
-2. hacker方式：修改sun.misc.Hashing类，不过不推荐，如果你想这么干，可以这样：java.util.Random类不是final的，你可以继承这个类，覆盖里面的nextInt()方法，返回thread-local的值（甚至可以是常量）。
-更好的方式是，你可以使用Java 7的java.util.concurrent.ThreadLocalRandom，它是一个使用ThreadLocal<ThreadLocalRandom>的线程局部的Random子类（感谢[Benjamin Possolo](https://plus.google.com/u/0/109148277999114144772/posts)指出我在原来的文章中没有提到这个类）。除了是线程局部外，ThreadLocalRandom还是CPU 缓存的（cache-aware）：为了消除在一个缓存线结束时产生两个不同种子的机会，它在每个ThreadLocalRandom实例产生种子后添加64个字节填充(高速缓存大小)。
+2. 手动打补丁：修改sun.misc.Hashing类，不过不推荐，如果你想这么干，可以这样：java.util.Random类不是final的，你可以继承这个类，覆盖里面的nextInt()方法，返回thread-local的值（甚至可以是常量）。
+
+更好的方式是，你可以使用Java 7的java.util.concurrent.ThreadLocalRandom，它是一个使用ThreadLocal<ThreadLocalRandom>的线程局部的Random子类（感谢[BenjaminPossolo](https://plus.google.com/u/0/109148277999114144772/posts)指出我在原来的文章中没有提到这个类）。除了是线程局部外，ThreadLocalRandom还是CPU缓存的（cache-aware）：为了消除在一个缓存线结束时产生两个不同种子的机会，它在每个ThreadLocalRandom实例产生种子后添加64个字节填充(高速缓存大小)。
 
 然后修改sun.misc.Hashing.Holder.SEED_MAKER这个字段，把它设置为你继承的Random类的实例。 虽然这个字段是private static final的，别担心，用反射来搞定： 
 > public class Hashing { 
@@ -79,7 +82,7 @@ Oracle在以下类的hash算法实现中留下个bug：HashMap，Hashtable，Has
 >  private static class Holder { 
 >
 >    static final java.util.Random SEED_MAKER;
-    
+
 3. Buddhist方式：不要升级到Java 7u6和更高版本，检查Java 7的更新版本看是否修复了该bug。
    
 ###Java 7u40+中，新的hash算法不再影响多线程代码的性能。
