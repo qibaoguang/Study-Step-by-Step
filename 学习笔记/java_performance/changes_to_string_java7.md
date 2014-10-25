@@ -62,13 +62,13 @@ Oracle在以下类的hash算法实现中留下个bug：HashMap，Hashtable，Has
 >
 >private static int randomHashSeed(ConcurrentHashMap instance) {
 >
-> if (sun.misc.VM.isBooted() && Holder.ALTERNATIVE_HASHING) {
+>if (sun.misc.VM.isBooted() && Holder.ALTERNATIVE_HASHING) {
 >
->     return sun.misc.Hashing.randomHashSeed(instance);
+>return sun.misc.Hashing.randomHashSeed(instance);
 >
 >}
 >
->  return 0;
+>return 0;
 >
 >}
 
@@ -77,11 +77,11 @@ Oracle在以下类的hash算法实现中留下个bug：HashMap，Hashtable，Has
 更好的方式是，你可以使用Java 7的java.util.concurrent.ThreadLocalRandom，它是一个使用ThreadLocal<ThreadLocalRandom>的线程局部的Random子类（感谢[BenjaminPossolo](https://plus.google.com/u/0/109148277999114144772/posts)指出我在原来的文章中没有提到这个类）。除了是线程局部外，ThreadLocalRandom还是CPU缓存的（cache-aware）：为了消除在一个缓存线结束时产生两个不同种子的机会，它在每个ThreadLocalRandom实例产生种子后添加64个字节填充(高速缓存大小)。
 
 然后修改sun.misc.Hashing.Holder.SEED_MAKER这个字段，把它设置为你继承的Random类的实例。 虽然这个字段是private static final的，别担心，用反射来搞定： 
-> public class Hashing { 
+>public class Hashing { 
 >
->  private static class Holder { 
+>private static class Holder { 
 >
->    static final java.util.Random SEED_MAKER;
+>static final java.util.Random SEED_MAKER;
 
 3. Buddhist方式：不要升级到Java 7u6和更高版本，检查Java 7的更新版本看是否修复了该bug。
    
