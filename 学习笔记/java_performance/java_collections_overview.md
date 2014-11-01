@@ -43,5 +43,13 @@ Java集合概述
 ###Maps
 * HashMap－一个很流行的map实现。它只是将keys映射到values，没有其他功能。如果有一个高质量的hashcode方法，get/put方法的时间复杂度就是常量级的。
 
+* EnumMap－使用枚举类型作为key的map。通常情况下，EnumMap比HashMap要快，因为EnumMap知道keys的最大数量，内嵌的有enum到int的映射（一个存放values的固定大小的数组）。
 
+* Hashtable－早期遗留下的HashMap同步版本。在新的产品代码中使用HashMap。
+
+* IdentityHashMap－Map中一个违背常识的特殊版本：它使用==而不是调用Object.equals比较引用。这个特性让IdentityHashMap非常适合于各种图的遍历算法－你可以很轻松的将处理过的节点和一些节点相关的数据存储到IdentityHashMap中。
+
+* LinkedHashMap－HashMap和LinkedList的结合，所有元素的插入顺序都被存储到一个LinkedList中。这就是LinkedHashMap entries，keys和values总是以插入的顺序进行遍历的原因。就每个元素的内存消耗而言，LinkedHashMap是JDK最昂贵的集合！
+
+* TreeMap－一种基于红黑树的排序导航Map。它采用自然顺序或给定的比较器对所有实体（entries）进行排序。这个map要求equals和Comparable／Comparator.compareTo的实现保持一致。该类实现了NavigableMap接口：它允许获取map中比给定key大或小的所有实体；获取一个pre/next实体（基于键的顺序）；使用一个给定范围内的键获取一个map（大致上相当于SQL的BETWEEN操作）和这些方法的许多变体。
 
