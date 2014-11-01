@@ -27,5 +27,21 @@ Java集合概述
 这篇文章的以下部分描述了非线程安全的集合类。所有这些集合类存放在java.util包，它们中的一些是Java1.0添加的（现在已过期），大部分是在Java1.4出现的。Java1.5加入支持枚举类型的集合，所有集合类也都支持泛型了。PriorityQueue也是Java1.5加入的。Java1.6添加的ArrayDeque是最新加入的非线程安全框架。
 
 ###Lists
-* ArrayList-最常用的List实现。底层是通过数组和一个int-数组中第一个未被使用的元素的位置实现的。和其他Lists实现一样，ArrayList也会在必要的时候扩展自己。ArrayList访问元素的时间复杂度为常量级。尾部更新很廉价（常量级时间复杂度），由于ArrayList是不可变的造成其头部更新很昂贵-所有的元素从index=0。
+* ArrayList-最常用的List实现。底层是通过数组和一个int-数组中第一个未被使用的元素的位置实现的。和其他Lists实现一样，ArrayList也会在必要的时候扩展自己。ArrayList访问元素的时间复杂度为常量级。尾部更新很廉价（常量级时间复杂度），由于ArrayList是不可变的造成其头部更新很昂贵-底层数组从索引为０到需要更新位置的所有元素需要向右移动以完成插入，向左移动以完成删除。CPU缓存友好的集合由于底层采用数组实现导致其缓存效果并不太好，因为它内部包含Objectｓ，它们是指向实际对象的引用。
+
+* LinkedList－双端队列（Deque）的实现，每个Node由一个value，prev和next指针组成。也就是说，访问或更新元素的时间复杂度为线性复杂度（由于优化，这些方法不会遍历超过一半的集合，所以位于集合中间的元素才是最昂贵的）。如果想写出快速的LinkedList代码，你需要使用ListIterators。如果你实现一个Queue/Deque（只能访问第一个和最后一个元素）－可以考虑使用ArrayDeque。
+
+* Vector－ArrayList的一个遗留版本，所有的方法都是synchronized。使用ArrayList替代它。
+
+###Queues/deques
+* ArrayDeque－基于数组的双端队列Deque实现，有head/tail指针。跟LinkedList不一样，这个类不实现List接口，也就是说，除了第一个和最后一个元素你访问不到任何数据。由于ArrayDeque产生的垃圾是有限的（扩展时原始数组会被抛弃），通常情况下这个类比LinkedList更适合实现queues/deques。
+
+* Stack－一个LIFO队列。生产环境的代码不要使用它，而是使用任何双端队列代替（ArrayDeque非常合适）。
+
+* PriorityQueue－基于优先级堆的队列。既可以使用自然顺序也可以使用提供的比较器Comparator。它的主要特性－poll/peek/remove/element方法总是返回队列中剩余的最小元素。除此之外，这个队列实现的Iterable接口不是以有序形式进行遍历的（或任何其他的特殊顺序）。如果你需要获取队列中最小元素，通常PriorityQueue比其他可排序集合更合适，比如TreeSet。
+
+###Maps
+* HashMap－一个很流行的map实现。它只是将keys映射到values，没有其他功能。如果有一个高质量的hashcode方法，get/put方法的时间复杂度就是常量级的。
+
+
 
