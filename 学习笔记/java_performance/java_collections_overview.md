@@ -129,3 +129,92 @@ Java集合概述
 * ConcurrentSkipListSet－一个采用ConcurrentSkipListMap存储的并发set。
 * CopyOnWriterArraySet－一个采用CopyOnWriteArrayList存储的并发set。
 
+
+##总结
+下面是所有JDK集合的一个简明总结：
+<table border="1">
+<tr>
+<td>&nbsp;</td>
+<td>Single threaded</td>
+<td>Concurrent</td>
+</tr>
+<tr>
+<td>Lists</td>
+<td>
+<ul>
+<li>ArrayList &#8211; generic array-based</li>
+<li>LinkedList &#8211; do not use</li>
+<li>Vector &#8211; deprecated</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>CopyOnWriteArrayList &#8211; seldom updated, often traversed</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Queues / deques</td>
+<td>
+<ul>
+<li>ArrayDeque &#8211; generic array-based</li>
+<li>Stack &#8211; deprecated</li>
+<li>PriorityQueue &#8211; sorted retrieval operations</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>ArrayBlockingQueue &#8211; bounded blocking queue</li>
+<li>ConcurrentLinkedDeque / ConcurrentLinkedQueue &#8211; unbounded linked queue (CAS)</li>
+<li>DelayQueue &#8211; queue with delays on each element</li>
+<li>LinkedBlockingDeque / LinkedBlockingQueue &#8211; optionally bounded linked queue (locks)</li>
+<li>LinkedTransferQueue &#8211; may transfer elements w/o storing</li>
+<li>PriorityBlockingQueue &#8211; concurrent PriorityQueue</li>
+<li>SynchronousQueue &#8211; Exchanger with Queue interface</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Maps</td>
+<td>
+<ul>
+<li>HashMap &#8211; generic map</li>
+<li>EnumMap &#8211; enum keys</li>
+<li>Hashtable &#8211; deprecated</li>
+<li>IdentityHashMap &#8211; keys compared with ==</li>
+<li>LinkedHashMap &#8211; keeps insertion order</li>
+<li>TreeMap &#8211; sorted keys</li>
+<li>WeakHashMap &#8211; useful for caches</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>ConcurrentHashMap &#8211; generic concurrent map</li>
+<li>ConcurrentSkipListMap &#8211; sorted concurrent map</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Sets</td>
+<td>
+<ul>
+<li>HashSet &#8211; generic set</li>
+<li>EnumSet &#8211; set of enums</li>
+<li>BitSet &#8211; set of bits/dense integers</li>
+<li>LinkedHashSet &#8211; keeps insertion order</li>
+<li>TreeSet &#8211; sorted set</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>ConcurrentSkipListSet &#8211; sorted concurrent set</li>
+<li>CopyOnWriteArraySet &#8211; seldom updated, often traversed</li>
+</ul>
+</td>
+</tr>
+</table>
+
+##See also
+* [原生类型集合：Trove library](http://java-performance.info/primitive-types-collections-trove-library/)－Trove库概览－一个可以包含Java原生类型的集合（跟多数JDK集合中的Objects不同）。
+* [流行Java数据类型的内存消耗１](http://java-performance.info/memory-consumption-of-java-data-types-1/)－enums，EnumMap/EnumSet/BitSet/ArrayList/LinkedList/ArrayDeque类的内存消耗。
+* [流行Java数据类型的内存消耗２](http://java-performance.info/memory-consumption-of-java-data-types-2/)－HashMap/HashSet，LinkedHashMap/LinkedHashSet，TreeMap/TreeSet和PriorityQueue等Java7中的JDK类和[Trove](http://java-performance.info/primitive-types-collections-trove-library/)中对应的替代品之间的内存消耗。
