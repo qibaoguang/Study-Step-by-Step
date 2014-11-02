@@ -53,3 +53,16 @@ Java集合概述
 
 * TreeMap－一种基于红黑树的排序导航Map。它采用自然顺序或给定的比较器对所有实体（entries）进行排序。这个map要求equals和Comparable／Comparator.compareTo的实现保持一致。该类实现了NavigableMap接口：它允许获取map中比给定key大或小的所有实体；获取一个pre/next实体（基于键的顺序）；使用一个给定范围内的键获取一个map（大致上相当于SQL的BETWEEN操作）和这些方法的许多变体。
 
+* WeakHashMap－这个map通常用于数据缓存实现中。它使用WeakReference来保存所有的键，这意味着如果没有指向键对象的强引用，这些键就可能被垃圾回收。另一方面，对应的values采用强引用存储。因此，你要么确保没有从values到keys的引用，要么把values也保存到弱引用中：m.put(key,new WeakReference(value))。
+
+###Sets
+* HashSet－一种基于dummy values的HashMap的set实现（some Object is used for every value），和HashMap有相同的特性。因为这样的实现，导致HashSet消耗的内存比这种数据结构实际需要的多。
+
+* EnumSet－一种值为枚举类型的set。Java中每个枚举都被映射为一个整数：每个枚举值都对应一个不同的整数。这允许EnumSet使用跟BitSet类似的结构，这种结构中每个bit映射为一个不同的枚举值。这里实际上有２种实现－底层使用单一的long型存储的RegularEnumSet（能够存储多达64个枚举值，涵盖了99.9%的使用案例）和底层采用long[]的JumboEnumSet。
+
+* BitSet－一种位set。需要注意的是，你可以使用一个BitSet代替一个密集的整数集（比如事先知道起始位置的ids）。这个类采用long[]存储位数据。
+
+* LinkedHashSet－和HashSet相似，这个类上层采用LinkedHashMap实现。这是唯一以插入顺序保存元素的set。
+
+* TreeSet－和HashSet类似，这个类基于一个TreeMap实例。这是标准JDK单线程部分中唯一的有序集合。
+
