@@ -2,7 +2,7 @@ Java集合概述
 ==================
 本文将为你简要介绍Java所有的标准集合。我们会对集合的不同属性和主要使用场景进行分类。除此之外，我们会列出所有在不同的集合类型间转换数据的正确方式。
 
-###数组(Arrays)
+##数组(Arrays)
 数组是Java唯一的内嵌集合类型。当处理的元素数量上限预先知道时，数组是非常有用的。java.util.Arrays包含很多有用的数组处理方法：
 
 * Arrays.asList－可以方便的将数组转换为List，list可以传递给其他标准集合的构造器。
@@ -23,7 +23,7 @@ Java集合概述
 
 这个方法分配的数组足以存储整个集合，因此toArray没有必要分配足够大的返回数组。
 
-###单线程安全的集合
+##单线程集合
 这篇文章的以下部分描述了非线程安全的集合类。所有这些集合类存放在java.util包，它们中的一些是Java1.0添加的（现在已过期），大部分是在Java1.4出现的。Java1.5加入支持枚举类型的集合，所有集合类也都支持泛型了。PriorityQueue也是Java1.5加入的。Java1.6添加的ArrayDeque是最新加入的非线程安全框架。
 
 ###Lists
@@ -66,7 +66,7 @@ Java集合概述
 
 * TreeSet－和HashSet类似，这个类基于一个TreeMap实例。这是标准JDK单线程部分中唯一的有序集合。
 
-###java.util.Collections
+##java.util.Collections
 就像java.util.Arrays对于数组那样，java.util.Collections有很多用于集合处理的有用方法。
 
 第一组方法可以返回集合的不同视图：
@@ -81,5 +81,43 @@ Java集合概述
 
 * Collections.unmodifiableCollection/unmodifiableList/unmodifiableMap/unmodifiableSet/unmodifiableSortedMap/unmodifiableSortedSet－返回一个不能修改的集合视图。当你需要实现能存放任何集合的不可变对象时很有用。
 
+第二组包含各种由于某些原因没有添加到集合中的方法：
+
+* Collections.addAll－如果你需要往集合中添加一定数量的元素或一个数组内容时调用它。
+* Collections.binarySearch－和数组的Arrays.binarySearch一样。
+* Colletions.disjoint－检查两个集合是否有共同元素。
+* Collections.fill－使用指定的值替换列表中所有的元素。
+* Collections.frequency－统计给定集合中有多少元素跟指定对象相同。
+* Collections.indexOfSubList/lastIndexOfSubList－这些方法看起来和String.indexOf(String)/lastIndexOf(String)相似－它们寻找给定列表中指定子列表第一次或最后一次出现的位置。
+* Collections.max/min－找到集合中基于自然顺序或比较器的最大/最小元素。
+* Collections.replaceAll－使用指定元素替换列表中的另一个元素。
+* Collections.reverse－翻转给定列表中元素的顺序。如果在对列表排序后立马调用此方法，你最好在排序过程中使用**Collections.reverseOrder比较器**。
+* Collections.rotate－将列表中的元素旋转给定的距离。
+* Collections.shuffle－打乱（洗牌shuffle）列表。注意你可以为该方法提供自定义的随机数生成器－可以是java.util.Random/java.util.ThreadLocalRandom或java.security.SecureRandom。
+* Collections.sort－根据自然顺序或给定的比较器对列表进行排序。
+* Collections.swap－交换列表中给定位置的两个元素（需要开发者都是自己写）。
+
+##并发集合
+文章的本部分讨论java.util.concurrent包中线程安全的集合。这些集合的主要特征是保证它们的方法能够以原子性执行。你最好不要忘记复合操作，比如"add-or-update"或"check-then-update"，它们涉及到多个方法调用，应该仍就处于同步，因为复合操作第一步需要的集合信息在到达第二步前可能已变得无效了。
+
+大部分的并发集合是在Java1.5引进的。ConcurrentSkipListMap／ConcurrentSkipListSet和LinkedBlockingDeque是在Java1.6中添加的。Java 1.7中最新添加的是ConcurrentLinkedDeque和LinkedTransferQueue。
+
+###Lists
+* CopyOnWriteArrayList－list实现，每次更新都会创建一个新的底层数组的拷贝。这是一个昂贵的操作，因此这个类可以用于遍历操作远多于更新的场合。该集合的常见用例是作为监听者/观察者集合。
+
+###Queues/deques
+* ArrayBlockingQueue－一个底层采用数组实现的有界阻塞队列。不能改变大小，因此当你尝试往一个满的队列添加元素时，方法调用会阻塞直到另一个线程从队列取出一个元素。
+
+* ConcurrentLinkedDeque/ConcurrentLinkedQueue－一个底层采用链表实现的无界双端队列/队列。往队列中添加元素不会阻塞，但有个不幸的要求就是集合的消费者必须至少跟生产者工作的同样快，否则你会用完内存。严重依赖于CAS操作（compare-and-set）。
+
+* DelayQueue－一个具有延迟元素的无界阻塞队列。元素只有在延迟过期后才能从队列中取出。队列的头是具有最短延迟的元素（包括负的值－延迟已过期）。这个队列可能会有用，例如你想实现一个具有延迟任务的队列（不要手动实现这样的队列－使用ScheduledThreadPoolExecutor代替）。
+
+* LinkedBlockingDeque/LinkedBlockingQueue－基于链表的可选边界（创建时可以指定最大容量）的队列/双端队列。它使用ReentrantLock-s作为empty/full条件。
+
+* LinkedTransferQueue－一个基于链表的无界队列。除了普通的队列操作，它还有一组transfer方法，允许生产者直接将消息发送给等待的消费者，因此也就不需要将元素存储到队列中了。这是一个基于CAS操作的不需要锁的集合。
+
+* PriorityBlockingQueue－一个PriorityQueue的无界阻塞版本。
+
+* SynchronousQueue－一个没有任何内部容量的阻塞队列。这意味着任何插入请求必须等待相应的删除请求，反之亦然（vice versa）。如果你不需要一个Queue接口，那通过Exchanger类也能实现同样的功能。
 
 
