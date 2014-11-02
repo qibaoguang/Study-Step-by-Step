@@ -120,4 +120,12 @@ Java集合概述
 
 * SynchronousQueue－一个没有任何内部容量的阻塞队列。这意味着任何插入请求必须等待相应的删除请求，反之亦然（vice versa）。如果你不需要一个Queue接口，那通过Exchanger类也能实现同样的功能。
 
+###Maps
+* ConcurrentHashMap－一个具有完全并发的get操作，可配置并发级别的put操作的hash table。这个级别是通过concurrencyLevel构造器参数（默认为16）进行调节的，它定义了map内部分区块（桶）的数量。只有在put操作过程中需要更新的部分需要加锁。记着，这个map不是HashMap算法的线程安全的替代品－任何在该map上的"get-then-put"方法调用序列（或任何其他的并发集合）都应该外部同步。
+
+* ConcurrentSkipListMap－一个基于跳表（skip lists）的ConcurrentNavigableMap实现。本质上（in essence），这个集合可以作为TreeMap的线程安全的替代品。
+
+###Sets
+* ConcurrentSkipListSet－一个采用ConcurrentSkipListMap存储的并发set。
+* CopyOnWriterArraySet－一个采用CopyOnWriteArrayList存储的并发set。
 
