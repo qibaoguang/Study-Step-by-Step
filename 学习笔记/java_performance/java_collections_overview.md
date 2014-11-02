@@ -66,3 +66,20 @@ Java集合概述
 
 * TreeSet－和HashSet类似，这个类基于一个TreeMap实例。这是标准JDK单线程部分中唯一的有序集合。
 
+###java.util.Collections
+就像java.util.Arrays对于数组那样，java.util.Collections有很多用于集合处理的有用方法。
+
+第一组方法可以返回集合的不同视图：
+
+* Collections.checkedCollection/checkedList/checkedMap/checkedSet/checkedSortedMap/CheckedSortedSet－返回一个在运行时校验添加元素类型的集合视图。任何试图添加一个不兼容类型的元素都会抛出ClassCastException。为了防止运行时类型转换错误，这个功能可能是需要的。
+
+* Collections.emptyList/emptyMap/emptySet－当你需要返回一个不可变的空集合且不想分配任何对象时非常有用。
+
+* Collections.singleton/singletonList/singletonMap－返回一个单一实体的不可变set/list/map。
+
+* Collections.synchronizedCollection/synchronizedList/synchronizedMap/synchronizedSet/synchronizedSortedMap/synchronizedSortedSet－返回一个所有方法都同步的集合视图（廉价且低效的多线程实现，不支持复合操作，比如put-or-update）。
+
+* Collections.unmodifiableCollection/unmodifiableList/unmodifiableMap/unmodifiableSet/unmodifiableSortedMap/unmodifiableSortedSet－返回一个不能修改的集合视图。当你需要实现能存放任何集合的不可变对象时很有用。
+
+
+
