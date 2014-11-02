@@ -1,4 +1,4 @@
-Java集合概述
+[Java集合概述](http://java-performance.info/java-collections-overview/)
 ==================
 本文将为你简要介绍Java所有的标准集合。我们会对集合的不同属性和主要使用场景进行分类。除此之外，我们会列出所有在不同的集合类型间转换数据的正确方式。
 
