@@ -22,7 +22,7 @@ ArrayList是一个普通的列表实现，适用于大多数场景。底层采�
 
 这个方法移除指定位置的单个元素。之后，通过调用System.arraycopy，右边的所有元素都被往左转移，这就是该方法时间复杂度为O(n)的原因。这里有两个潜在的问题：
 
-如果我们有ArrayList<Integer>，你就需要注意所有对remove(int)的调用：
+如果我们有`ArrayList<Integer>`，你就需要注意所有对remove(int)的调用：
 你将调用的是remove(int)还是remove(Object)？你可能需要手动转换remove(int)参数为int数据类型，remove(Object)参数为Integer数据类型。例如，如果你想移除列表的第一个元素，你应该调用remove(0)，但如果你想移除列表第一个值为０的元素，你最好调用remove((Integer)0)。
 
 如上所述，remove(int)时间复杂度为Ｏ(n)。这个方法带来的最大问题（author has ever seen）是在缓冲区的实现中。首先，调用者代码向缓冲区添加很多元素，然后使用下面的代码片段处理缓冲区的内容：
@@ -44,3 +44,8 @@ while ( !buffer.isEmpty() )
   process( el );
 }
 </pre>
+删除最后元素的操作不会调用System.arraycopy，所以调用这个方法的时间复杂度为O(1)。使用该代码删除即使是百万级消息也是咋眼之间就完成。
+
+如果是不同的使用模式：添加一些元素，处理一些元素，添加更多的元素等等，我们可能需要一个LinkedList或使用下面讨论的ArrayList.subList	。
+
+**remove(Object)**
