@@ -49,3 +49,19 @@ while ( !buffer.isEmpty() )
 如果是不同的使用模式：添加一些元素，处理一些元素，添加更多的元素等等，我们可能需要一个LinkedList或使用下面讨论的ArrayList.subList	。
 
 **remove(Object)**
+
+这个方法删除列表中第一次出现的指定元素。它支持null参数，并且有一个处理null的分支。它遍历列表所有的元素，所以时间复杂度为O(n)。该方法在任何情况下都会访问所有的元素-不管是查找指定元素时对它们进行读取，还是在指定的元素找到后，调用System.arraycopy将它们移动到左边。移动操作快些，但仍需要访问所有元素。
+
+这个方法和上面讨论的remove(int)具有相同的问题。使用该方法我们甚至可以设计出(devise)更糟糕的缓冲区处理代码：
+<pre>
+while ( !buffer.isEmpty() )
+{
+    Elem el = buffer.get( 0 );
+    process( el );
+    buffer.remove( el );
+}
+</pre>
+当你知道元素的位置时绝不要调用remove(Object)! Besides a lookup,你可能会删错数据。
+
+目前为止，**remove方法最重要的性质-它们不会缩小内部数组的大小，clear方法也不会，只有trimToSize会**。如果你的数据有个峰值(peak)，那在峰值之间的时间段内都在浪费内存，因为内部数组将保持足够大以适应峰值数据。这就是为什么在缓冲区大小降低到预定义级别（例如，从100K以上的元素到100K以下的元素）以下时，考虑调用trimToSize是值得的。
+
