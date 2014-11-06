@@ -1,3 +1,4 @@
+
 [使用 double/long 和 BigDecimal 进行货币计算](http://java-performance.info/bigdecimal-vs-double-in-financial-calculations/)
 ===========
 
@@ -12,7 +13,7 @@
 
 double计算也不精确，即使是简单的加减运算：
 
-`System.out.println( "362.2 - 362.6 = " + ( 362.2 - 362.6 ) );`
+    System.out.println( "362.2 - 362.6 = " + ( 362.2 - 362.6 ) );   
 
 输出结果为：`362.2 - 362.6 = -0.4000000000000341`
 
@@ -28,51 +29,33 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 
 先看一个使用double和BigDecimal进行货币操作的测试用例，分别使用double和BigDecimal计算362.2￥的1.5%，循环100M次。
 
->    int res = 0;
-
->    final BigDecimal orig = new BigDecimal( "362.2" );
-
->    final BigDecimal mult = new BigDecimal( "0.015" ); //1.5%
-
->    for ( int i = 0; i < ITERS; ++i )
-
->    {
-
->     final BigDecimal result = orig.multiply( mult, MathContext.DECIMAL64 );
-    
->     if ( result != null ) res++;
-    
->    }
+    int res = 0;
+    final BigDecimal orig = new BigDecimal( "362.2" );
+    final BigDecimal mult = new BigDecimal( "0.015" ); //1.5%
+    for ( int i = 0; i < ITERS; ++i )
+    {
+        final BigDecimal result = orig.multiply( mult, MathContext.DECIMAL64 );
+        if ( result != null ) res++;
+    }
 
 我们使用double和long不能完全模拟上面的计算。在下面的代码中，JIT会将常量Math.round( orig * mult )移出循环。
 
->    final double orig = 36220; //362.2 in cents
-
->    final double mult = 0.015; //1.5%
-
->    for ( int i = 0; i < ITERS; ++i )
-
->    {
-
->     final long result = Math.round( orig * mult );
-
->     if ( result != 543 ) res++;    //543.3 cents actually
-     
->    }
+    final double orig = 36220; //362.2 in cents
+    final double mult = 0.015; //1.5%
+    for ( int i = 0; i < ITERS; ++i )
+    {
+        final long result = Math.round( orig * mult );
+        if ( result != 543 ) res++;    //543.3 cents actually
+    }
 
 所以，我们使用下面稍微不同的测试用例以提高可比性：
 
->    final double orig = 36220; //362.2 in cents
-
->    for ( long i = 0; i < ITERS; ++i )
-
->    {
-
->    final long result = Math.round( orig * i );
-    
->    if ( result != 543 ) res++;    //compare with something
-    
->   }
+    final double orig = 36220; //362.2 in cents
+    for ( long i = 0; i < ITERS; ++i )
+    {
+        final long result = Math.round( orig * i );
+        if ( result != 543 ) res++;    //compare with something
+    }
 
 使用BigDecimal计算时花费4.899秒，使用double计算花费0.58秒。从测试结果可以看出，如果你的计算结果不超过52位(double精度)，并且你坚持遵守上面的两条规则，那你就能使用long/double完成快速，精确的货币计算！
 
@@ -86,43 +69,29 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 
 可以尝试运行代码：
 
->final BigDecimal three = new BigDecimal( "3" );
-
->try{
-
->	System.out.println( BigDecimal.ONE.divide( three ) );
-	
->}
-
->	catch ( ArithmeticException ex )
-	
->{
-
->	System.out.println( "Got an exception while calculating 1/3 ex.getMessage() );
-	
->}
+    final BigDecimal three = new BigDecimal( "3" );
+    try
+    {
+        System.out.println( BigDecimal.ONE.divide( three ) );
+    }
+    catch ( ArithmeticException ex )
+    {
+        System.out.println( "Got an exception while calculating 1/3 : " + ex.getMessage() );
+    }
 
 * BigDecimal性能如何？
 
 测试用例：计算10M E*E+E的和，其中E=Math.E
 
->BigDecimal res = BigDecimal.ZERO;
-
->final BigDecimal a = new BigDecimal( Math.E, context );
-
->final BigDecimal b = new BigDecimal( Math.E, context );
-
->final BigDecimal c = new BigDecimal( Math.E, context );
-
->for ( int i = 0; i < 10000000; ++i )
-
-> {
-
->    final BigDecimal val = a.multiply( b, context ).add( c, context );
-    
->   　res = res.add( val, context );
-   　
-> }
+    BigDecimal res = BigDecimal.ZERO;
+    final BigDecimal a = new BigDecimal( Math.E, context );
+    final BigDecimal b = new BigDecimal( Math.E, context );
+    final BigDecimal c = new BigDecimal( Math.E, context );
+    for ( int i = 0; i < 10000000; ++i )
+    {
+        final BigDecimal val = a.multiply( b, context ).add( c, context );
+        res = res.add( val, context );
+    }
 
 使用double，没有设置MathContext，设置不同的MathContext的测试结果：
 
@@ -141,42 +110,29 @@ PS：只要能遵守上面的两条建议，还是能够使用long/double数据�
 浮点数转字符串相当困难，比如双精度double转换，你需要知道浮点数的二进制表示形式(IEEE-754)，具体实现可以参考JDK sun.misc.FloatingDecimal类。
 
 * Java6转换Double对象到String需要经过一系列调用：
-
->Double
-
->public String toString() {
-
->    return String.valueOf(value);
-
->}
-
->String
-
->public static String valueOf(double d) {
-
->  return Double.toString(d);
-  
->}
-
->Double
-
->public static String toString(double d) {
-
->  return new FloatingDecimal(d).toJavaFormatString();
-
->}
-
-
+<pre>
+    Double
+    public String toString() {
+        return String.valueOf(value);
+    }
+     
+    String
+    public static String valueOf(double d) {
+        return Double.toString(d);
+    }
+     
+    Double
+    public static String toString(double d) {
+        return new FloatingDecimal(d).toJavaFormatString();
+    }
+</pre>
 * Java7中就非常直接：
-
->jdk 7 Double
-
->public String toString() {
-
->  return toString(value);
-
->}
-
+<pre>
+jdk 7 Double
+public String toString() {
+    return toString(value);
+}
+</pre>
 * BigDecimal转换为String
 
 BigDecimal有３个用于转换为String的方法：toString，toPlainString和toEngineeringString。toString会缓存toEngineeringString的结果，用于后续的调用(这样做可能是因为BigDecimal的值是不可变的)。下面测试了将Math.E转为字符串10M次耗时：
