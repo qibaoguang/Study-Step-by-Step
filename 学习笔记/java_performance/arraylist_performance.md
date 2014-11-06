@@ -73,23 +73,21 @@ while ( !buffer.isEmpty() )
 
 你可以通过一种方式来清理集合中被删除的元素，要么使用nulls代替删除的元素，要么维护另一个存放所有删除元素索引的集合（根据集合中元素的数量和打算删除的元素数量，你可以使用数组，Set或BitSet）。下面就是如何删除ArrayList中的所有null值：
 
-<pre>
-public static <T> void cleanNulls( final List<T> lst )
-{
-    int pFrom = 0;
-    int pTo = 0;
-    final int len = lst.size();
-    //copy all not-null elements towards list head
-    while ( pFrom < len )
-    {
-        if ( lst.get( pFrom ) != null )
-            lst.set( pTo++, lst.get( pFrom ) );
-        ++pFrom;
+    public static <T> void cleanNulls( final List<T> lst )
+        {
+            int pFrom = 0;
+            int pTo = 0;
+            final int len = lst.size();
+            //copy all not-null elements towards list head
+            while ( pFrom < len )
+            {
+                if ( lst.get( pFrom ) != null )
+                    lst.set( pTo++, lst.get( pFrom ) );
+                ++pFrom;
+            }
+            //there are some elements left in the tail - clean them
+            lst.subList( pTo, len ).clear();
     }
-    //there are some elements left in the tail - clean them
-    lst.subList( pTo, len ).clear();
-}
-</pre>
 
 以上代码只是一种方式。它使用了2个指针-pFrom，表示当前检查的元素，每次遍历都会增加；pTo，表示目的位置，只有在非null元素拷贝时才会增加。由于所有非空元素已被拷贝，留在ArrayList末端的元素也就不再需要（它们已被复制过），我们将使用下面讨论的subList方法清理它们。
 
