@@ -70,3 +70,27 @@ while ( !buffer.isEmpty() )
 第一个方法删除所有出现在参数中的元素，第二个方法保留所有出现在参数中的元素。两个方法的时间复杂度都为Ｏ(n*n)，因为它们遍历ArrayList中的所有元素，并在每个ArrayList元素上调用contains(Collection)方法。它们不会收缩（shrink）内部数组。
 
 这些方法可能用于扫描列表中的某些值，然后把它们添加到一个单独的集合并从原列表中删除的场景。为什么有人会这样做？可能因为他习惯于使用for-each循环，而for-each循环不允许从遍历的列表中移除元素，或任何其他原因。例如，你阅读过有关单个remove方法的性能问题，想通过使用那些方法来避免该问题。
+
+你可以通过一种方式来清理集合中被删除的元素，要么使用nulls代替删除的元素，要么维护另一个存放所有删除元素索引的集合（根据集合中元素的数量和打算删除的元素数量，你可以使用数组，Set或BitSet）。下面就是如何删除ArrayList中的所有null值：
+
+<pre>
+public static <T> void cleanNulls( final List<T> lst )
+{
+    int pFrom = 0;
+    int pTo = 0;
+    final int len = lst.size();
+    //copy all not-null elements towards list head
+    while ( pFrom < len )
+    {
+        if ( lst.get( pFrom ) != null )
+            lst.set( pTo++, lst.get( pFrom ) );
+        ++pFrom;
+    }
+    //there are some elements left in the tail - clean them
+    lst.subList( pTo, len ).clear();
+}
+</pre>
+
+以上代码只是一种方式。它使用了2个指针-pFrom，表示当前检查的元素，每次遍历都会增加；pTo，表示目的位置，只有在非null元素拷贝时才会增加。由于所有非空元素已被拷贝，留在ArrayList末端的元素也就不再需要（它们已被复制过），我们将使用下面讨论的subList方法清理它们。
+
+**subList(int,int)**
