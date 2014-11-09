@@ -109,6 +109,8 @@ while ( !buffer.isEmpty() )
 
 如果由于某些原因（例如，你需要处理它），你需要清理列表的部分数据，并且你已经知道连续调用remove方法是个坏主意（并且你不知道subList方法），你要么将剩余的元素复制到新的列表中并使用新列表替换老列表，要么调用remove方法，如果你认为它跟其他方式相比还不错的话。
 
+实际上，你只需要调用：`list.subList(from,to).clear()`。不幸的是，从JavaDoc中绝对不能显而易见的看出它会清理源列表的部分数据。尽管如此，它是清理一个子列表的最快方法-这个方法最终只调用了System.arraycopy将剩余的元素移到左边。
+
 为了避免在遍历列表或数组元素时使用索引index变量，Java语言添加了for-each循环。但如果只需要遍历列表的一部分那你应该怎么做呢？仍旧使用index变量？没必要－你可以遍历子列表的所有元素。下面的方法计算一个字符串列表给定部分中所有字符串的总长度。
 
 	public static int getTotalLength( final List<String> lst, final int from, final int to )
@@ -151,6 +153,3 @@ while ( !buffer.isEmpty() )
 **get(int)**
 
 提到这个方法也就一句话，它在Java7中比Java6慢了大概1/3，因为在Java7中它使用额外的方法去访问内部数组（Java6直接访问数组）。本来期望JIT能够内联这些简单的方法以此消除Java6和Java7的不同，但事实看起来并不是这样。也许在Java7的发布版可以解决这个问题。不管怎样，这个方法仍旧很快，在成千上万的访问上你看不出任何不同。
-
-实际上，你只需要调用：`list.subList(from,to).clear()`。不幸的是，从JavaDoc中绝对不能显而易见的看出它会清理源列表的部分数据。尽管如此，它是清理一个子列表的最快方法-这个方法最终只调用了System.arraycopy将剩余的元素移到左边。
-
