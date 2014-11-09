@@ -109,5 +109,48 @@ while ( !buffer.isEmpty() )
 
 如果由于某些原因（例如，你需要处理它），你需要清理列表的部分数据，并且你已经知道连续调用remove方法是个坏主意（并且你不知道subList方法），你要么将剩余的元素复制到新的列表中并使用新列表替换老列表，要么调用remove方法，如果你认为它跟其他方式相比还不错的话。
 
+为了避免在遍历列表或数组元素时使用索引index变量，Java语言添加了for-each循环。但如果只需要遍历列表的一部分那你应该怎么做呢？仍旧使用index变量？没必要－你可以遍历子列表的所有元素。下面的方法计算一个字符串列表给定部分中所有字符串的总长度。
+
+	public static int getTotalLength( final List<String> lst, final int from, final int to )
+	{
+	    int sum = 0;
+	    for ( final String s : lst.subList( from, to ) )
+	    {
+	        sum += s.length();
+	    }
+	    return sum;
+	}
+
+子列表的最后使用案例是递归算法。如前所述，在Java6中最好不要在递归算法中使用子列表（sublists）。Java7中sublist性能有了明显提升。这里有个小的测试方法－和"total length"一样，只是采用递归实现：
+
+	public static int getTotalLengthRec( final List<String> lst )
+	{
+	    if ( lst.size() == 1 )
+	        return lst.get( 0 ).length();
+	    final int middle = lst.size() >> 1;
+	    return getTotalLengthRec( lst.subList( 0, middle ) ) + getTotalLengthRec( lst.subList( middle, lst.size() ) );
+	}
+
+基准测试中，我们使用了一个包含1M短字符串的列表，调用这个方法1000次。Java6中耗时78秒，Java7中耗时22秒。在这些案例中，我们应该怎么做才能避免依赖于Java版本？手动处理索引。下面是同样的递归方法，但它使用显式的边界。
+
+	public static int getTotalLengthRec2( final List<String> lst )
+	{
+	    return getTotalLengthRecHelper( lst, 0, lst.size() );
+	}
+	 
+	public static int getTotalLengthRecHelper( final List<String> lst, final int from, final int to )
+	{
+	    if ( to - from <= 1 )
+	        return lst.get( from ).length();
+	    final int middle = ( from + to ) >> 1;
+	    return getTotalLengthRecHelper( lst, from, middle ) + getTotalLengthRecHelper( lst, middle, to );
+	}
+
+调用1000次getTotalLengthRec2方法在Java6中耗时7.8秒，Java7中耗时9.3秒。也就是说，在Java6中快了10倍，Java7中快了2倍。
+
+**get(int)**
+
+提到这个方法也就一句话，它在Java7中比Java6慢了大概1/3，因为在Java7中它使用额外的方法去访问内部数组（Java6直接访问数组）。本来期望JIT能够内联这些简单的方法以此消除Java6和Java7的不同，但事实看起来并不是这样。也许在Java7的发布版可以解决这个问题。不管怎样，这个方法仍旧很快，在成千上万的访问上你看不出任何不同。
+
 实际上，你只需要调用：`list.subList(from,to).clear()`。不幸的是，从JavaDoc中绝对不能显而易见的看出它会清理源列表的部分数据。尽管如此，它是清理一个子列表的最快方法-这个方法最终只调用了System.arraycopy将剩余的元素移到左边。
 
