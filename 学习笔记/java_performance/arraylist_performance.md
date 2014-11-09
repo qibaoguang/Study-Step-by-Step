@@ -153,3 +153,64 @@ while ( !buffer.isEmpty() )
 **get(int)**
 
 提到这个方法也就一句话，它在Java7中比Java6慢了大概1/3，因为在Java7中它使用额外的方法去访问内部数组（Java6直接访问数组）。本来期望JIT能够内联这些简单的方法以此消除Java6和Java7的不同，但事实看起来并不是这样。也许在Java7的发布版可以解决这个问题。不管怎样，这个方法仍旧很快，在成千上万的访问上你看不出任何不同。
+
+**contains(Object),indexOf(Object)**
+
+第一个方法检查指定对象是否在列表中（通过indexOf(elem)>=0来定义）。第二个方法查找指定对象在列表中的位置（支持nulls）。两个方法的时间复杂度都是O(n)，因为为了找到指定的元素，它们需要从头开始扫描内部数组。这两个方法使用equals方法比较指定元素和数组中的元素，因此你可能构造新的元素但仍能在列表中找到它们的位置。如果在你的代码中多次调用ArrayList的contains/indexOf方法，可以考虑使用任何Set实现代替。
+
+如果在ArrayList上使用indexOf方法，通常你在寻找列表中一些相似的元素。检查下看是否能对ArrayList进行排序，这样所有相似的元素（按某些标准）都彼此相近－多数情况下这是可能的（即使标准改变后你需要重新对数据排序）。例如，你有一个证券交易所的交易列表，这些列表有唯一的id，买家，卖家和一些其他的字段。买家和卖家双方可能知道部分特别交易信息，但如果你合并相同交易id的买家和卖家信息，你就有了完整的交易信息。下面有两种方式实现这样的合并－第一个比较直接－将所有交易保存到map<TradeId,Trade>，用新的交易对象和map中的每个对象进行比较，调用indexOf方法找到前一个交易对象的位置：
+
+	  if ( prevTrade != null )
+	        {
+	            final int prevPos = trades.indexOf( prevTrade );
+	            trade.merge( prevTrade );//merge trades attributes
+	            byTradeId.remove( trade.tradeId );//trades matched - no need to keep it in map any longer
+	            //clean nulls before exit
+	            trades.set( prevPos, null );
+	        }
+	        else
+	        {
+	            byTradeId.put( trade.tradeId, trade );//no trades with this tradeId before - save it in the map
+	        }
+	    }
+	    cleanNulls( trades ); //clean previously set nulls
+	}
+
+第二种途径是通过trade id对交易列表进行排序，然后试着找到具有相同trade id的邻近交易记录，并合并它们。通过trade id比较两个交易记录是通过一个单独的Comparator实现的，因为它不是Trades的自然比较器（很难说什么是它们的自然比较器）。
+
+	private static final class TradeIdComparator implements Comparator<Trade>
+	{
+	    public int compare( final Trade first, final Trade second ) {
+	        return first.tradeId.compareTo( second.tradeId );
+	    }
+	}
+	 
+	public void mergeTradesSort( final List<Trade> trades )
+	{
+	    Collections.sort( trades, new TradeIdComparator() );
+	    for ( int i = 1; i < trades.size(); ++i )
+	    {
+	        if ( trades.get( i ).tradeId.equals( trades.get( i - 1 ).tradeId ) )
+	        {
+	            trades.get( i ).merge( trades.get( i - 1 ) );
+	            //clean nulls before exit
+	            trades.set( i - 1, null );
+	            ++i;//no need to compare second trade with the next trade
+	        }
+	    }
+	    cleanNulls( trades ); //clean previously set nulls
+	}
+
+##总结
+
+在你的代码中优化ArrayList性能时需要遵守下面的准则：
+
+* 将元素添加到列表的尾部
+* 删除元素也要从尾部开始
+* 避免使用contains，indexOf和remove(Object)方法
+* 甚至还要避免使用removeAll和retainAll方法
+* 快速清理列表的部分数据要约定俗成的使用subList(int,int).clear()
+
+##See also
+
+[Java集合概述]( java_collections_overview.md)
