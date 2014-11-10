@@ -1,4 +1,4 @@
-java.util.LinkedList性能
+[java.util.LinkedList性能](http://java-performance.info/linkedlist-performance/)
 ============
 这篇文章中我们将讨论LinkedList的性能。通常，在对性能要求严格的代码中使用LinkedList不是个好主意，但有时候你会需要它....
 
