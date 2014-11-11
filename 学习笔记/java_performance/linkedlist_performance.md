@@ -14,3 +14,28 @@ LinkedList是一种每个节点都有指向前和后节点的指针的集合实�
 
 2. 你需要频繁的添加或删除集合中间的元素。
 
+**使用LinkedList和ArrayDeque实现FIFO缓冲区**
+
+下面让我们看看使用LinkedList或ArrayDeque实现的FIFO队列会有多快。我们将预先填充两个类实例一定数量的values，然后从列表的头部添加5个元素，从列表的尾部移除5个元素。添加/删除操作将会在一个循环中执行100M次。
+
+    final int PREFILL_COUNT = 100_000;
+    final int LOOP_COUNT = 100_000_000;
+    final LinkedList<Integer> lst = new LinkedList<Integer>();
+    final Integer val = 1;
+    for ( int i = 0; i < PREFILL_COUNT; ++i )
+        lst.add( 35 );
+    //start measuring time here<br/>
+    for ( int i = 0; i < LOOP_COUNT; ++i )
+    {
+        for ( int j = 0; j < 5; ++j )
+            lst.addFirst( val );
+        for ( int j = 0; j < 5; ++j )
+            lst.removeLast();
+    }
+    
+结果很有意思。LinkedList的性能在理论上是不受预填充元素数量影响的。实际上，每个添加操作（add）创建一个节点（4个对象Objects-节点本身，previous指针，next指针和value），每个删除操作（remove）清理这些对象，因此会产生相当可观的垃圾需要回收。你的应用内存占用越大，垃圾回收越慢。ArrayDeque对象自身不会产生垃圾只要集合大小稳定，所以它的性能才是真正的不依赖当前集合大小。
+||LinkedList,10 elems prefilled|LinkedList, 100K elems prefilled|LinkedList, 1M elems prefilled|ArrayDeque, 10 elems prefilled|ArrayDeque, 100K elems prefilled|ArrayDeque, 1M elems prefilled
+-|-|-|-|-|-|-|
+|Java 6|7.533 sec|7.879 sec|9.461 sec|2.323 sec|2.422 sec|2.446 sec|
+|Java 7|6.004 sec|6.493 sec|7.945 sec|2.035 sec|2.160 sec|2.343 sec|
+
