@@ -35,7 +35,7 @@ LinkedList是一种每个节点都有指向前和后节点的指针的集合实�
     
 结果很有意思。LinkedList的性能在理论上是不受预填充元素数量影响的。实际上，每个添加操作（add）创建一个节点（4个对象Objects-节点本身，previous指针，next指针和value），每个删除操作（remove）清理这些对象，因此会产生相当可观的垃圾需要回收。你的应用内存占用越大，垃圾回收越慢。ArrayDeque对象自身不会产生垃圾只要集合大小稳定，所以它的性能才是真正的不依赖当前集合大小。
 
-||LinkedList,10 elems prefilled|LinkedList, 100K elems prefilled|LinkedList, 1M elems prefilled|ArrayDeque, 10 elems prefilled|ArrayDeque, 100K elems prefilled|ArrayDeque, 1M elems prefilled
+||LinkedList,10 elems prefilled|LinkedList, 100K elems prefilled|LinkedList, 1M elems prefilled|ArrayDeque, 10 elems prefilled|ArrayDeque, 100K elems prefilled|ArrayDeque, 1M elems prefilled|
 -|-|-|-|-|-|-|
 |Java 6|7.533 sec|7.879 sec|9.461 sec|2.323 sec|2.422 sec|2.446 sec|
 |Java 7|6.004 sec|6.493 sec|7.945 sec|2.035 sec|2.160 sec|2.343 sec|
