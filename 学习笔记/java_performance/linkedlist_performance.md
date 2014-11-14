@@ -87,3 +87,43 @@ LinkedList是一个顺序数据结构。这就是为什么所有的基于链表�
 	}
 
 不幸的是，在这个示例中，我们平均需要遍历列表长度的1.25倍。首先，indexOf方法为了找到需要的字符串需要遍历列表。最好的情况下，需要的字符串位于列表的第一个。最坏的情况下，它在列表中就不存在，所以我们需要校验列表中的所有元素。平均下来，调用indexOf方法需要遍历列表长度的0.5倍。接着，我们将开始位置传给listIterator(int)方法。这个方法经过优化（跟其他通过索引访问的方法一样，比如get(int)，remove(int)），如果索引属于列表的前半部分，迭代器将从列表的开始处遍历，否则它将从后往回遍历。在我们的示例中，最好的情况是我们需要的字符串刚好是列表的最后一个元素－什么也不用做，因为listIterator方法的参数和列表的长度相等。最坏的情况是需要的元素位于列表的前半部分－listIterator(int)首先从开始处遍历，然后该方法会循环直到列表的尾部，因此访问了整个列表元素。
+
+重写该算法的方法是实现一个自己版本的indexOf方法，它将会返回listIterator。我们清楚的是返回的迭代器应该指向需要的元素，如果它在列表中存在的话（next方法将返回该元素）。当列表中不存在要求的元素时，迭代器应该指向列表的最后位置（hasNext()==false）。让我们假设要求的元素不等于null。
+
+	public static <T> ListIterator<T> findElem( final List<T> lst, final T elem )
+	{
+	    final ListIterator<T> iter = lst.listIterator();
+	    while ( iter.hasNext() )
+	    {
+	        if ( elem.equals( iter.next() ) )
+	        {
+	            iter.previous();
+	            break;
+	        }
+	    }
+	    return iter;
+	}
+现在前面的方法就可以化简了。我们只需要在列表中不存在要求的元素时获取一个新的ListIterator。
+
+	public static void cleanStringListFast( final LinkedList<String> lst, final String first )
+	{
+	    ListIterator<String> iter = findElem( lst, first );
+	    if ( !iter.hasNext() ) //if element is not present - process the full list<
+	        iter = lst.listIterator();
+	    while ( iter.hasNext() )
+	    {
+	        if ( iter.next().length() == 5 )
+	            iter.remove();
+	    }
+	}
+
+因此，作为规则，不要使用任何接收或返回列表中元素位置的方法，特别是在老的遍历风格下：
+	final List<Integer> lst = new LinkedList<Integer>();
+	for ( int i = 0; i < 100000; ++i )
+	    lst.add( i );
+	long sum = 0;
+	for ( int i = 0; i < 100000; ++i )
+	    sum += lst.get( i );
+
+这段代码运行结束竟然耗费难以想象的６秒！不要尝试使用这种方式遍历一个包含上百万元素的LinkedList列表。你会等的不耐烦！该规则的唯一例外是访问或删除列表的第一个或最后一个元素（或少量的前面或后面的元素）。
+          
