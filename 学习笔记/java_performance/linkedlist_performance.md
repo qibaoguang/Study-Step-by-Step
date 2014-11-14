@@ -119,7 +119,7 @@ LinkedList是一个顺序数据结构。这就是为什么所有的基于链表�
 
 因此，作为规则，不要使用任何接收或返回列表中元素位置的方法，特别是在老的遍历风格下：
 
-inal List<Integer> lst = new LinkedList<Integer>();
+	final List<Integer> lst = new LinkedList<Integer>();
 	for ( int i = 0; i < 100000; ++i )
 	    lst.add( i );
 	long sum = 0;
