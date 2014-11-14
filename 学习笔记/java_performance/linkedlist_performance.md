@@ -73,3 +73,17 @@ LinkedList需要记住的主要特性－它只提供对元素的顺序访问而�
 
 LinkedList是一个顺序数据结构。这就是为什么所有的基于链表的集合算法都依赖于迭代器的原因(iterators)。在一些情况下，比如remove(Object)隐式的使用迭代器，其他情况下都是显式的调用。例如，你有一个`LinkedList<String>`需要删除某个有５字符的字符串后的所有字符串。如果指定的字符串没有出现，你需要处理整个缓冲区。如果这个例子看起来比较假，可以使用有时间戳和其他属性的消息代替字符串，这样就比较真实了。
 
+这可能是解决该问题的第一种途径－使用indexOf方法找到需要的字符串位置，然后将位置作为参数调用listIterator(int)方法（当然，对于使用特殊的字符串'/'来定义字符串没找到的情况，需要将位置加１）。
+
+	public static void cleanStringListSlow( final LinkedList<String> lst, final String first )
+	{
+	    final int startPos = lst.indexOf( first ) + 1;
+	    final ListIterator<String> iter = lst.listIterator( startPos );
+	    while ( iter.hasNext() )
+	    {
+	        if ( iter.next().length() == 5 )
+	            iter.remove();
+	    }
+	}
+
+不幸的是，在这个示例中，我们平均需要遍历列表长度的1.25倍。首先，indexOf方法为了找到需要的字符串需要遍历列表。最好的情况下，需要的字符串位于列表的第一个。最坏的情况下，它在列表中就不存在，所以我们需要校验列表中的所有元素。平均下来，调用indexOf方法需要遍历列表长度的0.5倍。接着，我们将开始位置传给listIterator(int)方法。这个方法经过优化（跟其他通过索引访问的方法一样，比如get(int)，remove(int)），如果索引属于列表的前半部分，迭代器将从列表的开始处遍历，否则它将从后往回遍历。在我们的示例中，最好的情况是我们需要的字符串刚好是列表的最后一个元素－什么也不用做，因为listIterator方法的参数和列表的长度相等。最坏的情况是需要的元素位于列表的前半部分－listIterator(int)首先从开始处遍历，然后该方法会循环直到列表的尾部，因此访问了整个列表元素。
