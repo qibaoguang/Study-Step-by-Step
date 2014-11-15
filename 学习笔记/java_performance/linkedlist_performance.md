@@ -223,4 +223,69 @@ LinkedList是一个顺序数据结构。这就是为什么所有的基于链表�
 	    fullLst.clear();
 	}
 
+现在在接收到新的日志实体的时间里调用updateMap是足够的，它们将被添加到正确的map实体，并且map实体的顺序也不会改变。在此之后，我们只需要一个新的处理逻辑。
 
+	private static void processFirstTimestamp( final Map<Integer, List<LogEvent>> eventMap )
+	{
+	    if ( eventMap.isEmpty() )
+	        return;
+	    final Iterator<Map.Entry<Integer, List<LogEvent>>> iter = eventMap.entrySet().iterator();
+	    Long firstTime = null;
+	    while ( iter.hasNext() )
+	    {
+	        final Map.Entry<Integer, List<LogEvent>> entry = iter.next();
+	        final List<LogEvent> lst = entry.getValue();
+	        if ( firstTime == null )
+	            firstTime = lst.get(0).time;
+	        else if ( lst.get(0).time != firstTime )
+	            break;
+	        //extract entries for processing
+	        iter.remove();
+	        processIp(lst);
+	    }
+	}
+
+下面实现的一个小的测试用例。它产生50个时间戳，每个时间戳对应1000个IP地址，每个IP地址产生100个实体。每次我们产生的实体只是IP地址集稍微不同。前5个时间戳没有经过处理（可以当作缓存），然后对于每个数据的新增部分我们处理一个时间戳（所以我们总是有５个时间戳）。最后只剩下处理过的时间戳。这是一个针对批处理模式的测试方法。测试方法的初始化方式不是使用一个map而是调用`processFirstTimestamp(LinkedList<LogEvent>)`。
+
+	private static void testEventsMap()
+	{
+	    final long start = System.currentTimeMillis();
+	    final LinkedList<LogEvent> lst = new LinkedList<LogEvent>();
+	    final Map<Integer, List<LogEvent>> map = new HashMap<Integer, List<LogEvent>>( 1000 );
+	    int mlt = 0;
+	    for ( long t = 0; t < 50; ++t )
+	    {
+	        for ( int ip = mlt * 100; ip < 1000 + mlt * 100; ++ip )
+	        {
+	            for ( int num = 0; num < 100; ++num )
+	            {
+	                final LogEvent event = new LogEvent( ip, t, "Event " + num );
+	                lst.add( event );
+	            }
+	        }
+	        mlt++;
+	        if ( mlt > 4 )
+	            mlt = 0;
+	        updateMap( map, lst );
+	        if ( t > 5 )
+	            processFirstTimestamp( map );
+	    }
+	    while ( !map.isEmpty() )
+	        processFirstTimestamp( map );
+	    System.out.println( "Total time batch = " + ( System.currentTimeMillis() - start ) );
+	}
+
+基于map的实现比一般的列表实现快35倍－10秒对351秒。这就是在整个日志事件列表使用多迭代器的代价。
+
+##总结
+如果你想在自己的代码中优化LinkedList的性能，试着遵守这些规则：
+
+* 对基于队列的算法考虑使用ArrayDeque
+* 使用LinkedList的ListIterator
+* 避免使用任何接收或返回列表元素索引的LinkedList方法，它们跟性能没有一丁点关系
+* 检查是否有必要使用LinkedList.remove/removeFirst/removeLast方法，没有必要的话使用pollFirst/pollLast代替
+* 尝试对LinkedList进行批处理
+
+##See also
+
+[Java集合概述](java_collections_overview.md)
