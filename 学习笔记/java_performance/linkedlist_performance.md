@@ -199,3 +199,28 @@ LinkedList是一个顺序数据结构。这就是为什么所有的基于链表�
 	    }
 	}
             
+不幸的是，当日志中有很多消息或IP地址需要处理时这个算法表现非常糟糕。每次你需要扫描所有的事件但最后只提取很少的消息。比较好的方式是维护一个IP地址到它们对应事件列表的map。采用这种方式，不管是提取还是追加都非常快。为了保持找到IP的原始顺序我们使用LinkedHashMap，如果我们删除一些IP地址的所有实体，稍后又添加相同IP地址的新实体，这个IP地址将添加到遍历顺序的尾部。updateMap方法将输入列表的所有实体添加到map中，并清空输入列表。我们在初始化和截取子序列(subsequent)时才需要调用该方法。
+
+	private static Map<Integer, List<LogEvent>> extractMap( final List<LogEvent> fullLst )
+	{
+	    final Map<Integer, List<LogEvent>> res = new LinkedHashMap<Integer, List<LogEvent>>( 10 );
+	    updateMap( res, fullLst );
+	    return res;
+	}
+	 
+	private static void updateMap( final Map<Integer, List<LogEvent>> eventMap, final List<LogEvent> fullLst )
+	{
+	    for ( final LogEvent event : fullLst )
+	    {
+	        List<LogEvent> lst = eventMap.get( event.ipv4 );
+	        if ( lst == null )
+	        {
+	            lst = new ArrayList<LogEvent>( 10 );
+	            eventMap.put( event.ipv4, lst );
+	        }
+	        lst.add( event );
+	    }
+	    fullLst.clear();
+	}
+
+
