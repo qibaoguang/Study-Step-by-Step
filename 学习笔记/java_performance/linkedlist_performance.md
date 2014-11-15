@@ -128,3 +128,72 @@ LinkedList是一个顺序数据结构。这就是为什么所有的基于链表�
 	  
 这段代码运行结束竟然耗费难以想象的６秒！不要尝试使用这种方式遍历一个包含上百万元素的LinkedList列表。你会等的不耐烦！该规则的唯一例外是访问或删除列表的第一个或最后一个元素（或少量的前面或后面的元素）。
           
+**removeFirst/pollFirst**
+
+使用LinkedList时要记着它不只是一个简单的List，还是一个Deque。在使用LinkedList的代码中经常看到下面的结构：
+	public T next()
+	{
+	    if ( lst.isEmpty() )
+	        return null;
+	    return lst.removeFirst();
+	}     
+
+如果列表不为空，LinkedList.removeFirst（还有LinkedList.remove()）将返回第一个元素，否则抛出NoSuchElementException。该异常是removeFirst需要调用isEmpty进行保护的原因。
+
+这段代码是多余的，因为LinkedList提供的pollFirst方法跟上面提到的next方法完全相同－如果列表为空返回null，否则返回第一个元素。因此，正确的方法可以节省一个检查，并让代码更简洁。同样的情况也适用于removeLast/pollLast。
+
+**批处理**
+
+有时你可能会有一个链表，它包含从不同源获取的数据，你需要单独处理每个源的数据。例如，你有一个真实的根据事件时间戳排序的网络事件日志。日志的每个元素有用于定义网络设备（计算机，路由器等）的IP地址属性。你需要单独处理每个IP地址关联的事件。此外，你不能长时间的收集信息，并单独处理IP地址－它是一个实时日志，因此我们承受不起长时间的处理延迟（在接收到这些事件后，我们不能晚于N秒响应它们或我们有一个很大的网络，所以一次性保存/处理所有的事件将耗费大量内存）。
+
+对于这种数据，LinkedList有一个很好的解决方案－我们可以廉价的删除列表中任何位置的元素。首先，我们需要一个方法，用于从网络日志提取特定IP地址的事件。不要尝试查询元素，然后从列表中将它们删除，即使在你的库中有相应的方法，因为为了完成提取操作它需要２次遍历而不是一次。我们需要在提取方法中使用ListIterator，因为这是遍历元素同时从源列表中删除它们的唯一方式。
+
+	private static final class LogEvent
+	{
+	    public final int ipv4;
+	    public final long time;
+	    public final String eventDesc;
+	 
+	    private LogEvent( final int ipv4, final long time, final String eventDesc ) {
+	        this.ipv4 = ipv4;
+	        this.time = time;
+	        this.eventDesc = eventDesc;
+	    }
+	}
+	 
+	private static List<LogEvent> extractForIp( final LinkedList<LogEvent> fullLst, final int ip )
+	{
+	    final List<LogEvent> res = new ArrayList<LogEvent>( 10 );
+	    final ListIterator<LogEvent> iter = fullLst.listIterator();
+	    while ( iter.hasNext() )
+	    {
+	        final LogEvent event = iter.next();
+	        if ( event.ipv4 == ip )
+	        {
+	            res.add( event );
+	            iter.remove();
+	        }
+	    }
+	    return res;
+	}
+
+现在我们能处理当前时间戳的所有IP地址：
+
+	private static void processIp( final List<LogEvent> lst )
+	{
+	    //...processing logic here
+	}
+	 
+	private static void processFirstTimestamp( final LinkedList<LogEvent> fullList )
+	{
+	    if ( fullList.isEmpty() )
+	        return;
+	    final long firstTime = fullList.getFirst().time;
+	    while ( !fullList.isEmpty() && fullList.getFirst().time == firstTime )
+	    {
+	        final int ip = fullList.getFirst().ipv4;
+	        final List<LogEvent> eventsForIp = extractForIp( fullList, ip );
+	        processIp( eventsForIp );
+	    }
+	}
+            
