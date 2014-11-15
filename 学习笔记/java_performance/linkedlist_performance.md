@@ -103,6 +103,7 @@ LinkedList是一个顺序数据结构。这就是为什么所有的基于链表�
 	    }
 	    return iter;
 	}
+	
 现在前面的方法就可以化简了。我们只需要在列表中不存在要求的元素时获取一个新的ListIterator。
 
 	public static void cleanStringListFast( final LinkedList<String> lst, final String first )
@@ -131,12 +132,13 @@ LinkedList是一个顺序数据结构。这就是为什么所有的基于链表�
 **removeFirst/pollFirst**
 
 使用LinkedList时要记着它不只是一个简单的List，还是一个Deque。在使用LinkedList的代码中经常看到下面的结构：
+
 	public T next()
 	{
 	    if ( lst.isEmpty() )
 	        return null;
 	    return lst.removeFirst();
-	}     
+	}       
 
 如果列表不为空，LinkedList.removeFirst（还有LinkedList.remove()）将返回第一个元素，否则抛出NoSuchElementException。该异常是removeFirst需要调用isEmpty进行保护的原因。
 
