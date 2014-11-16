@@ -52,7 +52,7 @@ HashMap更新的更彻底－内部table的初始化现已移出构造器。现�
 
 [这里](http://www.reddit.com/r/java/comments/1s35n5/core_java_7_change_log/cdtm1z7)是那些更新的一个作者给我的回应.
 
-**跟踪文件I/O回调**
+* 跟踪文件I/O回调
 
 	File changed: \io\FileInputStream.java
 	File changed: \io\FileOutputStream.java
@@ -75,13 +75,13 @@ HashMap更新的更彻底－内部table的初始化现已移出构造器。现�
 
 [这里](http://axtaxt.wordpress.com/2013/09/19/experimenting-with-sun-misc-iotrace/)有该更新的一些调查。
 
-**重写java.lang.invoke**
+* 重写java.lang.invoke
 
 这个包中的大多数类都使用JDK8的Lambda格式重写了。不幸的是，Java8的lambdas看起来不可用。这个更新只有在使用Java 7 MethodHandle类或其他JVM动态语言时才会影响你。
 
 在依赖于该更新的Groovy2.0中存在一个可能的性能回退－我的Groovy版动态方法执行测试两次的运行性能，[Java7u45跟Java7u25相比要慢](http://java-performance.info/static-code-compilation-groovy-2-0/)。
 
-**解决替换hash算法性能衰退问题（出现于Java 7u6）**
+* 解决替换hash算法性能衰退问题（出现于Java 7u6）
 	
 	File changed: \util\HashMap.java
 	File changed: \util\Hashtable.java
@@ -138,9 +138,11 @@ See also:
 * [Oracle Discontinuing sun.reflect.Reflection.getCallerClass](http://www.infoq.com/news/2013/07/Oracle-Removes-getCallerClass)
 
 **Java 7u21(和Java 7u15相比)**
+
 没有性能相关的更新。
 
 **Java 7u15(和Java 7u7相比)**
+
 没有性能相关的更新。
 
 **Java 7u7(和Java 7u2相比)**
@@ -155,7 +157,7 @@ new String(String)构造器现在变得毫无价值。以前需要“拷贝子�
 
 整个来龙去脉可以读我的文章：[Java 1.7.0_06中String内部表示的变化](changes_to_string_java7.md)
 
-**不同JDK maps/sets的可选散列算法**
+* 不同JDK maps/sets的可选散列算法
 
 以下类受到影响：HashMap，HashTable，HashSet，LinkedHashMap，LinkedHashSet，WeakHashMap和ConcurrentHashMap。
 
@@ -163,18 +165,18 @@ new String(String)构造器现在变得毫无价值。以前需要“拷贝子�
 
 除了CocurrentHashMap以外的其他所有类	在Java 7u6(引入)和Java 7u40(解决)版本中会有并发问题－在构造期间，它们依赖一个java.util.Random的单例（实际处于jdk.map.althashing.threshold参数的处理中）－这限制了你在高竞争环境下可以创建的maps/sets数量。
 
-**java.	io.InputStream.skip更新**
+* java.	io.InputStream.skip更新
 
 java.io.InputStream.skip方法是通过将跳过的数据读到临时缓冲区，并丢弃它来实现的。原先的实现会在每个InputStream实例第一次调用skip时缓存２k的缓冲区。一方面它创建更少的垃圾（理论上）。另一方面，你可能不会再用	skip方法（不像read方法），但你需要保留那份临时缓冲区。
 
 新的实现（至少从Java 7u7版本开始）在每次调用skip方法时都会分配一个临时的缓冲区。缓冲区的大小是2k和跳过的数据量中最小的那个。
 
-**Integer/Long.toString稍微快了一些**
+* Integer/Long.toString稍微快了一些
 
 更新的版本中用了一个包级私有的构造器new String(char[],boolean)，它不会拷贝提供的char[]。老的代码使用会拷贝提供的char[]的new String(offset,cout,char[])构造器。
 
 Byte/Short.toString方法没有更新，因为它们调用Integer.toString方法进行转换。最后，Float/Double.toString使用sun.misc.FloatingDecimal进行转换，它不能访问String包级私有的构造器。
 
-**java.util.Collections包装类的equals方法更新**
+* java.util.Collections包装类的equals方法更新
 
 java.util.Collections中的一些集合包装类现在有了稍微快点的equals方法：添加了if(this==other) return true分支。
