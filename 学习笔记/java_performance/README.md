@@ -3,7 +3,9 @@
 
 ##代码优化
 
-###基础
+###Core
+[Core Java 7更新日志](core_java_7_change_log.md)
+
 [Java1.7中String内部表示的变化](changes_to_string_java7.md)
 
 [G1垃圾回收器中的字符串去重(Java 8 Update 20)](java_string_deduplication.md)
