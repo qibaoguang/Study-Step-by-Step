@@ -1,4 +1,4 @@
-Core Java 7更新日志
+[Core Java 7更新日志](http://java-performance.info/core-java-7-change-log/)
 ================
 
 **2014年1月1日更新－覆盖所有的Java7版本直到Java 7u45**
