@@ -148,11 +148,13 @@ LongBitSet底层采用Map<Long,BitSet>实现。我们的想法是使用位集键
 	}
 	
 遍历java.util.BitSet中的位通常这样做：
+
 	for ( int i = bs.nextSetBit( 0 ); i >= 0; i = bs.nextSetBit( i + 1 ) ) {
 	    //i is a key which bit was set
 	}
 
 如果是LongBitSet，可以很容易的实现类似于visitor的访问：
+
 	public void printAllSetBits()
 	{
 	    forEach( new LongProcedure() {
@@ -170,7 +172,7 @@ LongBitSet底层采用Map<Long,BitSet>实现。我们的想法是使用位集键
 
 实际上，这里有另一个极其相似的例子－检查你代码中的Set<Short/Integer/Long>。逻辑上，它们和位集相同：一个set中的值要么存在要么不存在，所以从一个整型到布尔值，我们的映射是相同的。下面从[Trove 章节](http://java-performance.info/primitive-types-collections-trove-library/)拷贝过来的表格告诉我们一个包含10M整数的map消耗的内存：
 
-<table border="1">
+<table>
 <thead>
 <tr>
 <td>JDK HashSet&lt;Integer&gt;</td>
@@ -187,3 +189,14 @@ LongBitSet底层采用Map<Long,BitSet>实现。我们的想法是使用位集键
 </tbody>
 </table>
 
+同样大小的位集将占1.25Mb的内存。从这我们能够得出结论：如果`HashSet<Integer>`的集位少于400位，那就应该使用位集代替它。即使是内存优化最好的TIntSet比例也大概是80:1。这意味着多数情况下使用位集代替存储整型数的set是值得的。
+
+最后的案例是每个整型键存储多个标记（少于8个）。为了每个键能够存储多个标记，你需要多个单独的位集。如果你需要存储一些bits value（所有的位都是一个单一值的一部分），那最好使用一个数组或map。这样的情况你可以参考[Use case: how to compact a long-to-long mapping](http://java-performance.info/use-case-how-to-compact-a-long-to-long-mapping/)章节。
+
+##总结
+
+当你需要映射大量整型键到布尔标记时不要忘记位集。为了节省内存，保存整型值的sets应该使用位集代替。
+
+##See also
+
+[Java集合概述](java_collections_overview.md)
