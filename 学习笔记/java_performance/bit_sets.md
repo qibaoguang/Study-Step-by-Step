@@ -146,5 +146,44 @@ LongBitSet底层采用Map<Long,BitSet>实现。我们的想法是使用位集键
 	        }
 	    }
 	}
-
 	
+遍历java.util.BitSet中的位通常这样做：
+	for ( int i = bs.nextSetBit( 0 ); i >= 0; i = bs.nextSetBit( i + 1 ) ) {
+	    //i is a key which bit was set
+	}
+
+如果是LongBitSet，可以很容易的实现类似于visitor的访问：
+	public void printAllSetBits()
+	{
+	    forEach( new LongProcedure() {
+	        @Override
+	        public boolean forEntry( final long value ) {
+	            System.out.println( value );
+	            return true;
+	        }
+	    });
+	}
+
+**LongBisSet使用场景**
+
+最简单的情况当然是每个整型键存储一个标记。使用LongBitSet，你可以在这保存一些密集值的映射，在那保存一些到单一标记的映射，从内存消耗这点看，它比原来的BitSet要好。
+
+实际上，这里有另一个极其相似的例子－检查你代码中的Set<Short/Integer/Long>。逻辑上，它们和位集相同：一个set中的值要么存在要么不存在，所以从一个整型到布尔值，我们的映射是相同的。下面从[Trove 章节](http://java-performance.info/primitive-types-collections-trove-library/)拷贝过来的表格告诉我们一个包含10M整数的map消耗的内存：
+
+<table border="1">
+<thead>
+<tr>
+<td>JDK HashSet&lt;Integer&gt;</td>
+<td>Trove THashSet&lt;Integer&gt;</td>
+<td>Trove TIntSet</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>525M</td>
+<td>236M</td>
+<td>103M</td>
+</tr>
+</tbody>
+</table>
+
