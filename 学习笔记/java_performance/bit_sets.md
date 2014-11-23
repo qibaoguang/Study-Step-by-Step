@@ -166,7 +166,7 @@ LongBitSet底层采用Map<Long,BitSet>实现。我们的想法是使用位集键
 	    });
 	}
 
-**LongBisSet使用场景**
+**LongBitSet使用场景**
 
 最简单的情况当然是每个整型键存储一个标记。使用LongBitSet，你可以在这保存一些密集值的映射，在那保存一些到单一标记的映射，从内存消耗这点看，它比原来的BitSet要好。
 
@@ -189,7 +189,7 @@ LongBitSet底层采用Map<Long,BitSet>实现。我们的想法是使用位集键
 </tbody>
 </table>
 
-同样大小的位集将占1.25Mb的内存。从这我们能够得出结论：如果`HashSet<Integer>`的集位少于400位，那就应该使用位集代替它。即使是内存优化最好的TIntSet比例也大概是80:1。这意味着多数情况下使用位集代替存储整型数的set是值得的。
+同样大小的位集仅占1.25Mb的内存。从这我们能够得出结论：如果`HashSet<Integer>`的集位少于400位，那就应该使用位集代替它。即使是内存优化最好的TIntSet比例也大概是80:1。这意味着多数情况下使用位集代替存储整型数的set是值得的。
 
 最后的案例是每个整型键存储多个标记（少于8个）。为了每个键能够存储多个标记，你需要多个单独的位集。如果你需要存储一些bits value（所有的位都是一个单一值的一部分），那最好使用一个数组或map。这样的情况你可以参考[Use case: how to compact a long-to-long mapping](http://java-performance.info/use-case-how-to-compact-a-long-to-long-mapping/)章节。
 
