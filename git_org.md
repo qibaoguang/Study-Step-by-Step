@@ -8,4 +8,4 @@ GitHub上感兴趣的组织
 
 [Parse](https://github.com/ParsePlatform)
 
-[GO:使用GO语言编写的项目](https://github.com/facebookgo)
+[FaceBook GO:FaceBook开源的GO语言项目](https://github.com/facebookgo)
