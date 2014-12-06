@@ -5,3 +5,5 @@
 [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70587)
 
 [一个合格的程序员应该读过哪些书](http://my.oschina.net/justjavac/blog/66624)
+
+[Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
