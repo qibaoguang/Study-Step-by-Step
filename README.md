@@ -4,6 +4,7 @@ Study-Step-by-Step
 
 ### Java
 * [Java戏法](http://www.infoq.com/cn/articles/Java-Sleight-of-Hand)
+* [Let’s talk about date and time](http://killbill.io/blog/lets-talk-about-date-and-time/)
 
 ### Shell
 * [Shell脚本编程30分钟入门](学习笔记/linux/shell.md)
