@@ -9,3 +9,5 @@ GitHub上感兴趣的组织
 [Parse](https://github.com/ParsePlatform)
 
 [FaceBook GO:FaceBook开源的GO语言项目](https://github.com/facebookgo)
+
+[Kill Bill](https://github.com/killbill/)
