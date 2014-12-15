@@ -6,8 +6,13 @@ Study-Step-by-Step
 * [Java戏法](http://www.infoq.com/cn/articles/Java-Sleight-of-Hand)
 * [Let’s talk about date and time](http://killbill.io/blog/lets-talk-about-date-and-time/)
 
+### Linux 
+* [awk命令](学习笔记/linux/awk.md)
+* [tar压缩与解压](学习笔记/linux/tar.md)
+
 ### Shell
 * [Shell脚本编程30分钟入门](学习笔记/linux/shell.md)
+* [Shell监控脚本](学习笔记/linux/shellscript_start.md)
 
 ### 管理艺术
 * [乔布斯的领导艺术](https://www.aspeninstitute.org/sites/default/files/content/docs/about/HBR-Isaacson.pdf)
