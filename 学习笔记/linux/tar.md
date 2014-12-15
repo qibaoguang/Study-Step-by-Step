@@ -92,11 +92,11 @@ t 列出档案文件的内容，查看已经备份了哪些文件。
 ### tar命令的C参数
 
 $ tar -cvf file2.tar /home/usr2/file2
-　
+
 tar: Removing leading '/' from members names
-　
+
 home/usr2/file2
-　
+
 该命令可以将/home/usr2/file2文件打包到当前目录下的file2.tar中，需要注意的是：使用绝对路径标识的源文件，在用tar命令压缩后，文件名连同绝对路径（这里是home/usr2/，根目录'/'被自动去掉了）一并被压缩进来。使用tar命令解压缩后会出现以下情况：
 
 $ tar -xvf file2.tar
@@ -108,7 +108,9 @@ $ ls
 解压缩后的文件名不是想象中的file2，而是home/usr2/file2。
 
 $ tar -cvf file2.tar -C /home/usr2 file2
+
 该命令中的-C dir参数，将tar的工作目录从当前目录改为/home/usr2，将file2文件（不带绝对路径）压缩到file2.tar中。
+
 ***注意：-C dir参数的作用在于改变工作目录，其有效期为该命令中下一次-C dir参数之前。***
 
 使用tar的-C dir参数，同样可以做到在当前目录/home/usr1下将文件解压缩到其他目录，例如：
@@ -118,7 +120,7 @@ $ tar -xvf file2.tar -C /home/usr2
 而tar不用-C dir参数时是无法做到的：
 
 $ tar -xvf file2.tar /home/usr2
-　　
+
 tar: /tmp/file: Not found in archive
-　　
+
 tar: Error exit delayed from previous errors
