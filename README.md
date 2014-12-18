@@ -7,6 +7,9 @@ Study-Step-by-Step
 * [Let’s talk about date and time](http://killbill.io/blog/lets-talk-about-date-and-time/)
 * [Google Guava官方教程](http://ifeve.com/google-guava/)
 
+### 软件开发
+*[The Reactive Manifesto : 反应宣言](http://www.reactivemanifesto.org/)
+
 ### 数据结构与算法
 * [B-树和B+树的应用：数据搜索和数据库索引](http://blog.csdn.net/hguisu/article/details/7786014)
 
