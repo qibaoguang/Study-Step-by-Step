@@ -9,6 +9,7 @@ Study-Step-by-Step
 
 ### 软件开发
 * [The Reactive Manifesto : 反应宣言](http://www.reactivemanifesto.org/)
+* [Why Do We Need a Reactive Manifesto?](http://typesafe.com/blog/why_do_we_need_a_reactive_manifesto%3F)
 
 ### 数据结构与算法
 * [B-树和B+树的应用：数据搜索和数据库索引](http://blog.csdn.net/hguisu/article/details/7786014)
