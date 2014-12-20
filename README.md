@@ -9,12 +9,8 @@ Study-Step-by-Step
 * [Java并发专栏](http://blog.csdn.net/column/details/j-u-c.html)
 * [JDBC源码分析](http://blog.csdn.net/xieyuooo/article/details/8502585)
 
-### 软件开发
-* [The Reactive Manifesto : 反应宣言](http://www.reactivemanifesto.org/)
-* [Why Do We Need a Reactive Manifesto?](http://typesafe.com/blog/why_do_we_need_a_reactive_manifesto%3F)
-
-### 数据结构与算法
-* [B-树和B+树的应用：数据搜索和数据库索引](http://blog.csdn.net/hguisu/article/details/7786014)
+### J2EE
+* [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
 
 ### Linux 
 * [awk命令](学习笔记/linux/awk.md)
@@ -24,5 +20,17 @@ Study-Step-by-Step
 * [Shell脚本编程30分钟入门](学习笔记/linux/shell.md)
 * [Shell监控脚本](学习笔记/linux/shellscript_start.md)
 
-### 管理艺术
+### Design
+* [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70252)
+* [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70587)
+
+### 软件开发
+* [The Reactive Manifesto : 反应宣言](http://www.reactivemanifesto.org/)
+* [Why Do We Need a Reactive Manifesto?](http://typesafe.com/blog/why_do_we_need_a_reactive_manifesto%3F)
+
+### 数据结构与算法
+* [B-树和B+树的应用：数据搜索和数据库索引](http://blog.csdn.net/hguisu/article/details/7786014)
+
+### 其他
 * [乔布斯的领导艺术](https://www.aspeninstitute.org/sites/default/files/content/docs/about/HBR-Isaacson.pdf)
+* [一个合格的程序员应该读过哪些书](http://my.oschina.net/justjavac/blog/66624)
