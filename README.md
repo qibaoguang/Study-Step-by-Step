@@ -14,6 +14,10 @@ Study-Step-by-Step
 ### J2EE
 * [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
 
+### MySQL
+* [MySQL初级教程](学习笔记/mysql/mysql_start.md)
+* [MySQL性能优化必备25条](http://www.iteye.com/topic/40967)
+
 ### Linux 
 * [awk命令](学习笔记/linux/awk.md)
 * [tar压缩与解压](学习笔记/linux/tar.md)
