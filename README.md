@@ -6,6 +6,7 @@ Study-Step-by-Step
 * [Java戏法](http://www.infoq.com/cn/articles/Java-Sleight-of-Hand)
 * [Let’s talk about date and time](http://killbill.io/blog/lets-talk-about-date-and-time/)
 * [Google Guava官方教程](http://ifeve.com/google-guava/)
+* [Java并发专栏](http://blog.csdn.net/column/details/j-u-c.html)
 
 ### 软件开发
 * [The Reactive Manifesto : 反应宣言](http://www.reactivemanifesto.org/)
