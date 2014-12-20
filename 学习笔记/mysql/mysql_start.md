@@ -1,5 +1,5 @@
 ### 安装
-CentOS 6 mysql5.5安装配置
+CentOS 6 mysql5.5安装配置:
 + 安装所需软件
 + 安装cmake
 + tar.gz形式安装mysql
@@ -7,27 +7,32 @@ CentOS 6 mysql5.5安装配置
 + rpm形式安装mysql
 + mysql配置参数详细说明
 
-MySQL自5.5版本以后,就开始使用cmake 编译工具了。
-tar.gz形式安装 mysql5.5 tar.gz 编译要很久  但是最适合自己的需求  存放在定义的目录结构，MySQL 我安装的版本5.5.14。
+MySQL自5.5版本以后，就开始使用cmake编译工具了。以tar.gz形式安装(mysql5.5.tar.gz)编译需要很久，但是最适合自己的需求，可以存放在定义的目录结构，我安装的MySQL版本是5.5.14。
 
-1 安装所需要系统库相关库文件
-[root@localhost ~]# yum install -y gcc gcc-c++ gcc-g77 autoconf automake zlib* fiex* libxml* ncurses-devel libmcrypt* libtool-ltdl-devel*
+#### 1. 安装所需要系统库相关库文件
 
-这两个网站mysql 资源比较丰富 
-ftp://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/
-ftp://ftp.pku.edu.cn/open/db/MySQL/
+<pre>[root@localhost ~]# yum install -y gcc gcc-c++ gcc-g77 autoconf automake zlib* fiex* libxml* ncurses-devel libmcrypt* libtool-ltdl-devel*</pre>
 
-2. 安装 cmake  
-[root@localhost ~]# wget http://www.cmake.org/files/v2.8/cmake-2.8.5.tar.gz 
-[root@localhost ~]# yum install cmake
+这两个网站mysql资源比较丰富 
+[](ftp://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/)
+[](ftp://ftp.pku.edu.cn/open/db/MySQL/)
+
+#### 2. 安装cmake  
+
+<pre>[root@localhost ~]# wget http://www.cmake.org/files/v2.8/cmake-2.8.5.tar.gz </pre>
+
+<pre>[root@localhost ~]# yum install cmake</pre>
  
- 3. 编译安装 MySQL 5.5.14 
-[root@localhost ~]# wget http://mirrors.sohu.com/mysql/MySQL-5.5/mysql-5.5.14.tar.gz
+#### 3. 编译安装MySQL5.5.14 
+ 
+<pre>[root@localhost ~]# wget http://mirrors.sohu.com/mysql/MySQL-5.5/mysql-5.5.14.tar.gz
 
 [root@localhost ~]# /usr/sbin/groupadd mysql 
+
 [root@localhost ~]# /usr/sbin/useradd -g mysql mysql 
 
 [root@localhost ~]# tar xvf mysql-5.5.14.tar.gz 
+
 [root@localhost ~]# cd mysql-5.5.14/ 
 
 [root@localhost ~]# cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
@@ -41,166 +46,240 @@ ftp://ftp.pku.edu.cn/open/db/MySQL/
 -DWITH_READLINE=1 \
 -DENABLED_LOCAL_INFILE=1 \
 -DMYSQL_DATADIR=/var/mysql/data \
--DMYSQL_USER=mysql
+-DMYSQL_USER=mysql</pre>
 
 以上参数等说明: 
-DCMAKE_INSTALL_PREFIX=/usr/local/mysql # mysql安装的主目录，默认为/usr/local/mysql 
-DMYSQL_DATADIR=/usr/local/mysql/data # mysql数据库文件的存放目录，可以自定义 
-DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock # 系统Socket文件（.sock）设置,基于该文件路径进行Socket链接，必须为绝对路径 
-DSYSCONFDIR=/etc # mysql配置文件 my.cnf的存放地址，默认为/etc下 
-DMYSQL_TCP_PORT=3306 # 数据库服务器监听端口，默认为3306 
-DENABLED_LOCAL_INFILE=1 # 允许从本地导入数据 
-DWITH_READLINE=1 # 快捷键功能 
-DWITH_SSL=yes # 支持 SSL 
-DMYSQL_USER=mysql # 默认为mysql 
+
+DCMAKE_INSTALL_PREFIX=/usr/local/mysql #mysql安装的主目录，默认为/usr/local/mysql 
+
+DMYSQL_DATADIR=/usr/local/mysql/data #mysql数据库文件的存放目录，可以自定义 
+
+DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock #系统Socket文件（.sock）设置,基于该文件路径进行Socket链接，必须为绝对路径 
+
+DSYSCONFDIR=/etc #mysql配置文件my.cnf的存放地址，默认为/etc下 
+
+DMYSQL_TCP_PORT=3306 #数据库服务器监听端口，默认为3306 
+
+DENABLED_LOCAL_INFILE=1 #允许从本地导入数据 
+
+DWITH_READLINE=1 #快捷键功能 
+
+DWITH_SSL=yes #支持SSL 
+
+DMYSQL_USER=mysql #默认为mysql 
 
 //下面3个是数据库编码设置 
-DEXTRA_CHARSETS=all # 安装所有扩展字符集，默认为all 
-DDEFAULT_CHARSET=utf8 # 使用 utf8 字符 
-DDEFAULT_COLLATION=utf8_general_ci # 校验字符 
 
-//下面5个是数据库存储引擎设在 
-DWITH_MYISAM_STORAGE_ENGINE=1 # 安装 myisam 存储引擎 
-DWITH_INNOBASE_STORAGE_ENGINE=1 # 安装 innodb 存储引擎 
-DWITH_ARCHIVE_STORAGE_ENGINE=1 # 安装 archive 存储引擎 
-DWITH_BLACKHOLE_STORAGE_ENGINE=1 # 安装 blackhole 存储引擎 
-DWITH_PARTITION_STORAGE_ENGINE=1 # 安装数据库分区 
+DEXTRA_CHARSETS=all #安装所有扩展字符集，默认为all 
+
+DDEFAULT_CHARSET=utf8 #使用 utf8 字符 
+
+DDEFAULT_COLLATION=utf8_general_ci #校验字符 
+
+//下面5个是数据库存储引擎设置
+
+DWITH_MYISAM_STORAGE_ENGINE=1 #安装myisam存储引擎 
+
+DWITH_INNOBASE_STORAGE_ENGINE=1 #安装innodb存储引擎 
+
+DWITH_ARCHIVE_STORAGE_ENGINE=1 #安装archive存储引擎 
+
+DWITH_BLACKHOLE_STORAGE_ENGINE=1 #安装blackhole存储引擎 
+
+DWITH_PARTITION_STORAGE_ENGINE=1 #安装数据库分区 
 
 执行安装，需要等很长时间 
-[root@localhost ~]#  make 
+
+<pre>[root@localhost ~]#  make 
+
 [root@localhost ~]#  make install 
  
 [root@localhost ~]# chmod +w /usr/local/mysql 
+
 [root@localhost ~]# chown -R mysql:mysql /usr/local/mysql   #改变目录拥有者与所属组 
 
 [root@localhost ~]# ln -s /usr/local/mysql/lib/libmysqlclient.so.16 /usr/lib/libmysqlclient.so.16 
+
 [root@localhost ~]# cd support-files/ 
-[root@localhost ~]# cp my-large.cnf /etc/my.cnf # 选择默认 配置文件 适合大型服务器 
-[root@localhost ~]# cp mysql.server /etc/init.d/mysqld    # 复制启动文件
 
-4. 配置启动MySQL 5.5.14 
-1. 若有需要请先修改 mysql 的配置 my.cnf 
-[root@localhost ~]# vi /etc/my.cnf 
+[root@localhost ~]# cp my-large.cnf /etc/my.cnf #选择默认配置文件适合大型服务器 
+
+[root@localhost ~]# cp mysql.server /etc/init.d/mysqld #复制启动文件 </pre>
+
+#### 4. 配置启动MySQL 5.5.14 
+
+##### 4.1. 若有需要请先修改mysql的配置my.cnf
+
+<pre>[root@localhost ~]# vi /etc/my.cnf </pre>
+
 在[mysqld]下面添加 
+<pre>
 basedir = /usr/local/mysql-5.5.14
-datadir = /usr/local/mysql-5.5.14/data
-log-error = /usr/local/mysql-5.5.14/mysql_error.log
-pid-file = /usr/local/mysql-5.5.14/data/mysql.pid
-default-storage-engine=MyISAM
-user = mysql
- 
-2. mysql 初始化安装  执行以下命令 
-[root@localhost ~]# /usr/local/mysql/scripts/mysql_install_db \
---basedir=/usr/local/mysql \
---datadir=/var/mysql/data \
---user=mysql 
 
-3. 将 mysql 加入开机启动 
+datadir = /usr/local/mysql-5.5.14/data
+
+log-error = /usr/local/mysql-5.5.14/mysql_error.log
+
+pid-file = /usr/local/mysql-5.5.14/data/mysql.pid
+
+default-storage-engine=MyISAM
+
+user = mysql
+</pre>
+ 
+##### 4.2. mysql初始化安装
+执行以下命令:
+<pre>
+[root@localhost ~]# /usr/local/mysql/scripts/mysql_install_db \
+
+--basedir=/usr/local/mysql \
+
+--datadir=/var/mysql/data \
+
+--user=mysql 
+</pre>
+
+##### 4.3. 将mysql加入开机启动 
+<pre>
 [root@localhost ~]# chmod +x /etc/init.d/mysqld 
+
 [root@localhost ~]# vi /etc/init.d/mysqld （编辑此文件，查找并修改以下变量内容：） 
+
 basedir=/usr/local/mysql
+
 datadir=/var/mysql/data
 
 [root@localhost ~]# chkconfig --add mysqld 
+
 [root@localhost ~]# chkconfig --level 345 mysqld on 
+</pre>
 
-为MySQL配置环境变量，以后使用起来方便 
-# export PATH=/usr/local/mysql/bin:$PATH
+为MySQL配置环境变量，以后使用起来方便
 
-4. 启动 mysql 
+<pre>export PATH=/usr/local/mysql/bin:$PATH</pre>
+
+##### 4.4. 启动mysql
+<pre>
 [root@localhost ~]# service mysqld start 
-设置密码 
+</pre>
+设置密码:
+<pre>
 [root@localhost ~]# mysql_secure_installation 
+</pre>
 
 注意：如果出现 Starting MySQL...The server quit without updating PID file
 
- 报错：
+报错：
 
 Starting MySQL...The server quit without updating PID file
 
- 
 查看错误日志
 
 情景1： 
- 
+ <pre>
 110206 12:58:35 [ERROR] Can't start server : Bind on unix socket: No such file or directory
 
 110206 12:58:35 [ERROR] Do you already have another mysqld server running on socket: /mysql/mysqldir/data/mysql.sock ?
 
 110206 12:58:35 [ERROR] Aborting
-[root@localhost ~]# ps -ef | grep mysql # 未发现有mysqld. 
-[root@localhost ~]# netstat -an | grep 3306 也未发现异常. 
-最后从mysql安装目录下重新复制一个配置文件到/etc/my.cnf
+</pre>
+<pre>
+[root@localhost ~]# ps -ef | grep mysql #未发现有mysqld. 
+
+[root@localhost ~]# netstat -an | grep 3306 #也未发现异常. 
+</pre>
+
+最后从mysql安装目录下重新复制一个配置文件到/etc/my.cnf,
 修改相应参数.于是问题解决 
 
 情景2： 
+<pre>
  /mysql/mysqldir/bin/mysqld: Table 'mysql.plugin' doesn't exist
- [ERROR] Can't open the mysql.plugin table. Please run my        sql_upgrade to create it.
+ [ERROR] Can't open the mysql.plugin table. Please run mysql_upgrade to create it.
+ </pre>
 原因：编译安装后忘记初始化表.
+
 解决：运行mysql_install_db
 
+其他情况，查看日志文件（我的是localhost.localdomain.err，具体因人而异），然后具体分析；
 
- 其他情况，查看日志文件（我的是localhost.localdomain.err，具体因人而异），然后具体分析；
+tar.gz安装形式完成。
 
-tar.gz 安装形式完成。
+#### 5. rpm 形式安装 
 
-5. rpm 形式安装 
 下载所需软件 进行安装
+<pre>
 [root@localhost ~]# rpm -ivh libaio-0.3.93-4.i386.rpm 
     rpm -ivh MySQL-server-5.5.14-1.rhel5.i386.rpm
     rpm -ivh MySQL-client-5.5.14-1.rhel5.i386.rpm
     rpm -ivh MySQL-shared-5.5.14-1.rhel5.i386.rpm
     rpm -ivh MySQL-devel-5.5.14-1.rhel5.i386.rpm
+</pre>
+启动MySQL服务器:
+<pre>[root@localhost ~]# service mysql start </pre>
 
-启动MySQL服务器 
-[root@localhost ~]# service mysql start 
-设置密码 
-[root@localhost ~]# mysql_secure_installation 
-
+设置密码:
+<pre>[root@localhost ~]# mysql_secure_installation</pre>
 
 linux采用rpm方式重新安装mysql，完成后Mysql启动时候报告错误，找不到pid文件 
 
 Starting MySQL..Manager of pid-file quit without updating file.[FAILED]
+
 此时需要采用safe模式启动
 
-[root@localhost ~]# /usr/bin/mysqld_safe --user=mysql 
+<pre>[root@localhost ~]# /usr/bin/mysqld_safe --user=mysql</pre>
 
 特别要注意kill旧Mysql进程:
 
 安装mysql 出现如下类似错误的话 
-conflicts with file from package mysql-libs-
 
+conflicts with file from package mysql-libs-
 
 需要把以前安装的mysql相关的包卸载掉。
 
 说明：使用rpm安装等时候，不能向编译安装一样选择安装路径，现在用命令来查看一下mysql都安装到哪里去了 
+<pre>
 [root@localhost ~]# find / -name mysql -print 
+
 /etc/logrotate.d/mysql
+
 /etc/rc.d/init.d/mysql
+
 /var/lib/mysql
+
 /var/lib/mysql/mysql
+
 /var/lock/subsys/mysql
+
 /usr/lib/mysql
+
 /usr/include/mysql
+
 /usr/share/mysql
+
 /usr/bin/mysql
-而 data默认放在：/var/lib/mysql 
+</pre>
+而data默认放在：/var/lib/mysql 
+
 mysql默认安装在了：/usr/share/mysql中
     
 
-6. mysq配置参数详细说明
+#### 6. mysq配置参数详细说明
 
 mysql最大并发数|Linux修改Mysql最大并发连接数 
 
 第一步，先查看下当前MYSQL的最大连接数
 
-[root@localhost ~]# /usr/local/mysql/bin/mysqladmin -uroot -ppassword variables |grep max_connections (注意，root替换成你的数据库，不过一般默认就是root,password是数据库密码，) 输入以上命令后会显示下面的信息，这个是最大连接数是100
+<pre>
+[root@localhost ~]# /usr/local/mysql/bin/mysqladmin -uroot -ppassword variables |grep max_connections #注意，root替换成你的数据库，不过一般默认就是root,password是数据库密码 
+</pre>
+输入以上命令后会显示下面的信息，这个是最大连接数是100
 
 | max_connections | 100 //默认是100
 
-第二步 ，修改最大连接数为200 
+第二步，修改最大连接数为200 
 
-[root@localhost ~]# nano /etc/my.cnf
+<pre[root@localhost ~]# nano /etc/my.cnf</pre>
 
 输入以上命令后会进入my.cnf文件内容，在其中加入下面这行代码
 
@@ -210,11 +289,11 @@ max_connections=200
 
 最后一步就是重启mysql 
 
-[root@localhost ~]# service mysqld restart //重启mysql的命令
+<pre>[root@localhost ~]# service mysqld restart //重启mysql的命令</pre>
 
 
-MySQL my.cnf 中文参考 
-
+### MySQL my.cnf中文参考 
+<pre>
 #BEGIN CONFIG INFO
 #DESCR: 4GB RAM, 只使用InnoDB, ACID, 少量的连接, 队列负载大
 #TYPE: SYSTEM
@@ -656,4 +735,4 @@ interactive-timeout
 # 警告: 确认你已经将全系统限制设定的足够高!
 # 打开大量表需要将此值设高
 open-files-limit = 8192
- 
+</pre>
