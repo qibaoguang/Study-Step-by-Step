@@ -1,31 +1,39 @@
-### 安装
+[MYSQL初级教程](http://www.iteye.com/topic/1128407)
+=========
+
+### 安装与启动
 CentOS 6 mysql5.5安装配置:
-+ 安装所需软件
-+ 安装cmake
-+ tar.gz形式安装mysql
-+ 配置与启动
-+ rpm形式安装mysql
-+ mysql配置参数详细说明
+1. 安装所需软件
+2. 安装cmake
+3. tar.gz形式安装mysql
+4. 配置与启动
+5. rpm形式安装mysql
+6. mysql配置参数详细说明
 
 MySQL自5.5版本以后，就开始使用cmake编译工具了。以tar.gz形式安装(mysql5.5.tar.gz)编译需要很久，但是最适合自己的需求，可以存放在定义的目录结构，我安装的MySQL版本是5.5.14。
 
 #### 1. 安装所需要系统库相关库文件
 
-<pre>[root@localhost ~]# yum install -y gcc gcc-c++ gcc-g77 autoconf automake zlib* fiex* libxml* ncurses-devel libmcrypt* libtool-ltdl-devel*</pre>
+<pre>
+[root@localhost ~]# yum install -y gcc gcc-c++ gcc-g77 autoconf automake zlib* fiex* libxml* ncurses-devel libmcrypt* libtool-ltdl-devel*
+</pre>
 
 这两个网站mysql资源比较丰富 
-[](ftp://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/)
-[](ftp://ftp.pku.edu.cn/open/db/MySQL/)
+[ftp://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/](ftp://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/)
+[ftp://ftp.pku.edu.cn/open/db/MySQL/](ftp://ftp.pku.edu.cn/open/db/MySQL/)
 
 #### 2. 安装cmake  
 
-<pre>[root@localhost ~]# wget http://www.cmake.org/files/v2.8/cmake-2.8.5.tar.gz </pre>
+<pre>
+[root@localhost ~]# wget http://www.cmake.org/files/v2.8/cmake-2.8.5.tar.gz
 
-<pre>[root@localhost ~]# yum install cmake</pre>
+[root@localhost ~]# yum install cmake
+</pre>
  
 #### 3. 编译安装MySQL5.5.14 
  
-<pre>[root@localhost ~]# wget http://mirrors.sohu.com/mysql/MySQL-5.5/mysql-5.5.14.tar.gz
+<pre>
+[root@localhost ~]# wget http://mirrors.sohu.com/mysql/MySQL-5.5/mysql-5.5.14.tar.gz
 
 [root@localhost ~]# /usr/sbin/groupadd mysql 
 
@@ -46,10 +54,11 @@ MySQL自5.5版本以后，就开始使用cmake编译工具了。以tar.gz形式�
 -DWITH_READLINE=1 \
 -DENABLED_LOCAL_INFILE=1 \
 -DMYSQL_DATADIR=/var/mysql/data \
--DMYSQL_USER=mysql</pre>
+-DMYSQL_USER=mysql
+</pre>
 
 以上参数等说明: 
-
+<pre>
 DCMAKE_INSTALL_PREFIX=/usr/local/mysql #mysql安装的主目录，默认为/usr/local/mysql 
 
 DMYSQL_DATADIR=/usr/local/mysql/data #mysql数据库文件的存放目录，可以自定义 
@@ -87,10 +96,12 @@ DWITH_ARCHIVE_STORAGE_ENGINE=1 #安装archive存储引擎
 DWITH_BLACKHOLE_STORAGE_ENGINE=1 #安装blackhole存储引擎 
 
 DWITH_PARTITION_STORAGE_ENGINE=1 #安装数据库分区 
+</pre>
 
 执行安装，需要等很长时间 
 
-<pre>[root@localhost ~]#  make 
+<pre>
+[root@localhost ~]#  make 
 
 [root@localhost ~]#  make install 
  
@@ -104,13 +115,16 @@ DWITH_PARTITION_STORAGE_ENGINE=1 #安装数据库分区
 
 [root@localhost ~]# cp my-large.cnf /etc/my.cnf #选择默认配置文件适合大型服务器 
 
-[root@localhost ~]# cp mysql.server /etc/init.d/mysqld #复制启动文件 </pre>
+[root@localhost ~]# cp mysql.server /etc/init.d/mysqld #复制启动文件 
+</pre>
 
 #### 4. 配置启动MySQL 5.5.14 
 
 ##### 4.1. 若有需要请先修改mysql的配置my.cnf
 
-<pre>[root@localhost ~]# vi /etc/my.cnf </pre>
+<pre>
+[root@localhost ~]# vi /etc/my.cnf
+</pre>
 
 在[mysqld]下面添加 
 <pre>
@@ -183,20 +197,22 @@ Starting MySQL...The server quit without updating PID file
 
 110206 12:58:35 [ERROR] Aborting
 </pre>
+
 <pre>
 [root@localhost ~]# ps -ef | grep mysql #未发现有mysqld. 
 
 [root@localhost ~]# netstat -an | grep 3306 #也未发现异常. 
 </pre>
 
-最后从mysql安装目录下重新复制一个配置文件到/etc/my.cnf,
-修改相应参数.于是问题解决 
+最后从mysql安装目录下重新复制一个配置文件到/etc/my.cnf,修改相应参数.于是问题解决 
 
 情景2： 
+
 <pre>
  /mysql/mysqldir/bin/mysqld: Table 'mysql.plugin' doesn't exist
  [ERROR] Can't open the mysql.plugin table. Please run mysql_upgrade to create it.
  </pre>
+ 
 原因：编译安装后忘记初始化表.
 
 解决：运行mysql_install_db
@@ -259,6 +275,7 @@ conflicts with file from package mysql-libs-
 
 /usr/bin/mysql
 </pre>
+
 而data默认放在：/var/lib/mysql 
 
 mysql默认安装在了：/usr/share/mysql中
@@ -289,7 +306,9 @@ max_connections=200
 
 最后一步就是重启mysql 
 
-<pre>[root@localhost ~]# service mysqld restart //重启mysql的命令</pre>
+<pre>
+[root@localhost ~]# service mysqld restart //重启mysql的命令
+</pre>
 
 
 ### MySQL my.cnf中文参考 
