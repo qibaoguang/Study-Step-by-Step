@@ -3,11 +3,17 @@
 
 ### 安装与启动
 CentOS 6 mysql5.5安装配置:
+
 1. 安装所需软件
+
 2. 安装cmake
+
 3. tar.gz形式安装mysql
+
 4. 配置与启动
+
 5. rpm形式安装mysql
+
 6. mysql配置参数详细说明
 
 MySQL自5.5版本以后，就开始使用cmake编译工具了。以tar.gz形式安装(mysql5.5.tar.gz)编译需要很久，但是最适合自己的需求，可以存放在定义的目录结构，我安装的MySQL版本是5.5.14。
@@ -18,8 +24,10 @@ MySQL自5.5版本以后，就开始使用cmake编译工具了。以tar.gz形式�
 [root@localhost ~]# yum install -y gcc gcc-c++ gcc-g77 autoconf automake zlib* fiex* libxml* ncurses-devel libmcrypt* libtool-ltdl-devel*
 </pre>
 
-这两个网站mysql资源比较丰富 
+这两个网站mysql资源比较丰富:
+
 [ftp://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/](ftp://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/)
+
 [ftp://ftp.pku.edu.cn/open/db/MySQL/](ftp://ftp.pku.edu.cn/open/db/MySQL/)
 
 #### 2. 安装cmake  
@@ -183,36 +191,27 @@ datadir=/var/mysql/data
 
 注意：如果出现 Starting MySQL...The server quit without updating PID file
 
-报错：
-
-Starting MySQL...The server quit without updating PID file
+报错：Starting MySQL...The server quit without updating PID file
 
 查看错误日志
 
 情景1： 
  <pre>
 110206 12:58:35 [ERROR] Can't start server : Bind on unix socket: No such file or directory
-
 110206 12:58:35 [ERROR] Do you already have another mysqld server running on socket: /mysql/mysqldir/data/mysql.sock ?
-
 110206 12:58:35 [ERROR] Aborting
 </pre>
-
 <pre>
 [root@localhost ~]# ps -ef | grep mysql #未发现有mysqld. 
-
 [root@localhost ~]# netstat -an | grep 3306 #也未发现异常. 
 </pre>
-
 最后从mysql安装目录下重新复制一个配置文件到/etc/my.cnf,修改相应参数.于是问题解决 
 
 情景2： 
-
-<pre>
+ <pre>
  /mysql/mysqldir/bin/mysqld: Table 'mysql.plugin' doesn't exist
  [ERROR] Can't open the mysql.plugin table. Please run mysql_upgrade to create it.
  </pre>
- 
 原因：编译安装后忘记初始化表.
 
 解决：运行mysql_install_db
@@ -223,7 +222,7 @@ tar.gz安装形式完成。
 
 #### 5. rpm 形式安装 
 
-下载所需软件 进行安装
+下载所需软件进行安装:
 <pre>
 [root@localhost ~]# rpm -ivh libaio-0.3.93-4.i386.rpm 
     rpm -ivh MySQL-server-5.5.14-1.rhel5.i386.rpm
@@ -233,7 +232,6 @@ tar.gz安装形式完成。
 </pre>
 启动MySQL服务器:
 <pre>[root@localhost ~]# service mysql start </pre>
-
 设置密码:
 <pre>[root@localhost ~]# mysql_secure_installation</pre>
 
@@ -288,7 +286,9 @@ mysql最大并发数|Linux修改Mysql最大并发连接数
 第一步，先查看下当前MYSQL的最大连接数
 
 <pre>
-[root@localhost ~]# /usr/local/mysql/bin/mysqladmin -uroot -ppassword variables |grep max_connections #注意，root替换成你的数据库，不过一般默认就是root,password是数据库密码 
+[root@localhost ~]# /usr/local/mysql/bin/mysqladmin -uroot -ppassword variables |grep max_connections 
+
+#注意，root替换成你的数据库，不过一般默认就是root,password是数据库密码 
 </pre>
 输入以上命令后会显示下面的信息，这个是最大连接数是100
 
@@ -296,7 +296,7 @@ mysql最大并发数|Linux修改Mysql最大并发连接数
 
 第二步，修改最大连接数为200 
 
-<pre[root@localhost ~]# nano /etc/my.cnf</pre>
+<pre>[root@localhost ~]# nano /etc/my.cnf</pre>
 
 输入以上命令后会进入my.cnf文件内容，在其中加入下面这行代码
 
@@ -304,12 +304,11 @@ max_connections=200
 
 使用上下箭头移动光标，输入后按ctrl+o组合键后保存，保存的时候要再按回车键确定的，这个地方也是我开始没注意的地方，确定后按ctrl+x组合键退出回到命令行
 
-最后一步就是重启mysql 
+最后一步就是重启mysql
 
 <pre>
 [root@localhost ~]# service mysqld restart //重启mysql的命令
 </pre>
-
 
 ### MySQL my.cnf中文参考 
 <pre>
