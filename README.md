@@ -9,6 +9,7 @@ Study-Step-by-Step
 * [Java并发专栏](http://blog.csdn.net/column/details/j-u-c.html)
 * [JDBC源码分析](http://blog.csdn.net/xieyuooo/article/details/8502585)
 * [JAVA-特种兵-AK47](http://blog.csdn.net/m13666368773/article/category/863997)
+* [Java线程池架构原理和源码解析](http://blog.csdn.net/xieyuooo/article/details/8718741)
 
 ### J2EE
 * [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
