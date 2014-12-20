@@ -8,6 +8,7 @@ Study-Step-by-Step
 * [Google Guava官方教程](http://ifeve.com/google-guava/)
 * [Java并发专栏](http://blog.csdn.net/column/details/j-u-c.html)
 * [JDBC源码分析](http://blog.csdn.net/xieyuooo/article/details/8502585)
+* [JAVA-特种兵-AK47](http://blog.csdn.net/m13666368773/article/category/863997)
 
 ### J2EE
 * [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
