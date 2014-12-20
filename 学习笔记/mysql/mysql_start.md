@@ -208,10 +208,10 @@ datadir=/var/mysql/data
 最后从mysql安装目录下重新复制一个配置文件到/etc/my.cnf,修改相应参数.于是问题解决 
 
 情景2： 
- <pre>
+<pre>
  /mysql/mysqldir/bin/mysqld: Table 'mysql.plugin' doesn't exist
  [ERROR] Can't open the mysql.plugin table. Please run mysql_upgrade to create it.
- </pre>
+</pre>
 原因：编译安装后忘记初始化表.
 
 解决：运行mysql_install_db
@@ -286,9 +286,7 @@ mysql最大并发数|Linux修改Mysql最大并发连接数
 第一步，先查看下当前MYSQL的最大连接数
 
 <pre>
-[root@localhost ~]# /usr/local/mysql/bin/mysqladmin -uroot -ppassword variables |grep max_connections 
-
-#注意，root替换成你的数据库，不过一般默认就是root,password是数据库密码 
+[root@localhost ~]# /usr/local/mysql/bin/mysqladmin -uroot -ppassword variables |grep max_connections
 </pre>
 输入以上命令后会显示下面的信息，这个是最大连接数是100
 
@@ -754,3 +752,6 @@ interactive-timeout
 # 打开大量表需要将此值设高
 open-files-limit = 8192
 </pre>
+
+配置参考：
+[网易](http://www.iteye.com/topic/40967)
