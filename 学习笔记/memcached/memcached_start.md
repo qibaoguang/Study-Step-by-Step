@@ -45,3 +45,44 @@ netstat -lp | grep memcached
 <pre>
 ps -ef | grep memcached 
 </pre>
+
+### Memcached Java客户端（spymemcached）与Spring整合
+net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.MemcachedClient每次使用的时候创建MemcachedClient的新实例。
+<pre>
+<bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">  
+    <property name="servers" value="host1:11211,host2:11211,host3:11211"/>  
+    <property name="protocol" value="BINARY"/>  
+    <property name="transcoder">  
+      <bean class="net.spy.memcached.transcoders.SerializingTranscoder">  
+        <property name="compressionThreshold" value="1024"/>  
+      </bean>  
+    </property>  
+    <property name="opTimeout" value="1000"/>  
+    <property name="timeoutExceptionThreshold" value="1998"/>  
+    <property name="hashAlg" value="KETAMA_HASH"/>  
+    <property name="locatorType" value="CONSISTENT"/>   
+    <property name="failureMode" value="Redistribute"/>  
+    <property name="useNagleAlgorithm" value="false"/>  
+  </bean>  
+</pre>
+属性说明：
+<pre>
+Servers :一个字符串，包括由空格或逗号分隔的主机或IP地址与端口号
+Daemon :设置IO线程的守护进程(默认为true)状态
+FailureMode :设置故障模式(取消，重新分配，重试)，默认是重新分配
+HashAlg :设置哈希算法(见net.spy.memcached.HashAlgorithm的值)
+InitialObservers :设置初始连接的观察者(观察初始连接)
+LocatorType :设置定位器类型(ARRAY_MOD,CONSISTENT),默认是ARRAY_MOD
+MaxReconnectDelay :设置最大的连接延迟
+OpFact :设置操作工厂
+OpQueueFactory :设置操作队列工厂
+OpTimeout :以毫秒为单位设置默认的操作超时时间
+Protocol :指定要使用的协议(BINARY,TEXT),默认是TEXT
+ReadBufferSize :设置读取的缓冲区大小
+ReadOpQueueFactory :设置读队列工厂
+ShouldOptimize :如果默认操作优化是不可取的，设置为false(默认为true)
+Transcoder :设置默认的转码器(默认以net.spy.memcached.transcoders.SerializingTranscoder)
+UseNagleAlgorithm :如果你想使用Nagle算法，设置为true
+WriteOpQueueFactory :设置写队列工厂
+AuthDescriptor :设置authDescriptor,在新的连接上使用身份验证
+</pre>
