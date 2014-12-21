@@ -1,6 +1,5 @@
 [Memcached初级教程](http://memcached.org/)
 ===========
-
 ### 安装与启动
 #### 1. install
 <pre>
@@ -48,8 +47,7 @@ ps -ef | grep memcached
 
 ### Memcached Java客户端（spymemcached）与Spring整合
 net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.MemcachedClient每次使用的时候创建MemcachedClient的新实例。
-<pre>
-<bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">  
+`<bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">  
     <property name="servers" value="host1:11211,host2:11211,host3:11211"/>  
     <property name="protocol" value="BINARY"/>  
     <property name="transcoder">  
@@ -63,8 +61,7 @@ net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.Memcache
     <property name="locatorType" value="CONSISTENT"/>   
     <property name="failureMode" value="Redistribute"/>  
     <property name="useNagleAlgorithm" value="false"/>  
-  </bean>  
-</pre>
+  </bean>`
 属性说明：
 <pre>
 Servers :一个字符串，包括由空格或逗号分隔的主机或IP地址与端口号
