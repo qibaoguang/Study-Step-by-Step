@@ -40,3 +40,5 @@ Study-Step-by-Step
 ### 其他
 * [乔布斯的领导艺术](https://www.aspeninstitute.org/sites/default/files/content/docs/about/HBR-Isaacson.pdf)
 * [一个合格的程序员应该读过哪些书](http://my.oschina.net/justjavac/blog/66624)
+* [把《编程珠玑》读薄](http://www.hawstein.com/posts/make-thiner-programming-pearls.html)
+* [把《把时间当作朋友》读薄](http://www.hawstein.com/posts/make-thiner-make-friend-with-time.html)
