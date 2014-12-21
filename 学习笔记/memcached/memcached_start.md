@@ -48,6 +48,7 @@ ps -ef | grep memcached
 ### Memcached Java客户端（spymemcached）与Spring整合
 net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.MemcachedClient每次使用的时候创建MemcachedClient的新实例。
 <pre>
+    <code>
     <bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">  
         <property name="servers" value="host1:11211,host2:11211,host3:11211"/>  
         <property name="protocol" value="BINARY"/>  
@@ -63,6 +64,7 @@ net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.Memcache
         <property name="failureMode" value="Redistribute"/>  
         <property name="useNagleAlgorithm" value="false"/>  
     </bean>
+    </code>
 </pre>
 属性说明：
 <pre>
