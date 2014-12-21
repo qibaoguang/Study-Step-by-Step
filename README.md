@@ -16,7 +16,7 @@ Study-Step-by-Step
 
 ### MySQL
 * [MySQL初级教程](学习笔记/mysql/mysql_start.md)
-* [MySQL性能优化必备25条](http://www.iteye.com/topic/40967)
+* [MySQL性能优化必备25条](http://www.iteye.com/topic/1114134)
 
 ### Linux 
 * [awk命令](学习笔记/linux/awk.md)
