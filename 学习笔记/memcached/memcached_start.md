@@ -49,21 +49,21 @@ ps -ef | grep memcached
 net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.MemcachedClient每次使用的时候创建MemcachedClient的新实例。
 <pre>
     <code>
-    "<bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">  
-        <property name="servers" value="host1:11211,host2:11211,host3:11211"/>  
-        <property name="protocol" value="BINARY"/>  
-        <property name="transcoder">  
-        <bean class="net.spy.memcached.transcoders.SerializingTranscoder">  
-            <property name="compressionThreshold" value="1024"/>  
-        </bean>  
-        </property>  
-        <property name="opTimeout" value="1000"/>  
-        <property name="timeoutExceptionThreshold" value="1998"/>  
-        <property name="hashAlg" value="KETAMA_HASH"/>  
-        <property name="locatorType" value="CONSISTENT"/>   
-        <property name="failureMode" value="Redistribute"/>  
-        <property name="useNagleAlgorithm" value="false"/>  
-    </bean>"
+    &lt;bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean"&gt;  
+    &lt;property name="servers" value="host1:11211,host2:11211,host3:11211"/&gt;  
+    &lt;property name="protocol" value="BINARY"/&gt;  
+    &lt;property name="transcoder"&gt;  
+    &lt;bean class="net.spy.memcached.transcoders.SerializingTranscoder"&gt;  
+        &lt;property name="compressionThreshold" value="1024"/&gt;  
+    &lt;/bean&gt;  
+    &lt;/property&gt;  
+    &lt;property name="opTimeout" value="1000"/&gt;  
+    &lt;property name="timeoutExceptionThreshold" value="1998"/&gt;  
+    &lt;property name="hashAlg" value="KETAMA_HASH"/&gt;  
+    &lt;property name="locatorType" value="CONSISTENT"/&gt;   
+    &lt;property name="failureMode" value="Redistribute"/&gt;  
+    &lt;property name="useNagleAlgorithm" value="false"/&gt;  
+&lt;/bean&gt;
     </code>
 </pre>
 属性说明：
