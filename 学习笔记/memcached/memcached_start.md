@@ -49,7 +49,7 @@ ps -ef | grep memcached
 net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.MemcachedClient每次使用的时候创建MemcachedClient的新实例。
 <pre>
     <code>
-    <bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">  
+    "<bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">  
         <property name="servers" value="host1:11211,host2:11211,host3:11211"/>  
         <property name="protocol" value="BINARY"/>  
         <property name="transcoder">  
@@ -63,7 +63,7 @@ net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.Memcache
         <property name="locatorType" value="CONSISTENT"/>   
         <property name="failureMode" value="Redistribute"/>  
         <property name="useNagleAlgorithm" value="false"/>  
-    </bean>
+    </bean>"
     </code>
 </pre>
 属性说明：
