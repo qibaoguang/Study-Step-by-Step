@@ -13,6 +13,7 @@ Study-Step-by-Step
 
 ### J2EE
 * [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
+* [Memcached初级教程](学习笔记/memcached/memcached_start.md)
 
 ### MySQL
 * [MySQL初级教程](学习笔记/mysql/mysql_start.md)
