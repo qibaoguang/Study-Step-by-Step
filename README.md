@@ -14,6 +14,7 @@ Study-Step-by-Step
 ### J2EE
 * [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
 * [Memcached初级教程](学习笔记/memcached/memcached_start.md)
+* [构建一个可靠的分布式计数器--memcached之incr/decr操作实战分析](http://my.oschina.net/flashsword/blog/93109)
 
 ### MySQL
 * [MySQL初级教程](学习笔记/mysql/mysql_start.md)
