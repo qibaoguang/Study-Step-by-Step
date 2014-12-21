@@ -6,3 +6,5 @@
 * [The next wave of programming languages](http://radar.oreilly.com/2010/07/the-next-wave-of-programming-l.html)
 * [Web application development is different (and better)](http://radar.oreilly.com/2014/01/web-application-development-is-different-and-better.html)
 * [You Don't Want to Think Like a Programmer](http://prog21.dadgum.com/190.html)
+* [How to interview a programmer?](http://www.cnblogs.com/chenjiefree/archive/2007/09/19/899191.html)
+* [The Difference Between A Developer, A Programmer And A Computer Scientist](http://www.skorks.com/2010/03/the-difference-between-a-developer-a-programmer-and-a-computer-scientist/)
