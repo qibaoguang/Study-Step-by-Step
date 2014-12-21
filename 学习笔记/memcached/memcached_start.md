@@ -1,6 +1,6 @@
 [Memcached初级教程](http://memcached.org/)
 ===========
-### 安装与启动
+### 一. 安装与启动
 #### 1. install
 <pre>
 Debian/Ubuntu: apt-get install libevent-dev Redhat/Centos: yum install libevent-devel
@@ -45,11 +45,11 @@ netstat -lp | grep memcached
 ps -ef | grep memcached 
 </pre>
 
-### Memcached Java客户端（spymemcached）与Spring整合
+### 二. Memcached Java客户端（spymemcached）与Spring整合
 net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.MemcachedClient每次使用的时候创建MemcachedClient的新实例。
 <pre>
     <code>
-    &lt;bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean"&gt;  
+&lt;bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean"&gt;  
     &lt;property name="servers" value="host1:11211,host2:11211,host3:11211"/&gt;  
     &lt;property name="protocol" value="BINARY"/&gt;  
     &lt;property name="transcoder"&gt;  
