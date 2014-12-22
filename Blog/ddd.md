@@ -1,6 +1,6 @@
 领域驱动设计
 ============
-###胖模型 VS 贫血模型
+###胖模型 VS 贫血模型（有误，有空重新整理）
 贫血模型：又称失血模型，是指领域对象里只有get和set方法，或者包含少量的CRUD方法，所有的业务逻辑都不包含在内而是放在Business Logic层。
 
 优点是系统的层次结构清楚，各层之间单向依赖，Client->(Business Facade)->Business Logic->Data Access。当然Business Logic是依赖Domain Object的。似乎现在流行的架构就是这样，当然层次还可以细分。
