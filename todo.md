@@ -3,4 +3,4 @@
 
 ### opensource
 * [Spiderman网络爬虫](https://gitcafe.com/laiweiwei/Spiderman/tree/master)
-* [WebMagic:爬虫](https://github.com/code4craft/webmagic)
+* [WebMagic网络爬虫](https://github.com/code4craft/webmagic)
