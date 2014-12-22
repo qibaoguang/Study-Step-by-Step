@@ -15,6 +15,8 @@
 
 贫血模型结构清晰，便于分模块开发，但贫血的领域模型不够优雅，不够OO。充血模型的领域对象由于依赖于数据访问层，如果没有透明持久化支持，Domain Object的业务逻辑脱离Data Access层就无法进行单元测试，还好Java世界已有Hibernate等ORM框架，加上Spring的动态注入，实现充血模型还是能够做到的。
 
+### See also 
+* [失血，贫血，充血，胀血模型的解释](http://www.oschina.net/question/54100_10400)
 
 
 
