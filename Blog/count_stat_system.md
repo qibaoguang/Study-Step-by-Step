@@ -6,10 +6,26 @@ how to design a scalability count stat system
 先对上述计数常见使用场景简要分析。第一种情况，如果有新消息，应用会显示消息条数或直接显示红点，比如CSDN通知栏的做法，这种场景需要的是消息的增量信息。第二种情况，比如微博计数统计，每个微博的转发数，评价数，这些场景需要的是消息的全量信息。因此，我们要设计的计数系统需要支持全量和增量的统计，还需要支持对不同类型消息的计数。
 
 ### 简要设计
+1. 表结构设计
  从需求中我们可以抽象出一个item概念，它表示一个消息类型及该消息类型支持的key数量，对全量和增量支持的flag，表结构如下：
-+-----------+----------+---------+------+
-| item_type | key_size | comment | flag |
-+-----------+----------+---------+------+
-| t         |        2 | test    |    3 |
-+-----------+----------+---------+------+
+<pre>
+CREATE TABLE `item` (
+  `item_type` varchar(64) NOT NULL,
+  `key_size` tinyint(2) NOT NULL DEFAULT '0',
+  `comment` varchar(255) DEFAULT NULL,
+  `flag` tinyint(8) DEFAULT '0',
+  PRIMARY KEY (`item_type`,`key_size`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+</pre>
+出于可用性的考虑，我们没有将增量，全量作为消息类型的一个属性而是作为扩展的维度直接关联到具体的消息类型，具体做法是：如果建立一个item_type为t,key_size为2的消息，那我们同时会创建`amount_t.2`和`delta_t.2`的两张表，这样即表示了增量，全量的概念，也通过分表的做法提高系统性能。
+
+2. 缓存的使用
+由于计数系统操作相当频繁，为了保证性能采用缓存是必然的。常见的NoSQL数据库，比如MongoDB,Redis都可以满足我们的需求。它们一般都提供分布式，原子性的incr和decr操作，非常适合实现计数系统。如果采用memcached作为缓存层的话，需要注意memcached底层对数值的处理。Memcached底层是采用字符串来存放数值类型的，所以初始化缓存时需要将数值转换为字符串形式，否则某些memcached客户端会将底层的字符串展开为数值(ASCII码值)并返回，比如spymemcached客户端，[这是踩过的坑](http://my.oschina.net/flashsword/blog/93109)。
+
+缓存中key如何定义？可以将类型及具体的key组合成缓存中的key，比如上述item的一个keys为10,20的具体类型，那缓存中的key可以定义为amount:t.2:10,20，delta:t.2:10,20，该具体类型的计数就是缓存中key对应的value。由于增量数据基本都是瞬时数据，更新比较频繁，可以根据场景决定是否要将这些数据持久化到数据库中。
+
+3. 计数获取和更新
+通过对计数类型分表，系统扩展性有了提高，但另一方面计数的获取就复杂化了。如果需要获取不同类型的计数，那就要跨越多张表。
+
+
 
