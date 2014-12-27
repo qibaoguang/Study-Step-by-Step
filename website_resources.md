@@ -6,3 +6,4 @@
 * [MartinFowler](http://martinfowler.com/articles/microservices.html)
 * [Implementing Domain-Driven Design](https://vaughnvernon.co/?page_id=168)
 * [架构师：郑昀](http://www.cnblogs.com/zhengyun_ustc/)
+* [阿里开源](http://code.taobao.org/opensources/)
