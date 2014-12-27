@@ -21,7 +21,6 @@ CREATE TABLE `item` (
 
 2. 缓存的使用
 由于计数系统操作相当频繁，为了保证性能采用缓存是必然的。常见的NoSQL数据库，比如MongoDB,Redis都可以满足我们的需求。它们一般都提供分布式，原子性的incr和decr操作，非常适合实现计数系统。如果采用memcached作为缓存层的话，需要注意memcached底层对数值的处理。Memcached底层是采用字符串来存放数值类型的，所以初始化缓存时需要将数值转换为字符串形式，否则某些memcached客户端会将底层的字符串展开为数值(ASCII码值)并返回，比如spymemcached客户端，[这是踩过的坑](http://my.oschina.net/flashsword/blog/93109)。
-
 缓存中key如何定义？可以将类型及具体的key组合成缓存中的key，比如上述item的一个keys为10,20的具体类型，那缓存中的key可以定义为amount:t.2:10,20，delta:t.2:10,20，该具体类型的计数就是缓存中key对应的value。由于增量数据基本都是瞬时数据，更新比较频繁，可以根据场景决定是否要将这些数据持久化到数据库中。
 
 3. 计数获取和更新
