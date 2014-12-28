@@ -30,7 +30,7 @@ Study-Step-by-Step
 * [Shell监控脚本](学习笔记/linux/shellscript_start.md)
 
 ### Design
-* [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70252)
+* [OSChina 留言表设计说明](http://www.oschina.net/question/12_70252)
 * [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70587)
 
 ### 软件开发
