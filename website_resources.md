@@ -7,3 +7,4 @@
 * [Implementing Domain-Driven Design](https://vaughnvernon.co/?page_id=168)
 * [架构师：郑昀](http://www.cnblogs.com/zhengyun_ustc/)
 * [阿里开源](http://code.taobao.org/opensources/)
+* [领域驱动设计](http://www.cnblogs.com/daxnet/archive/2010/11/02/1867392.html)
