@@ -1,6 +1,6 @@
 [Web应用程序开发发生变化并且变得更好了](http://radar.oreilly.com/2014/01/web-application-development-is-different-and-better.html)
 ====================
-如今，Web成为最常见的分布式应用系统，因为它不需要把自己看成是一个编程环境。几乎每天我都能看到来自程序员（甚至是聪明的程序员）的评论或抱怨，说他们需要处理多少奇怪或低级的部分，比如 how they’d like to [fix a historical accident](https://twitter.com/tomdale/status/427917952696844288) by [ripping out HTML completely and replacing it with Canvas](https://twitter.com/tomdale/status/427918214371094529),分离关注点如何麻烦。一切都应该是JavaScript.
+如今，Web成为最常见的分布式应用系统，因为它不需要把自己看成是一个编程环境。几乎每天我都能看到来自程序员（甚至是聪明的程序员）的评论或抱怨，说他们需要处理多少奇怪或低级的部分，比如 how they’d like to [fix a historical accident](https://twitter.com/tomdale/status/427917952696844288) by [ripping out HTML completely and replacing it with Canvas](https://twitter.com/tomdale/status/427918214371094529)，分离关注点如何麻烦。一切都应该是JavaScript。
 
 现在Web已经发生变化了，我也知道程序员可能对它选择的路线不能容忍的原因，但这次是程序员错了。这并不是说Web就是完美的-当然它也有问题。也不是说成功就意味着事物变得更好。许多糟糕的东西仍然有广泛的群众拥护，想要理解“[更坏就是更好](http://www.jwz.org/doc/worse-is-better.html)”的对话内容需要达到无限的级别。当然，Web没有解决所有的编程需求，更何况很多问题本身就不恰当。
 
@@ -10,7 +10,7 @@ Web让标记出项目的扩展性问题成为可能，也在允许人力和技�
 
 Web有个光辉的岁月。开始的几年是用来解决和形成一个关于Web是什么的故事。接下来是疯狂成长的几年，在这段时间里大大小小的开发者犯错，然后满怀热情的去解决这些错误，问题解决后又经历了一段平和期。即使在平和期，Web也保持着庞大的规模，web项目的规模和范围仍在继续增长。
 
-这不仅仅因为Web是构建分布式应用的一个非常好的方式，也不仅仅因为在我们想要这样做的时候它出现了，而是因为前端，后端和通过唯一的特性集和约束构建起来的两者之间的联系让开发出杰出（和可维护）的应用程序更容易。
+这不仅仅因为Web是构建分布式应用的一个非常好的方式，也不仅仅因为在我们想要这样做的时候它出现了，而是因为前端，后端和通过唯一的特性集和约束构建起来的两者之间的联系让开发杰出（和可维护）的应用程序更容易。
 
 
 
