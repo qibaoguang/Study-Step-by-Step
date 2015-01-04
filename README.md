@@ -16,6 +16,7 @@ Study-Step-by-Step
 * [Memcached初级教程](学习笔记/memcached/memcached_start.md)
 * [构建一个可靠的分布式计数器--memcached之incr/decr操作实战分析](http://my.oschina.net/flashsword/blog/93109)
 * [Cookie&Session](http://blog.csdn.net/hi_1234567/article/details/8492859)
+* [一种基于注解的Spring MVC权限控制方法](http://www.open-open.com/lib/view/open1358472021196.html)
 
 ### Docker
 * [杨保华:DockerPool开源社区](http://blog.csdn.net/yeasy)
