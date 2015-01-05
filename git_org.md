@@ -11,3 +11,4 @@ GitHub上感兴趣的组织
 * [OpenStack](https://github.com/openstack)
 * [Google云计算平台](https://github.com/googlecloudplatform)
 * [Akka Project](https://github.com/akka)
+* [h5bp:HTML5](https://github.com/h5bp)
