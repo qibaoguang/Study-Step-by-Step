@@ -6,6 +6,7 @@ GitHub上感兴趣的组织
 * [Parse](https://github.com/ParsePlatform)
 * [FaceBook GO:FaceBook开源的GO语言项目](https://github.com/facebookgo)
 * [FaceBook](https://github.com/facebook)
+* [Groupon](https://github.com/groupon)
 * [Kill Bill : 计费与支付](https://github.com/killbill/) & [Ning](https://github.com/ning/)
 * [MyBatis](https://github.com/mybatis)
 * [OpenStack](https://github.com/openstack)
