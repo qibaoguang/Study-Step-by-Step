@@ -10,3 +10,4 @@
 * [领域驱动设计](http://www.cnblogs.com/daxnet/archive/2010/11/02/1867392.html)
 * [netfocus：DDD](http://www.cnblogs.com/netfocus/)
 * [DDD社区](http://dddcommunity.org/library/vernon_2011/)
+* [KillBill-> Recurly](https://recurly.com/)
