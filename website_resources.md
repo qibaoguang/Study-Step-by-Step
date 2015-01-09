@@ -12,3 +12,4 @@
 * [DDD社区](http://dddcommunity.org/library/vernon_2011/)
 * [KillBill-> Recurly](https://recurly.com/)
 * [Google:Material Design](https://github.com/1sters/material_design_zh)
+* [开涛博客](http://jinnianshilongnian.iteye.com/)
