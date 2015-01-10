@@ -43,6 +43,7 @@ Study-Step-by-Step
 * [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70587)
 
 ### 软件开发
+* [CQRS](http://www.cqrs.nu/)
 * [DDD:Jdon](http://en.jdon.com/)
 * [The Reactive Manifesto : 反应宣言](http://www.reactivemanifesto.org/)
 * [Why Do We Need a Reactive Manifesto?](http://typesafe.com/blog/why_do_we_need_a_reactive_manifesto%3F)
