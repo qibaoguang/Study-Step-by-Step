@@ -19,6 +19,7 @@ Study-Step-by-Step
 * [一种基于注解的Spring MVC权限控制方法](http://www.open-open.com/lib/view/open1358472021196.html)
 * [AJAX+REST as the latest architectural mirage](http://stage.vambenepe.com/archives/1801)
 * [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
+* [Building a REST API with JAXB, Spring Boot and Spring Data](http://raibledesigns.com/rd/entry/building_a_rest_api_with)
 
 ### Docker
 * [杨保华:DockerPool开源社区](http://blog.csdn.net/yeasy)
