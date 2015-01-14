@@ -16,6 +16,7 @@ GitHub上感兴趣的组织
 * [Spring](https://github.com/spring-projects)
 * [LeanCloud](https://github.com/leancloud) & [为应用加速](https://leancloud.cn/docs/rest_api.html)
 * [1sters:极客实验室](https://github.com/1sters)
+* [极客优才开源项目库](https://github.com/geekcompany)
 * [DocumentCloud : JS](https://github.com/documentcloud)
 * [Jhipster:Spring+JS](https://github.com/jhipster)
 * [Swagger:API可视化工具](https://github.com/swagger-api)
