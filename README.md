@@ -22,6 +22,11 @@ Study-Step-by-Step
 * [Building a REST API with JAXB, Spring Boot and Spring Data](http://raibledesigns.com/rd/entry/building_a_rest_api_with)
 * [自定义Jaxb绑定](http://blog.frankel.ch/customize-your-jaxb-bindings)
 
+### 项目构建
+* [Gradle在大型Java项目中的应用](http://www.infoq.com/cn/articles/Gradle-application-in-large-Java-projects/)
+* [Gradle](http://gradle.org/documentation)
+
+
 ### Docker
 * [杨保华:DockerPool开源社区](http://blog.csdn.net/yeasy)
 * [DockerPool开源社区](http://dockerpool.com/)
