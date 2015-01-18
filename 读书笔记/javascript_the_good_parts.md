@@ -2,7 +2,7 @@ JavaScript语言精粹
 ====================
 ### 前言
 
-约定表示符号：=> 表示参考相关文章或书籍
+约定：=> 表示参考相关文章或书籍;JS是JavaScript的缩写。
 
 本书专注于JavaScript的精华部分，同时会偶尔警告要去避免的糟粕部分。作者提炼出的JavaScript精华子集，更可靠，更易读，更易于维护。
 
@@ -31,9 +31,50 @@ JavaScript优秀的思想：函数，弱类型，动态对象，对象字面量�
 
 ### 第2章 语法
 * 空白
+
+空白可能表现为被格式化的字符或注释的形式。空白通常没有意义，但有时候必须要用它来分隔字符序列，否则它们就会被合并成一个符号。
+
+<pre>
+var that = this; //var和this之间的空格不能移除，其他的空格都可以移除
+</pre>
+
+注释：JavaScript提供两种注释形式，块注释和行注释。注释应该被优先用来提高程序的可读性。**注释一定要精确地描述代码,没有用的注释比没有注释更糟糕!**
+
+块注释：/* */，由于这些字符可能出现在正则表达式字面量里，所以不建议使用块注释。
+
+行注释：//，建议使用行注释替代块注释。
+
 * 标识符
+
+标识符由一个字母开头（JS规范中还允许以下划线_和美元符$开头），其后可选择性地加上一个或多个字母，数字或下划线。
+
+标识符不能使用的保留字：abstract，boolean，break，byte，case，catch，char，class，const，continue，debugger，default，delete，do，double，else，enum，export，extends，false，final，finally，float，for，function，goto，if，implements，import，in，instanceof，int，interface，long，native，new，null，package，private，protected，public，return，short，static，supper，switch，synchronized，this，throw，throws，transient，true，try，typeof，var，volatile，void，while，with。
+
+该列表中不包括一些本应该被保留而没有保留的字，诸如undefined，NaN和Infinity。
+
+JS不允许使用保留字来命名变量或参数。更糟糕的是，JS不允许在对象字面量中，或者用点运算符提取对象属性时，使用保留字作为对象的属性名。
+
+标识符被用于语句，变量，参数，属性名，运算符和标记。
+
 * 数字
+
+JS只有一个数字类型，在内部被表示为64位的浮点数，和Java的double数字类型一样。与其他大多数编程语言不同的是，它没有分离出整数类型，所以1和1.0的值相同。这避免了短整型的溢出问题和一大堆因数字类型导致的错误。
+
+数字字面量有指数部分，则这个字面量的值等于e之前的数字与10的e之后数字的次方相乘。100=1e2。
+
+负数：前置运算符-加数字。-100。
+
+NaN：一个数值，表示不能产生正常运算结果。NaN不等于任何值，包括它自己。可以使用函数isNaN(number)检测NaN。
+
+Infinity：表示所有大于1.79769313486231570e+308的值。
+
+数字拥有方法，JS中的Math对象包含一套作用于数字的方法。Math.floor(number)可以将一个数字转换为一个整数。
+
 * 字符串
+
+
+
+
 * 语句
 * 表达式
 * 字面量
