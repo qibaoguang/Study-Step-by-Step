@@ -3,12 +3,19 @@ JavaScript语言精粹
 ### 前言
 这本书专注于JavaScript的精华部分，同时会偶尔警告要去避免的糟粕部分，通过提炼JavaScript的精华子集，来书写更可靠，更易读，更便于维护的JavaScript代码。
 
+约定表示符号：
+* => 表示参考相关文章或书籍
+
 ### 第1章 精华
 * 为什么要使用JavaScript语言
 JavaScript是非常重要的Web浏览器语言，它与浏览器的结合使它成为世界上最流行的编程语言之一。同时，它也是一门拥有极强表达能力的语言，即使对它没有太对了解，也能用它完成工作。
+
 **注：作者认为JavaScript没有得到应用的重视，让人们认识到JavaScript的杰出是本书的最终目的**。
-建议阅读作者一篇很著名的文章：[JavaScript：世界上最被误解的语言](http://javascript.crockford.com/javascript.html)
+=> [JavaScript：世界上最被误解的语言](http://javascript.crockford.com/javascript.html)
+
 * 分析JavaScript
+JavaScript优秀的思想：函数，弱类型，动态对象，对象字面量。糟糕的思想：基于全局变量的编程模型。
+函数：基于词法来划分作用域，而不是动态划分作用域的。=
 * 一个简单的实验场
 
 ### 第2章 语法
