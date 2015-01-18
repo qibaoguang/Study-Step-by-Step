@@ -299,12 +299,70 @@ document.writeln(myObj.value); //6
 </pre>
 
 * 构造器调用模式
+
+JS是一门基于原型继承的语言，对象可以直接从其他对象继承属性。该语言是无类型的。
+
+构造器函数：函数创建的目的是结合new前缀来调用，那它就被称为构造器函数。按照约定，它们保存在以大写格式命名的变量里。
+
+构造器函数缺点：如果调用构造器函数时，没有在前面加上new，可能会产生非常糟糕的事情，即没有编译时警告，也没有运行时警告，所以约定非常重要。不推荐使用这种形式的构造器函数。（下一章有更好的替代方式）
+<pre>
+var Quo = function(str){ //创建一个名为Quo的构造器函数，它创建一个带有status属性的对象。
+    this.status = str;
+};
+
+//给Quo的所有实例提供一个get_status的公共方法
+Quo.prototype.get_status = function(){
+  return this.status;
+};
+//构造一个Quo实例
+var myQuo = new Quo("confused");
+document.writeln(myQuo.get_status()); //打印显示"confused"
+</pre>
+
 * Apply调用模式
 
+JS是一门函数式的面向对象编程语言，所以函数可以拥有方法。
+
+apply方法：apply方法允许我们构建一个参数数组传递给调用函数，同时允许我们选择this的值。apply方法接收两个参数，第1个是要绑定给this的值，第2个是一个参数数组。
+<pre>
+//构建一个包含两个数字的数组，并将它们相加
+var array = [3,4]; 
+var sum = add.apply(null,array); //sum=7
+
+//构造一个包含status成员的对象
+var statusObject = {
+  status:'A-OK'
+}
+
+//statusObject并没有继承自Qup.prototype，但我们可以在statusObject上调用get_status方法，
+//尽管statusObject并没有一个名为get_status的方法。
+var status = Quo.prototype.get_status.apply(statusObject); //status='A-OK'
+</pre>
+
 * 参数
+
+arguments：函数调用时会隐式传递arguments数组。函数通过此参数能访问所有它被调用时传递给它的参数列表，包括那些没有被分配给函数声明时定义的形参的多余参数。利用该特性可以编写不需要指定参个数的函数，不过不是特别有用。
+
+arguments的语言设计错误：arguments并不是一个真正的数组。它只是一个"类似数组(array-like)"的对象。arguments拥有一个length属性，但它没有任何数组的方法。
+
 * 返回
+
+正常返回：函数从第一个语句开始执行，并在遇到关闭函数体的}时结束。然后把控制权交还给调用该函数的程序。
+
+return：return语句可用来使函数提前返回。当return被执行时，函数立即返回而不再执行余下的语句。
+
+一个函数总会返回一个值。如果没有指定返回值，则返回undefined。如果函数调用时在前面加上new前缀，且返回值不是一个对象，则返回this（该新对象）。
+
 * 异常
+
+throw语句：throw中断函数的执行。它应该抛出一个exception对象（自定义对象），该对象包含一个用来识别异常类型的name属性和一个描述性的message属性，还可以添加其他属性。
+
+try catch：一个try语句只会有一个捕获所有异常的catch代码块（跟Java异常机制不同）。
+
 * 扩充类型的功能
+
+
+
 * 递归
 * 作用域
 * 闭包
