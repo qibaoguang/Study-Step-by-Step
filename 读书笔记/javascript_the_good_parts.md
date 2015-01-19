@@ -365,7 +365,7 @@ try catch：一个try语句只会有一个捕获所有异常的catch代码块（
 可以使该方法对所有函数可用。由于JS原型继承的动态本质，新的方法立刻被赋予到所有的对象实例上，即使对象实例是在方法增加之前创建的。
 
 功能扩充实例：
-<pre>
+```javascript
 //为Function.prototype增加method方法，方便以后创建新的方法
 Function.prototype.method = function(name,func){
     if(!this.prototype[name]){ //没有该方法时才添加
@@ -383,7 +383,7 @@ Number.method('integer',function(){
 String.method('trim',function(){
     return this.replace(/^\s+|\s+$/g,'');
 })
-</pre>
+```
 
 * 递归
 
@@ -429,7 +429,7 @@ var getElementsByAttribute = function(att,value){
 </pre>
 
 尾递归优化：一种在函数的最后执行递归调用语句的特殊形式的递归。这意味着如果一个函数返回自身递归调用的结果，那么调用的过程会被替换为一个循环，它可以显著提高速度。But，JS当前没有提供尾递归优化。深度递归的函数可能会因为堆栈溢出而运行失败。
-<pre>
+```javascript
 //构造一个带尾递归的函数（返回自身调用结果），JS没对这种形式的递归做优化。
 var factorial = function factorial(i,a){
     a = a || 1;
@@ -439,7 +439,7 @@ var factorial = function factorial(i,a){
     return factorial(i-1, a*i);
 };
 document.writenln(factorial(4)); //24
-</pre>
+```
 
 * 作用域
 * 闭包
