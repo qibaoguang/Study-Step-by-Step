@@ -35,9 +35,9 @@ JavaScript优秀的思想：函数，弱类型，动态对象，对象字面量�
 
 空白可能表现为被格式化的字符或注释的形式。空白通常没有意义，但有时候必须要用它来分隔字符序列，否则它们就会被合并成一个符号。
 
-<pre>
+```javascript
 var that = this; //var和this之间的空格不能移除，其他的空格都可以移除
-</pre>
+```
 
 注释：JavaScript提供两种注释形式，块注释和行注释。注释应该被优先用来提高程序的可读性。
 
@@ -158,16 +158,16 @@ typeof：typeof运算符产生的值有'number'，'string'，'boolean'，'undefi
 检索对象：可以使用.或[]检索对象，优先考虑使用.表示法，因为它更紧凑且可读性更好。如果字符串表达式不是合法的JS标识符，则必须使用[]来检索对象。
 
 检索一个不存在的成员属性的值将返回undefined，可以使用||运算符填充默认值。
-<pre>
+```javascript
 var middle = stooge["middle-name"] || "(none)" ;
-</pre>
+```
 
 尝试从undefined的成员属性中取值将导致TypeError异常，可以通过&&运算符避免错误。
-<pre>
+```javascript
 flight.equipment //undefined
 flight.equipment.model //throw 'TypeError'
 flight.equipment && flight.equipment.model //undefined
-</pre>
+```
 
 * 更新
 
@@ -176,10 +176,10 @@ flight.equipment && flight.equipment.model //undefined
 * 引用
 
 对象引用：对象通过引用来传递，它们永远不会被复制。
-<pre>
+```javascript
 var a={},b={},c={}; //a,b,c引用不同的空对象
 a=b=c={}; //a,b,c引用相同的空对象
-</pre>
+```
 
 * 原型
 
@@ -188,7 +188,7 @@ a=b=c={}; //a,b,c引用相同的空对象
 原型选择：当创建一个新对象时，可以选择某个对象作为它的原型，JS提供的实现机制杂乱而复杂，其实可以被明显地简化。
 
 原型选择简化方法：为Object增加一个create方法，这个方法创建一个使用原对象作为其原型的新对象。
-<pre>
+```javascript
 if(typeof Object.create !== 'function'){ //书中代码为Object.beget,笔误？
     Object.create = function(o){
       var F = function(){};
@@ -197,7 +197,7 @@ if(typeof Object.create !== 'function'){ //书中代码为Object.beget,笔误？
     }
 }
 var another_stooge = Object.create(stooge);
-</pre>
+```
 
 原型连接与委托机制：原型连接在更新时不起作用，当对某个对象做出改变时，不会触及该对象的原型。原型连接只在检索值的时候才被用到。如果尝试获取对象中不存在的属性值，则JS会试着从原型对象中获取该属性值。如果原型对象也没有该属性，则继续从原型对象的原型中寻找，依此类推，直到到达终点Object.prototype。如果仍旧找不到，则返回undefined。这个过程就是委托。
 
@@ -208,10 +208,10 @@ var another_stooge = Object.create(stooge);
 反射：检查对象并确定对象的属性。typeof操作符可以方便的确定属性的类型。
 
 处理不需要的属性：当你想让对象在运行时动态获自身信息时，关注更多的是数据，这时应该让你的程序做检查并丢弃掉值为函数的属性。使用hasOwnProperty方法可以检查对象是否拥有独有的属性，如果有则返回true，它不会检查原型链。
-<pre>
+```javascript
 flight.hasOwnProperty('number')       //true
 flight.hasOwnProperty('constructor')  //false
-</pre>
+```
 
 * 枚举
 
@@ -227,13 +227,13 @@ delete运算符：用于删除对象的属性。如果对象包含该属性，�
 JS的全局变量：JS可以很随意地定义全局变量来容纳你的应用的所有资源。遗憾的是，全局变量会削弱程序的灵活性，应该避免使用。
 
 最小化全局变量：为你的应用只创建一个唯一的全局变量！（后面会介绍另一种有效减少全局污染的方法：闭包）
-<pre>
+```javascript
 var MYAPP = {}; //命名空间，整个应用的容器
 MYAPP.stooge={
   "first-name":"Joe",
   "last-name":"Howard"
 };
-</pre>
+```
 
 ### 第4章 函数
 JS设计最出色的就是它的函数的实现，几乎接近于完美！
@@ -261,7 +261,7 @@ this与调用模式：参数this的值取决于调用的模式。在JS中，一�
 * 方法调用模式
 
 方法：当一个函数被保存为对象的一个属性时，我们称之为方法。当方法被调用时，this被绑定到该对象。如果调用表达式包含一个提取属性的动作（.或[]），那它就是被当作一个方法来调用。
-<pre>
+```javascript
 var myObj = { //创建myObj对象，有一个value属性和一个increment方法.
   value: 0,
   increment: function(inc){ //increment方法接受一个可选的参数。如果该参数不是数字，则默认使用1.
@@ -274,7 +274,7 @@ document.writeln(myObj.value) // 1
 
 myObj.increment();
 document.writeln(myObj.value) //3
-</pre>
+```
 
 方法可以使用this访问自己所属的对象，所以它能从对象中取值或对对象进行修改。this到对象的绑定发生在调用的时候，这样的延迟绑定使得函数可以高度复用this。
 
@@ -285,7 +285,7 @@ document.writeln(myObj.value) //3
 函数调用：当一个函数并非一个对象的属性时，那么它就是被当做一个函数来调用的。以此模式调用函数时，this被绑定到全局对象。这是语言设计的一个错误！如果设计正确，那么当内部函数被调用时，this应该仍然绑定到外部函数的this变量。这个错误设计的后果是方法不能利用内部函数来帮助它工作，因为内部函数的this被绑定了错误的值，所以不能共享该方法对对象的访问权。
 
 解决方案：在外部方法中定义一个变量that，并赋值为this，内部函数可以通过that访问this。
-<pre>
+```javascript
 myObj.double = function(){ //给myObj增加一个double方法
     var that = this; //解决方法
     var helper = function(){ //double方法内部的函数
@@ -296,7 +296,7 @@ myObj.double = function(){ //给myObj增加一个double方法
 
 myObj.double(); //以方法的形式调用double
 document.writeln(myObj.value); //6
-</pre>
+```
 
 * 构造器调用模式
 
@@ -305,7 +305,7 @@ JS是一门基于原型继承的语言，对象可以直接从其他对象继承
 构造器函数：函数创建的目的是结合new前缀来调用，那它就被称为构造器函数。按照约定，它们保存在以大写格式命名的变量里。
 
 构造器函数缺点：如果调用构造器函数时，没有在前面加上new，可能会产生非常糟糕的事情，即没有编译时警告，也没有运行时警告，所以约定非常重要。不推荐使用这种形式的构造器函数。（下一章有更好的替代方式）
-<pre>
+```javascript
 var Quo = function(str){ //创建一个名为Quo的构造器函数，它创建一个带有status属性的对象。
     this.status = str;
 };
@@ -317,14 +317,14 @@ Quo.prototype.get_status = function(){
 //构造一个Quo实例
 var myQuo = new Quo("confused");
 document.writeln(myQuo.get_status()); //打印显示"confused"
-</pre>
+```
 
 * Apply调用模式
 
 JS是一门函数式的面向对象编程语言，所以函数可以拥有方法。
 
 apply方法：apply方法允许我们构建一个参数数组传递给调用函数，同时允许我们选择this的值。apply方法接收两个参数，第1个是要绑定给this的值，第2个是一个参数数组。
-<pre>
+```javascript
 //构建一个包含两个数字的数组，并将它们相加
 var array = [3,4]; 
 var sum = add.apply(null,array); //sum=7
@@ -337,7 +337,7 @@ var statusObject = {
 //statusObject并没有继承自Qup.prototype，但我们可以在statusObject上调用get_status方法，
 //尽管statusObject并没有一个名为get_status的方法。
 var status = Quo.prototype.get_status.apply(statusObject); //status='A-OK'
-</pre>
+```
 
 * 参数
 
@@ -390,7 +390,7 @@ String.method('trim',function(){
 递归函数：直接或间接地调用自身的函数。
 
 汉诺塔问题：
-<pre>
+```javascript
 var hanoi = function(disc,src,aux,dst){
     if(disc > 0){
       hanoi(disc-1,src,dst,aux);
@@ -399,10 +399,10 @@ var hanoi = function(disc,src,aux,dst){
     }
 };
 hanoi(3,'Src','Aux','Dst');
-</pre>
+```
 
 递归函数操作树形结构：
-<pre>
+```javascript
 //定义walk_the_DOM函数，它从某个指定的节点开始，按HTML源码中的顺序访问该树的每个节点。
 //它会调用传入的函数，并依次传递每个节点给它。walk_the_DOM调用自身去处理每个子节点。
 var walk_the_DOM = function walk(node,func){
@@ -426,7 +426,7 @@ var getElementsByAttribute = function(att,value){
     });
     return results;
 };
-</pre>
+```
 
 尾递归优化：一种在函数的最后执行递归调用语句的特殊形式的递归。这意味着如果一个函数返回自身递归调用的结果，那么调用的过程会被替换为一个循环，它可以显著提高速度。But，JS当前没有提供尾递归优化。深度递归的函数可能会因为堆栈溢出而运行失败。
 ```javascript
@@ -440,8 +440,25 @@ var factorial = function factorial(i,a){
 };
 document.writenln(factorial(4)); //24
 ```
-
 * 作用域
+
+作用域：作用域控制变量和参数的可见性及生命周期。For us，作用域减少了名称冲突，并提供了自动内存管理。
+
+JS作用域：**不支持块级作用域**,支持函数作用域。定义在函数中的参数和变量在函数外部不可见，而在函数内部任何位置定义的变量，在该函数内部任何地方都可见。由于JS缺少块级作用域，所以不建议延迟声明变量，最好的做法是在函数体的顶部声明函数中可能用到的所有变量。
+```javascript
+var foo = function(){
+    var a = 3, b = 5;
+    var bar = function(){
+        var b = 7, c = 11; 
+        //此时，a为3, b为7, c为11
+        a += b + c; 
+        //此时，a为21, b为7, c为11
+    };
+    //此时，a为3, b为5, 而c还没定义
+    bar();
+    //此时，a为21, b为5
+};
+```
 * 闭包
 * 回调
 * 模块
