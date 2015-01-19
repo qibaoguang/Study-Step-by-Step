@@ -376,7 +376,7 @@ Function.prototype.method = function(name,func){
 
 //为Number.prototype增加一个integer方法，用于提取数字中的整数部分
 Number.method('integer',function(){
-    return Math[this<0 ? 'ceil' : 'floor'](this);
+  return Math[this<0 ? 'ceil' : 'floor'] (this);
 });
 
 //为String添加移除字符串首尾空白的方法
