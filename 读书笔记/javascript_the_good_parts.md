@@ -361,9 +361,86 @@ try catch：一个try语句只会有一个捕获所有异常的catch代码块（
 
 * 扩充类型的功能
 
+通过给Object.prototype添加方法，可以让该方法对所有对象可用; 通过给Function.prototype增加方法，
+可以使该方法对所有函数可用。由于JS原型继承的动态本质，新的方法立刻被赋予到所有的对象实例上，即使对象实例是在方法增加之前创建的。
 
+功能扩充实例：
+<pre>
+//为Function.prototype增加method方法，方便以后创建新的方法
+Function.prototype.method = function(name,func){
+    if(!this.prototype[name]){ //没有该方法时才添加
+        this.prototype[name] = func;
+    }
+    return this;
+};
+
+//为Number.prototype增加一个integer方法，用于提取数字中的整数部分
+Number.method('integer',function(){
+    return Math[this<0 ? 'ceil' : 'floor'](this);
+});
+
+//为String添加移除字符串首尾空白的方法
+String.method('trim',function(){
+    return this.replace(/^\s+|\s+$/g,'');
+})
+</pre>
 
 * 递归
+
+递归函数：直接或间接地调用自身的函数。
+
+汉诺塔问题：
+<pre>
+var hanoi = function(disc,src,aux,dst){
+    if(disc > 0){
+      hanoi(disc-1,src,dst,aux);
+      document.writeln('Move disc '+disc+' from '+src+' to '+dst);
+      hanoi(disc-1,aux,src,dst);
+    }
+};
+hanoi(3,'Src','Aux','Dst');
+</pre>
+
+递归函数操作树形结构：
+<pre>
+//定义walk_the_DOM函数，它从某个指定的节点开始，按HTML源码中的顺序访问该树的每个节点。
+//它会调用传入的函数，并依次传递每个节点给它。walk_the_DOM调用自身去处理每个子节点。
+var walk_the_DOM = function walk(node,func){
+    func(node);
+    node = node.firstChild;
+    while(node){
+      walk(node,func);
+      node = node.nextSibling;
+    }
+};
+
+//定义getElementsByAttribute函数，它以一个属性名称字符串和一个可选的匹配值作为参数，调用
+//walk_the_DOM，传递一个用来查找节点属性名的函数作为参数。匹配的节点累加到结果数组中。
+var getElementsByAttribute = function(att,value){
+    var results = [];
+    walk_the_DOM(document.body, function(node){
+        var actual = node.nodeType === 1 && node.getAttribute(attr);
+        if(typeof actual === 'string' && (actual === value || typeof value !== 'string')){
+              results.push(node);
+        }
+    });
+    return results;
+};
+</pre>
+
+尾递归优化：一种在函数的最后执行递归调用语句的特殊形式的递归。这意味着如果一个函数返回自身递归调用的结果，那么调用的过程会被替换为一个循环，它可以显著提高速度。But，JS当前没有提供尾递归优化。深度递归的函数可能会因为堆栈溢出而运行失败。
+<pre>
+//构造一个带尾递归的函数（返回自身调用结果），JS没对这种形式的递归做优化。
+var factorial = function factorial(i,a){
+    a = a || 1;
+    if(i<2){
+      return a;
+    }
+    return factorial(i-1, a*i);
+};
+document.writenln(factorial(4)); //24
+</pre>
+
 * 作用域
 * 闭包
 * 回调
