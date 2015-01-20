@@ -189,7 +189,7 @@ a=b=c={}; //a,b,c引用相同的空对象
 
 原型选择简化方法：为Object增加一个create方法，这个方法创建一个使用原对象作为其原型的新对象。
 ```javascript
-if(typeof Object.create !== 'function'){ //书中代码为Object.beget,笔误？
+if(typeof Object.create !== 'function'){ //书中代码为Object.beget,印刷错误？
     Object.create = function(o){
       var F = function(){};
       F.prototype = o;
@@ -555,7 +555,8 @@ send_request_asynchronously(request,function(response){
 ```javascript
 //寻找字符串中的HTML字符实体并把它们替换为对应的字符。
 String.method('deentityify',function(){
-//字符实体表。它映射字符实体的名字到对应的字符。把该信息放到全局变量不合适，定义在函数的内部会带来运行时的损耗（每次执行此函数，该字面量都会被求值一次）。
+//字符实体表。它映射字符实体的名字到对应的字符。把该信息放到全局变量不合适，
+//定义在函数的内部会带来运行时的损耗（每次执行此函数，该字面量都会被求值一次）。
 var entity = {
     quot: '"',
     lt: '<',
@@ -563,7 +564,8 @@ var entity = {
 }; 
 //返回deentityify方法
 return function(){
-//这才是deentityify方法。它调用字符串的replace方法，查找'&'开头和';'结束的子字符串。如果这些字符可以在实体表中找到，则将其替换为映射表中的值。
+//这才是deentityify方法。它调用字符串的replace方法，查找'&'开头和';'结束的子字符串。
+//如果这些字符可以在实体表中找到，则将其替换为映射表中的值。
     return this.replace(/&([^&;]+);/g,function(a, b){
         var r = entity[b];
         return typeof r === 'string' ? r : a ;
