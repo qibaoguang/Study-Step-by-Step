@@ -524,8 +524,79 @@ var add_the_handlers = function(nodes){
 
 * 回调
 
+回调：函数使得对不连续事件的处理变得更容易，因为我们可以注册回调函数，以异步的方式处理请求。
 
+C/S请求响应模式对比：
+
+同步方式：网络上的同步请求会导致客户端进入假死状态，特别是网络传输或服务器很慢时。
+```javascript
+request = prepare_the_request();
+response = send_request_synchronously(request);
+display(response);
+```
+异步方式：发起异步请求，提供一个当服务器响应到达时随即触发的回调函数。异步函数立即返回，这样客户端就不会阻塞。
+```javascript
+request = prepare_the_request();
+send_request_asynchronously(request,function(response){
+    display(response);
+});
+```
 * 模块
+
+模块：为了屏蔽JS全局变量的使用，我们可以使用函数和闭包来构造模块。模块是一个提供接口却隐藏状态与实现的函数或对象。
+
+模块模式：模块模式利用了函数作用域和闭包来创建对象与私有成员的关联。在下面示例中，只有deentityify方法有权访问字符实体表这个数据对象。
+
+模块模式的一般形式：一个定义了私有变量和函数的函数; 利用闭包创建可以访问私有变量和函数的特权函数; 最后返回这个特权函数，或把它们保存到一个可访问的地方。
+
+模块模式好处：使用模块模式可以摒弃全局变量的使用。模块模式促进信息隐藏和其他优秀的设计实践，比如单例模式，利于应用程序的封装。模块模式也可以用来产生安全的对象，比如示例2中用来产生序列号的对象。
+
+模块示例：为String增加deentityify方法
+```javascript
+//寻找字符串中的HTML字符实体并把它们替换为对应的字符。
+String.method('deentityify',function(){
+//字符实体表。它映射字符实体的名字到对应的字符。把该信息放到全局变量不合适，定义在函数的内部会带来运行时的损耗（每次执行此函数，该字面量都会被求值一次）。
+var entity = {
+    quot: '"',
+    lt: '<',
+    gt: '>'
+}; 
+//返回deentityify方法
+return function(){
+//这才是deentityify方法。它调用字符串的replace方法，查找'&'开头和';'结束的子字符串。如果这些字符可以在实体表中找到，则将其替换为映射表中的值。
+    return this.replace(/&([^&;]+);/g,function(a, b){
+        var r = entity[b];
+        return typeof r === 'string' ? r : a ;
+    };
+};
+}());
+document.writeln('&lt;&quot;&gt'.deentityify()); //<">
+```
+模块示例2：产生序列号
+```javascript
+var serial_marker = function(){
+  var prefix = '';
+  var seq = 0;
+  return {
+      set_prefix: function(p){
+          prefix = String(p);
+      },
+      set_seq: function(s){
+          seq = s;
+      },
+      gensym: function(){
+          var result = prefix + seq;
+          seq += 1;
+          return result;
+      }
+  };
+};
+//虽然seqer可变，且可以替换它的方法，但替换后的方法依然不能访问私有成员。
+var seqer = serial_marker();
+seqer.set_prefix('Q');
+seqer.set_seq(1000);
+var unique = seqer.gensym(); //unique='Q1000'
+```
 * 级联
 * 柯里化
 * 记忆
