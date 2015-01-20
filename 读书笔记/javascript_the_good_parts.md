@@ -460,7 +460,71 @@ var foo = function(){
 };
 ```
 * 闭包
+
+作用域的好处是内部函数可以访问定义它们的外部函数的参数和变量。当内部函数拥有比它的外部函数更长的生命周期时，内部函数引用的外部函数变量不会被释放（Java中一般会引起内存泄漏，而JS闭包恰好利用该特性）。
+
+示例：
+```javascript
+//创建一个myObj对象，把匿名函数调用结果赋值给它。
+var myObj = (function(){
+  var value = 0;//由于函数作用域，外部对value的操作只能基于return的对象的两个方法。
+  //该匿名函数返回一个包含两个方法的对象，并且这些方法继续享有访问value变量的特权。
+  return {
+    increment: function(inc){
+      value += typeof inc === 'number' ? inc : 1;
+    },
+    getValue: function(){
+      return value;
+    }
+  };
+}());
+```
+重构Quo构造器：
+```javascript
+//将status作为私有属性，提供对应的getter方法(原版本直接可以访问status，提供getter没意义，还需要显示new)。
+var quo = function(status){
+  return {
+    get_status:function(){
+      return status;
+    }
+  };
+};
+var myQuo = quo("amazed");//由于不需要加上new，所以名字没有首字母大写
+document.writeln(myQuo.get_status());
+```
+注：当调用quo时，它返回一个包含get_status方法的新对象。该对象的一个引用保存在myQuo中。即使quo已经返回，但get_status方法仍然享有访问quo对象的status属性的特权。get_status方法并不是访问该参数的一个副本，而是参数本身。**因为该函数可以访问它被创建时所处的上下文环境，这被称为闭包。**
+
+加深理解：
+```javascript
+//糟糕的例子
+//构造一个用于显示节点序号的函数，但由于用错误的方式给数组中的节点设置事件处理函数，而造成每次点击总是显示节点的数目
+var add_the_handlers = function(nodes){
+    var i;
+    for(i=0; i<nodes.length; i+=1){
+        nodes[i].onclick = function(e){
+            alert(i);
+        };
+    }
+};
+
+//改良后的例子
+var add_the_handlers = function(nodes){
+    var helper = function(i){
+        return function(e){
+            alert(i);
+        };
+    };
+    var i;
+    for(i=0; i<nodes.length; i+=1){
+        nodes[i].onclick = helper(i);
+    }
+};
+```
+注：避免在循环中创建函数，它可能只会带来无谓的计算，还会引起混淆。建议先在循环之外创建一个辅助函数，让辅助函数返回一个绑定当前i值的函数，这样就不会导致混淆。
+
 * 回调
+
+
 * 模块
 * 级联
 * 柯里化
