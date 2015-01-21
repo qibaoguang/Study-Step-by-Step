@@ -600,9 +600,58 @@ seqer.set_seq(1000);
 var unique = seqer.gensym(); //unique='Q1000'
 ```
 * 级联
+
+级联：在单独一条语句中依次调用同一个对象的多个方法，关键是返回this而不是undefined。JQuery等JS框架常使用级联简化编程。级联技术可以产生极富表现力的接口，并保持单个接口的简单性。
+
 * 柯里化
+
+柯里化：也称局部套用，是把多参数函数转换为一系列单参数函数并进行调用的技术。柯里化允许我们把函数与传递给它的参数相结合，产生出一个新的函数。
+
+柯里化示例：curry
+```javascript
+//curry方法创建一个保存原始函数和要被套用的参数的闭包来工作。它返回另一个函数，该函数被调用时，
+//会返回调用原始函数的结果，并传递调用curry时的参数加上当时调用的参数。
+Function.method('curry',function(){
+  var args = arguments, that = this;
+  return function(){
+      //Wrong! 本意使用Array的concat方法连接两个数组，但arguments不是真正的数组，它没有concat方法。
+      return that.apply(null, args.concat(arguments)); 
+  };  
+});
+//修正版：对两个arguments应用数组的slice方法，产生拥有concat方法的常规数组。
+Function.method('curry',function(){
+  var slice = Array.prototype.slice,
+      args = slice.apply(arguments); //arguments:传给原方法的参数
+      that = this;
+  return function(){
+     return that.apply(null, args.concat(slice.apply(arguments)));//arguments:传递给curry的参数
+  };
+});
+```
 * 记忆
 
+记忆：函数可以将先前操作的结果记录在某个对象里，从而避免无谓的重复运算，这种优化被称为记忆。JS的对象和数组能很方便的实现这种优化。
+
+带记忆功能的函数：memoizer
+```javascript
+//memoizer取得一个初始的memo数组和formula函数，返回一个管理memo存储和调用formula的recur函数。
+//把这个recur函数和它的参数传递给formula函数。
+var memoizer = function(memo, formula){
+  var recur = function(n){
+      var result = memo[n];
+      if(typeof result !== 'number'){
+          result = formula(recur, n);
+          memo[n] = result;
+      }
+      return result;
+  };
+  return recur;
+};
+//应用memoizer产生可记忆的阶乘函数
+var factorial = memoizer([1, 1], function(recur, n){
+    return n * recur(n-1);
+});
+```
 ### 第5章 继承
 * 伪类
 * 对象说明符
