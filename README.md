@@ -22,6 +22,9 @@ Study-Step-by-Step
 * [Building a REST API with JAXB, Spring Boot and Spring Data](http://raibledesigns.com/rd/entry/building_a_rest_api_with)
 * [自定义Jaxb绑定](http://blog.frankel.ch/customize-your-jaxb-bindings)
 
+### 前端开发
+* [Javascript语言精粹](读书笔记/javascript_the_good_parts.md)
+
 ### 项目构建
 * [Gradle在大型Java项目中的应用](http://www.infoq.com/cn/articles/Gradle-application-in-large-Java-projects/)
 * [Gradle](http://gradle.org/documentation)
@@ -30,8 +33,6 @@ Study-Step-by-Step
 ### Docker
 * [杨保华:DockerPool开源社区](http://blog.csdn.net/yeasy)
 * [DockerPool开源社区](http://dockerpool.com/)
-
-
 
 ### MySQL
 * [MySQL初级教程](学习笔记/mysql/mysql_start.md)
