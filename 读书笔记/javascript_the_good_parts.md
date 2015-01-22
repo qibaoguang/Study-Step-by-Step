@@ -659,11 +659,145 @@ var factorial = memoizer([1, 1], function(recur, n){
 JS的继承：JS是一门弱类型语言，从不需要类型转换。对于JS对象来说，重要的是它能做什么，而不是它从哪里来，它是什么（鸭式辩型）。JS基于原型的特性，意味着对象直接从其他对象继承，而不像基于类的语言。下面是JS常用的继承模式。
 
 * 伪类
+
+原型与伪类：JS的原型存在诸多矛盾，它的某些复杂的语法看起来就像那些基于类的语言，这些语法问题掩盖了它的原型机制。它不能直接从其他对象继承，反而插入了一个多余的间接层：通过构造器函数产生对象。
+
+当一个函数对象被创建时，Function构造器产生的函数对象会运行类似如下的代码：
+```javascript
+this.prototype = {constructor:this};
+```
+新函数对象被赋予一个prototype属性，它的值是一个包含constructor属性且属性值为该新函数的对象。这个prototype对象是存放继承特征的地方。由于JS语言没有提供确定构造器函数的方法（不像Java），所以每个函数都会得到一个prototype对象。constructor属性没什么用，重要的是prototype对象。
+
+当采用构造器调用模式，即用new前缀去调用一个函数时，函数执行的方式会被修改。如果new运算符是一个方法而不是一个运算符，它可能会像这样执行：
+```javascript
+Function.method('new',function(){
+  //创建一个继承构造器函数原型对象的新对象
+  var that = Object.create(this.prototype);
+  //调用构造器函数，绑定-this-到新对象上
+  var other = this.apply(that, arguments);
+  //如果它的返回值不是一个对象，就返回该新对象。
+  return (typeof other === 'object' && other) || that;
+});
+```
+伪类之伪：伪类本意是想向面向对象靠拢，但它看起来格格不入。没有私有环境，所有的属性都是公开的，无法访问super（父类）的方法。更糟糕的是，使用构造器如果忘记加new前缀，那么this将不会绑定到新对象上，而是绑定到全局对象上。这样不但没有扩充新对象，反而破坏了全局变量环境。出现这种情况事，既没有编译时错误，也没有运行时警告。
+
+放弃伪类：与其时刻担心忘记加new前缀，不如根本就不使用new（即使有构造器函数命名首字母大写的约定）。借鉴类的表示法可能误导程序员去编写过于深入与复杂的层次结构。许多复杂类层次结构产生原因是因为静态类型检查的约束，而JS完全摆脱了那些约束。在基于类的语言中，类继承是代码重用的唯一方式（当然还有组合），而JS有更多且更好的选择。所以放弃使用伪类，坚持JS的本色！
+
 * 对象说明符
+
+对象说明符：使用对象说明符来描述要构建的对象规格说明，而不是传一大串参数，这样可以避免参数顺序的问题，又能和JSON配合。
+
 * 原型
+
+原型，从构造有用对象开始：在一个纯粹的原型模式中，我们会摒弃类，转而专注于对象。基于原型的继承比基于类的继承在概念上更为简单：一个新对象可以继承一个旧对象的属性。通过构造一个有用的对象，接着构造更多类似的对象，这就可以完全避免把一个应用拆解成一系列嵌套抽象类的分类过程。
+
+差异化继承：通过定制一个新的对象，我们指明它与所基于的基本对象的区别。
+
 * 函数化
+
+函数化：前面几种继承模式的一个弱点是没法保护隐私。对象的所有属性都是可见的。我们无法得到私有变量和私有函数。不要试图通过**伪装私有（pretend privacy）**来实现私有属性的保护（给私有属性起个怪模怪样的名字，并希望其他使用代码的用户假装看不到这些奇怪的成员，掩耳盗铃！），应该使用模块模式来完成该效果！
+
+函数化，从构造一个生成对象的函数开始：
+  1. 创建一个新对象。构造方式很多，比如构造一个对象字面量，或者new+构造器函数，或者调用任意一个会返回对象的函数。
+  2. 有选择地定义私有实例变量和方法。这些就是函数中通过var语句定义的普通变量。
+  3. 给这个新对象扩充方法。这些方法拥有特权去访问变量，以及在第2步中通过var语句定义的变量。
+  4. 返回这个新对象。
+
+伪代码：
+```javascript
+//spec对象包含构造器需要构造新实例的所有信息。
+var constructor = function(spec, my){
+    //声明该对象私有的实例变量和方法  
+    var that, 其他私有变量实例;
+    //my为继承链中的构造器提供秘密共享的容器,可选
+    my = my || {};
+    //把共享的变量和函数添加到my中;
+    my.member = value;
+    .....
+    //构造新对象并赋值给that
+    that = 一个新对象;
+    //扩充that，添加组成该对象接口的特权方法
+    var methodical = function(){
+      ...
+    };
+    that.methodical = methodical;
+    //返回that
+    return that;
+};
+```
+示例：
+```javascript
+var mammal = function(spec){
+    var that = {};
+    that.get_name = function(){
+      return spec.name;
+    };
+    that.says = function(){
+      return spec.saying || '';
+    };
+    return that;
+};
+var myMammal = mammal({name: 'Herb'});
+```
+父类方法：函数化模式给我们提供处理父类方法的方法。
+```javascript
+//构造一个superior方法，它取得一个方法名并返回调用那个方法的函数。该函数会调用原来的方法。
+Object.method('superior', function(name){
+    var that = this, method = that[name];
+    return function(){
+        return method.apply(that, arguments);
+    };
+});
+```
+函数化模式优点：函数化模式有很大的灵活性。相比伪类模式，它不仅带来的工作更少，还让我们得到更好的封装和信息隐藏，以及访问父类方法的能力。如果对象的所有状态都是私有的，那就可以保证对象的完整性不被破坏。如果使用函数化样式创建一个对象，并且该对象的所有方法都不使用this或that，那该对象就是持久性的。一个持久性对象就是一个简单功能函数的集合。一个持久性的对象不会被入侵。访问一个持久性的对象时，除非有方法授权，否则攻击者不能访问对象的内部状态。
+
 * 部件
 
+一套部件组装出对象。
+
+示例：
+```javascript
+//构造一个给任何对象添加简单事件处理特性的函数。
+//它会给对象添加一个on方法，一个fire方法和一个私有的事件注册对象。
+var eventuality = function(that){
+   var registry = {};
+   //在一个对象上触发事件。该事件可以是一个包含事件名称的字符串，或一个拥有包含事件名称的
+   //type属性的对象。通过'on'方法注册的事件处理程序中匹配事件名称的函数将被调用。
+   that.fire = function(event){
+      var array, func, handler, i, type = typeof event === 'string' ? event : event.type;
+      //如果这个事件存在一组事件处理程序，则遍历它们并按顺序依次执行。
+      if(registry.hasOwnProperty(type)){
+          array = registry[type];
+          for(i=0; i<array.length; i += 1){
+              handler = array[i];
+              //每个处理程序包含一个方法和一组可选的参数。
+              //如果该方法是一个字符串形式的名字，那么就寻找该函数。
+              func = handler.method;
+              if(typeof func === 'string'){
+                  func = this[func];
+              }
+              //调用一个处理程序。如果该条目包含参数，那么传递它们过去，否则，传递该事件对象。
+              func.apply(this, handler.parameters || [event]);
+          }
+      }
+      return this;
+   };
+//注册一个事件。构造一条处理程序条目，并将它插入到处理程序数组中，如果不存在该类型的事件，则构造一个。
+    that.on = function(type, method, parameters){
+        var handler = {
+            method : method,
+            parameters : parameters
+        };
+        if(registry.hasOwnProperty(type)){
+            registry[type].push(handler);
+        }else{
+            registry[type] = [handler];
+        }
+        return this;
+    };
+    return that;
+};
+```
 ### 第6章 数组
 * 数组字面量
 * 长度
