@@ -874,10 +874,49 @@ var is_array = function(value){
 ```
 * 方法
 
-
+Array.prototype：可以通过Array.prototype给数组扩充方法。
 
 * 指定初始值
 
+JS数组通常不会预置值。如果你用[]得到一个新数组，它将是空的。如果你访问一个不存在的元素，得到的值则是undefined。JS应该提供为数组指定初始值的方法，但我们可以弥补这个疏忽：
+```javascript
+Array.dim = function(dimension, initial){
+    var a = [], i;
+    for(i=0; i<dimension; i++){
+      a[i] = initial;
+    }
+    return a;
+};
+//创建一个包含10个0的数组
+var myArray = Array.dim(10, 0);
+```
+多维数组：JS没有多为数组，但就像大多数类C语言一样，它支持元素为数组的数组：
+```javascript
+var matrix = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8]
+];
+matrix[2][1]; //7
+//注意：Array.dim(n, [])在这里不能工作，如果使用它，每个元素都指向同一个数组的引用，后果不堪设想。
+```
+初始化多维数组：一个空的矩阵每个单元都会拥有一个初始值undefined。
+```javascript
+Array.matrix = function(m, n, initial){
+    var a, i, j, mat=[];//由于JS变量作用域问题，将变量在函数体最前面声明。
+    for(i=0; i<m; i++){
+      a = [];
+      for(j=0; j<n; j++){
+        a[j] = initial;
+      }
+      mat[i] = a;
+    }
+    return mat;
+};
+//构造一个用0填充的4X4矩阵
+var myMatrix = Array.matrix(4, 4, 0);
+document.writeln(myMatrix[3][3]); //0
+```
 ### 第7章 正则表达式
 * 一个例子
 * 结构
