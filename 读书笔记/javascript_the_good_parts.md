@@ -799,12 +799,83 @@ var eventuality = function(that){
 };
 ```
 ### 第6章 数组
+
+数组：一段线性分配的内存，通过整数计算偏移并访问其中的元素。数组是一种性能出色的数据结构。不幸的，JS没有提供这样的结构。
+
+JS数组：JS提供一种拥有一些类数组（array-like）特性的对象。它把数组的下标转变为字符串，用其作为属性。它明显比一个真正的数组慢，但使用起来更方便。属性的检索和更新的方式与对象一模一样，只不过多一个可以用整数作为属性名的特性。
+
 * 数组字面量
+
+数组字面量：数组字面量提供一种非常方便地创建新数组的表示法。JS数组允许混合类型。
+```javascript
+var empty = [];
+//数组的第一个值将获得属性名'0'，第二个值将获得属性名'1'，依次类推:
+var numbers = [
+'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'
+];
+
+empty[1]; //undefined
+numbers[1]; //'one'
+
+empty.length; //0
+numbers.length; //10
+```
 * 长度
+
+JS数组长度：JS数组的length没有上界，如果你用大于或等于当前length的数字作为下标来存储一个元素，那么lengt值会被增大以容纳新元素，不会发生数组越界错误。
+
+注意：**length属性的值是这个数组最大整数属性名加上1，不一定等于数组里属性的个数!**
+```javascript
+var myArray = [];
+myArray.length; //0
+myArray[10000] = true;
+myArray.length; //10001
+```
+[]后置下标运算符：[]后置下表运算符把它所含的表达式转换成一个字符串，如果该表达式有toString方法，就使用方法的值。这个字符串将被用作属性名。如果这个字符串看起来像一个大于等于这个数组当前length且小于2^32-1的正整数，那么这个数组的length将会被重新设置为新的下标加1。可以直接设置length的值，设置更大的length不会给数组分配更多的空间，但把length设小将导致所有下标大于等于length的属性被删除。
+
 * 删除
+
+删除：由于JS数组是对象，所以delete运算符可以用来从数组中移除元素：
+```javascript
+//删除之后数组会留下一个空洞，除非移动每个数组的元素
+delete numbers[2];//numbers 是['zero', 'one', undefined, 'three'...]
+```
+splice方法：如果即想删除元素又不想留下空洞，可以使用splice方法。由于需要移除和重新插入，splice对于大型数组来说可能效率不高。
+```javascript
+//第1个参数是数组中的一个序号，第2个参数是要删除的元素个数。
+//任何额外的参数都会在序号那个点的位置被插入到数组中。
+numbers.splice(2, 1);//numbers 是['zero', 'one', 'three'...]
+```
 * 枚举
+ 
+for in：由于JS数组其实就是对象，所以可以用for in语句来遍历一个数组的所有属性。遗憾的是，for in无法保证属性的顺序，而大多数要遍历数组的场合都期望按照阿拉伯数字顺序产生元素。此外，可能从原型中得到意外属性的问题依旧存在。
+
+for循环：常规的for语句可以避免for in语句的问题。
+```javascript
+var i;
+for(i=0; i<arrays.length; i+=1){
+    document.writeln(arrays[i]);
+}
+```
 * 容易混淆的地方
+
+对象与数组的选择：当属性名是小而连续的整数时，你应该使用数组。否则，使用对象。JS本身对数组和对象的区别是混乱的。typeof运算符报告数组的类型是'object'，这没有任何意义。
+
+如何区别对象和数组：is_array（JS没有提供相应机制）
+```javascript
+//此方法不能识别从不同的窗口(window)或帧(frame)里构造的数组。
+var is_array = function(value){
+    return value && typeof value === 'object' && value.constructor === Array;
+};
+//better
+var is_array = function(value){
+    return Object.prototype.toString.apply(value) === '[object Array]';
+};
+```
 * 方法
+
+
+
 * 指定初始值
 
 ### 第7章 正则表达式
