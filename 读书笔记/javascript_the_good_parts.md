@@ -918,7 +918,33 @@ var myMatrix = Array.matrix(4, 4, 0);
 document.writeln(myMatrix[3][3]); //0
 ```
 ### 第7章 正则表达式
+
+正则表达式：一门简单语言的语法规范，它应用在一些方法中，对字符串中的信息实现查找，替换和提取操作。JS中，正则表达式相较于等效的字符串处理有着显著的性能优势。JS正则表达式不支持注释和空白。
+
 * 一个例子
+
+匹配URL：parse_url
+```javascript
+var parse_url = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;
+var url = "http://www.ora.com:80/goodparts?q#fragement";
+var result = parse_url.exec(url);
+var names = ['url', 'scheme', 'slash', 'host', 'port', 'path', 'query', 'hash'];
+var blanks = '    ';
+var i;
+for(i=0; i<names.length; i++){
+    document.writeln(names[i] + ':' + blanks.substring(names[i].length), result[i]);
+}
+//输出结果
+url: http://www.ora.com:80/goodparts?q#fragement
+scheme: http
+slash: //
+host: www.ora.com
+port: 80
+path: goodsparts
+query: q
+hash: fragment
+```
+
 * 结构
 * 元素
 
