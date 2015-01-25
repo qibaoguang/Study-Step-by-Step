@@ -1027,6 +1027,45 @@ var doubled_words = /([A-Za-z\u00C0-\u1FFF\u2800-\uFFFD]+)\s+\1/gi;
 
 ### 第8章 方法
 * Array
+  
+  1. array.concat(item...)
+  concat方法产生一个新数组，它包含一份array的浅复制（shallow copy）并把一个或多个参数item附加在其后。如果参数item是一个数组，那么它的每个元素都会被分别添加。功能和array.push(item...)类似。
+```javascript
+var a = ['a', 'b', 'c'];
+var b = ['x', 'y', 'z'];
+var c = a.concat(b, true);// c=['a', 'b', 'c', 'x', 'y', 'z', true];
+```
+  2. array.join(separator)
+  join方法把一个array中的每个元素构造成一个字符串，并用separator分隔符把它们连接在一起。默认的separator是逗号','。可以使用空白字符串作为separator实现无间隔的连接。对于连接大量的字符串片段，将它们放到一个数组中并用join方法连接通常比+元素运算符连接效率高。（注：**现在多数浏览器对+运算符连接字符串做了特别优化，性能已显著高于Array.join()，多数情况下，建议连接字符串首选+运算符**）。
+```javascript
+var a = ['a', 'b', 'c'];
+a.push('d');
+var c = a.join(' '); //c = 'abcd';
+```
+  3. array.pop()
+  pop方法移除array中的最后一个元素并返回该元素。如果array是empty，它会返回undefined。
+```javascript
+var a = ['a', 'b', 'c'];
+var c = a.pop(); //c = 'c', a = ['a', 'b'];
+//pop的一种实现方式
+Array.method('pop',function(){
+    return this.splice(this.length - 1, 1)[0];
+});
+```
+  4. array.push(item...)
+  push方法把一个或多个参数item附加到一个数组的尾部。和concat方法不同的是，它会修改array，如果参数item是一个数组，它会把参数数组作为单个元素整个添加到数组中，并返回这个array的新长度值。
+```javascript
+var a = ['a', 'b', 'c'];
+var b = ['x', 'y', 'z'];
+var c = a.push(b, true); // a=['a', 'b', 'c', ['x', 'y', 'z'], true] , c=5。
+//push可以这样实现
+Array.method('push',function(){
+    this.splice.apply(this, 
+        [this.length, 0].concat(Array.prototype.splice.apply(arguments)));
+    return this.length;
+});
+```
+
 * Function
 * Number
 * Object
