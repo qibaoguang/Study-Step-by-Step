@@ -62,6 +62,7 @@ Study-Step-by-Step
 * [B-树和B+树的应用：数据搜索和数据库索引](http://blog.csdn.net/hguisu/article/details/7786014)
 
 ### 其他
+* [ISO国际标准组织](http://www.iso.org/iso/home.html)
 * [乔布斯的领导艺术](https://www.aspeninstitute.org/sites/default/files/content/docs/about/HBR-Isaacson.pdf)
 * [一个合格的程序员应该读过哪些书](http://my.oschina.net/justjavac/blog/66624)
 * [把《编程珠玑》读薄](http://www.hawstein.com/posts/make-thiner-programming-pearls.html)
