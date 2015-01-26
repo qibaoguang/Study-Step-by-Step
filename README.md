@@ -18,10 +18,14 @@ Study-Step-by-Step
 * [Cookie&Session](http://blog.csdn.net/hi_1234567/article/details/8492859)
 * [一种基于注解的Spring MVC权限控制方法](http://www.open-open.com/lib/view/open1358472021196.html)
 * [AJAX+REST as the latest architectural mirage](http://stage.vambenepe.com/archives/1801)
-* [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
-* [WebSocket Security](https://devcenter.heroku.com/articles/websocket-security)
 * [Building a REST API with JAXB, Spring Boot and Spring Data](http://raibledesigns.com/rd/entry/building_a_rest_api_with)
 * [自定义Jaxb绑定](http://blog.frankel.ch/customize-your-jaxb-bindings)
+
+### WebSocket
+* [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
+* [WebSocket Security](https://devcenter.heroku.com/articles/websocket-security)
+* [Spring WebSocket Support](http://spring.io/blog/2013/05/23/spring-framework-4-0-m1-websocket-support)
+* [WEBSOCKET MESSAGING ARCHITECTURES](http://assets.spring.io/wp/WebSocketBlogPost.html)
 
 ### 前端开发
 * [Javascript语言精粹](读书笔记/javascript_the_good_parts.md)
@@ -42,8 +46,6 @@ Study-Step-by-Step
 ### Linux 
 * [awk命令](学习笔记/linux/awk.md)
 * [tar压缩与解压](学习笔记/linux/tar.md)
-
-### Shell
 * [Shell脚本编程30分钟入门](学习笔记/linux/shell.md)
 * [Shell监控脚本](学习笔记/linux/shellscript_start.md)
 
