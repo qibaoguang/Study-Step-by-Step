@@ -25,3 +25,4 @@ GitHub上感兴趣的组织
 * [SockJS -> WebSocket](https://github.com/sockjs)
 * [grunt:JS任务运行及构建工具](https://github.com/gruntjs)
 * [Yeoman:Web 应用开发脚手架](https://github.com/yeoman)
+* [Tools and docs for building and using HTTP APIs](https://github.com/interagent)
