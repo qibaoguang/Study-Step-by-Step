@@ -1125,11 +1125,37 @@ var x = function(){
 alert(x()); //666
 ```
 * Number
+
+number.toExponential(fractionDigits) : 把number转换成一个指数形式的字符串。可选参数fractionDigits控制其小数点后的数字位数，值必须在0~20。
+
+number.toFixed(fractionDigits) : 把number转换为一个十进制数形式的字符串。可选参数fractionDigits控制其小数点后的数字位数，值必须在0～20,默认为0。
+
+number.toPrecision(precision) : 把number转换为一个十进制数形式的字符串。可选参数precision控制数字的精度，值必须在0～21。
+
+number.toString(radix) : 把number转换为一个字符串。可选参数radix控制基数，值必须在2～36，默认为10。通常情况下，number.toString()可以简单地写为String(number);
+
 * Object
+
+object.hasOwnProperty(name) : 如果这个object包含一个名为name的属性，那么hasOwnProperty方法返回true。原型链中的同名属性不会被检查，当name为"hasOwnProperty"时不起作用，返回false。
+
 * RegExp
+
+regexp.exec(string)：如果成功匹配regexp和字符串string，则返回一个数组。数组中下标为0的元素将包含正则表达式regexp匹配的子字符串。下标为1的元素是分组1捕获的文本，下标为2的元素是分组2捕获的文本，依次类推。如果匹配失败，则返回null。
+
+exec循环调用：如果regexp带有一个g标识（全局标识），那么查找将从regexp.lastIndex（初始值为0）位置开始。如果匹配成功，那regexp.lastIndex将被设置为该匹配后第一个字符的位置。不成功的匹配将设置regexp.lastIndex为0。这允许你通过循环exec去查询一个匹配模式在一个字符串中发生了几次。需要注意的是，如果你提前退出了循环，再次进入这个循环前必须把regexp.lastIndex重置为0。而且，^因子仅匹配regexp.lastIndex为0的情况。
+
+regexp.test(string) : 如果regexp匹配string，则返回true; 否则，返回false。不要对这个方法使用g标识。
+
 * String
 
+参考JS String API! 使用类似Java String。
+
 ### 第9章 代码风格
+
+* [Google JavaScript 代码风格指南](http://bq69.com/blog/articles/script/868/google-javascript-style-guide.html)
+* [Google JSON 风格指南](https://github.com/darcyliu/google-styleguide/blob/master/JSONStyleGuide.md)
+* [CoffeeScript 编码风格指南](https://github.com/geekplux/coffeescript-style-guide)
+
 
 ### 第10章 优美的特性
 
