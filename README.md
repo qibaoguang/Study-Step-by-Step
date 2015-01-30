@@ -10,6 +10,7 @@ Study-Step-by-Step
 * [JDBC源码分析](http://blog.csdn.net/xieyuooo/article/details/8502585)
 * [JAVA-特种兵-AK47](http://blog.csdn.net/m13666368773/article/category/863997)
 * [Java线程池架构原理和源码解析](http://blog.csdn.net/xieyuooo/article/details/8718741)
+* [实战 Groovy 系列](http://www.ibm.com/developerworks/cn/java/j-pg/)
 
 ### J2EE
 * [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
@@ -21,14 +22,20 @@ Study-Step-by-Step
 * [Building a REST API with JAXB, Spring Boot and Spring Data](http://raibledesigns.com/rd/entry/building_a_rest_api_with)
 * [自定义Jaxb绑定](http://blog.frankel.ch/customize-your-jaxb-bindings)
 
-### WebSocket
+### Http & WebSocket
 * [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
 * [WebSocket Security](https://devcenter.heroku.com/articles/websocket-security)
 * [Spring WebSocket Support](http://spring.io/blog/2013/05/23/spring-framework-4-0-m1-websocket-support)
 * [WEBSOCKET MESSAGING ARCHITECTURES](http://assets.spring.io/wp/WebSocketBlogPost.html)
+* [HTTP 下午茶](http://happypeter.github.io/tealeaf-http/#chinese)
+* [HTTP 2](http://yuedu.baidu.com/ebook/478d1a62376baf1ffc4fad99?pn=1)
 
 ### 前端开发
 * [Javascript语言精粹](读书笔记/javascript_the_good_parts.md)
+* [HTML5 高级程序设计](https://github.com/bolasblack/Read-note/blob/master/HTML5%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1.md)
+* [JavaScript核心概念及实践](http://icodeit.org/jsccp/)
+* [JavaScript 模式](https://github.com/jayli/javascript-patterns)
+* [学用 JavaScript 设计模式](http://www.oschina.net/translate/learning-javascript-design-patterns)
 
 ### 项目构建
 * [Gradle在大型Java项目中的应用](http://www.infoq.com/cn/articles/Gradle-application-in-large-Java-projects/)
