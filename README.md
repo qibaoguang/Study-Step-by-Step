@@ -36,6 +36,7 @@ Study-Step-by-Step
 * [JavaScript核心概念及实践](http://icodeit.org/jsccp/)
 * [JavaScript 模式](https://github.com/jayli/javascript-patterns)
 * [学用 JavaScript 设计模式](http://www.oschina.net/translate/learning-javascript-design-patterns)
+* [AngularJS最佳实践和风格指南](https://github.com/mgechev/angularjs-style-guide/blob/master/README-zh-cn.md)
 
 ### 项目构建
 * [Gradle在大型Java项目中的应用](http://www.infoq.com/cn/articles/Gradle-application-in-large-Java-projects/)
