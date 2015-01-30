@@ -1061,8 +1061,69 @@ Array.method('push',function(){
     return this.length;
 });
 ```
-
+array.reverse():reverse方法反转array里的元素的顺序，并返回array本身。
+```javascript
+var a = ['a', 'b', 'c'];
+var b = a.reverse();//a=b=['c', 'b', 'a']
+```
+array.shift():shift方法移除数组array中的第1个元素并返回该元素。如果这个数组array是空的，则返回undefined。shift通常比pop慢得多：
+```javascript
+var a = ['a', 'b', 'c'];
+var c = a.shift(); //a=['b', 'c'], c='a'
+//shift可以这样实现
+Array.method('shift', function(){
+  return this.splice(0, 1)[0];
+});
+```
+array.slice(star, end):slice方法对array中的一段做浅复制。end参数可选，默认是array.length。如果两个参数中的任何一个是负数，array.length会和它们相加，试图让它们变成非负数。如果start大于等于array.length，得到的结果是一个新的空数组。
+```javascript
+var a = ['a', 'b', 'c'];
+var b = a.slice(0, 1); //b=['a']
+var c = a.slice(1); //c=['b', 'c']
+var d = a.slice(1, 2); //d=['b']
+```
+array.sort(comparefn):sort方法对array中的内容进行排序。它不能正确地给一组数字排序：
+```javascript
+//JS的默认比较函数把要被排序的元素都视为字符串。
+var n = [4, 8, 15, 16, 23, 42];
+n.sort(); //n=[15, 16, 23, 4, 42, 8] 
+//自定义比较函数：相等返回0, 第1个参数排列在前面则返回一个负数，否则返回一个正数
+n.sort(function(a, b){
+  return a-b;
+}); // n=[4, 8, 15, 16, 23, 42];
+//如果想使排序适用范围更广，需要判断元素类型。
+```
+array.splice(start, deleteCount, item...):splice方法从array中移除一个或多个元素，并用新的item替换它们。
+```javascript
+//splice主要用于从一个数组中删除元素
+var a = ['a', 'b', 'c'];
+var r = a.splice(1, 1, 'ache', 'bug');
+//a = ['a', 'ache', 'bug', 'c'], r = ['b']
+```
+array.unshift(item...):unshift方法像push方法一样，用于把元素添加到数组中，但它是把item插入到array的开始部分而不是尾部。它返回array的新length。
+```javascript
+var a = ['a', 'b', 'c'];
+var r = a.unshift('?', '@');
+//a=['?', '@', 'a', 'b', 'c'] , r=5
+```
 * Function
+
+function.apply(thisArg, argArray) : apply方法调用function，传递一个会被绑定到this上的对象和一个可选的数组作为参数。apply方法被用在apply调用模式中。
+```javascript
+//bnd:返回一个函数，调用这个函数就像调用那个对象的一个方法
+Function.method('bind', function(that){
+  var method = this,
+      slice = Array.prototype.slice,
+      args = slice.apply(arguments, [1]);
+  return function(){
+      return method.apply(that, args.concat(slice.apply(arguments, [0])));
+  };
+});
+var x = function(){
+  return this.value;
+}.bind({value: 666});
+alert(x()); //666
+```
 * Number
 * Object
 * RegExp
