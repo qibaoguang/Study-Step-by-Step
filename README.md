@@ -52,6 +52,7 @@ Study-Step-by-Step
 ### Design
 * [OSChina 留言表设计说明](http://www.oschina.net/question/12_70252)
 * [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70587)
+* [HTTP 接口设计](https://github.com/bolasblack/http-api-guide)
 
 ### 软件开发
 * [CQRS](http://www.cqrs.nu/)
