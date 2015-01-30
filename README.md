@@ -39,7 +39,7 @@ Study-Step-by-Step
 * [AngularJS最佳实践和风格指南](https://github.com/mgechev/angularjs-style-guide/blob/master/README-zh-cn.md)
 * [GRUNT:JS任务运行工具](http://www.gruntjs.net/) & [GruntJS](http://gruntjs.com/)
 * [Bower:WEB包管理](http://bower.io/)
-* [JS：RSA](http://ohdave.com/rsa/)
+* [JS：RSA](http://ohdave.com/rsa/) & [cryptojs](http://cryptojs.altervista.org/)
 
 
 ### 项目构建
