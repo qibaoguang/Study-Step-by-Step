@@ -24,3 +24,4 @@ GitHub上感兴趣的组织
 * [The Apache Software Foundation](https://github.com/apache)
 * [SockJS -> WebSocket](https://github.com/sockjs)
 * [grunt:JS任务运行及构建工具](https://github.com/gruntjs)
+* [Yeoman:Web 应用开发脚手架](https://github.com/yeoman)
