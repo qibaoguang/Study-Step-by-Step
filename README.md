@@ -41,6 +41,7 @@ Study-Step-by-Step
 ### 项目构建
 * [Gradle在大型Java项目中的应用](http://www.infoq.com/cn/articles/Gradle-application-in-large-Java-projects/)
 * [Gradle](http://gradle.org/documentation)
+* [YEO MAN](http://yeomanjs.org/)
 
 
 ### Docker
