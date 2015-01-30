@@ -10,4 +10,3 @@
 ### opensource
 * [Spiderman网络爬虫](https://gitcafe.com/laiweiwei/Spiderman/tree/master)
 * [WebMagic网络爬虫](https://github.com/code4craft/webmagic)
-* [YMX](https://94EH-CL7SP5-9579)
