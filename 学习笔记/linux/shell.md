@@ -3,16 +3,16 @@ Shell脚本编程30分钟入门
 ## 什么是Shell脚本
 ### 示例
 看个例子吧：
+```shell
+#!/bin/sh
+cd ~
+mkdir shell_tut
+cd shell_tut
 
-	#!/bin/sh
-	cd ~
-	mkdir shell_tut
-	cd shell_tut
-	
-	for ((i=0; i<10; i++)); do
-		touch test_$i.txt
-	done
-
+for ((i=0; i<10; i++)); do
+	touch test_$i.txt
+done
+```
 ### 示例解释
 
 - 第1行：指定脚本解释器，这里是用/bin/sh做解释器的
