@@ -14,3 +14,4 @@
 * [Google:Material Design](https://github.com/1sters/material_design_zh)
 * [开涛博客](http://jinnianshilongnian.iteye.com/)
 * [云计算＆大数据：anzhsoft](http://blog.csdn.net/anzhsoft?viewmode=contents)
+* [HAL Browser](http://haltalk.herokuapp.com/explorer/browser.html#/)
