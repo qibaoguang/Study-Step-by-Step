@@ -1171,24 +1171,72 @@ regexp.test(string) : 如果regexp匹配string，则返回true; 否则，返回f
   3. 直接使用未经声明的变量，这被称为隐式的全局变量：foo = value;
 
 * 作用域
-  JS没有提供块级作用域：代码块中声明的变量在包含此代码块的函数的任何位置都是可见的。
+  
+JS没有提供块级作用域：代码块中声明的变量在包含此代码块的函数的任何位置都是可见的。最好在每个函数的开头部分声明所有变量。
 
 * 自动插入分号
+
+JS自动修复机制：通过自动插入分号来修正有缺损的程序。但是，它可能会掩盖更为严重的错误。
+```javascript
+//如果return语句返回一个值，这个值表达式的开始部分必须和return位于同一行。
+return  //自动插入分号会让它返回undefined
+{
+  status : true
+};
+//正确写法
+return {
+  status : true
+};
+```
 * 保留字
 * Unicode
 * typeof
+  
+  typeof不能区分null和对象，typeof null 返回的是'object'。
+
 * parseInt
+
+parseInt是一个把字符串转换为整数的函数。它遇到非数字时会停止解析，parseInt("16")和parseInt("16 tons")产生的结果相同。如果该字符串第1个字符是0,那么该字符串会基于八进制而不是十进制来求值。在八进制中，8和9不是数字，所以parseInt("08")和parseInt("09")结果都是0。这个错误会导致程序解析日期和时间时出现问题。幸运的是，parseInt可以接受一个基数作为参数，parseInt("08",10)结果为8，建议加上基数参数。
+
 * +
+
++运算符可以用于加法运算或字符串连接，具体如何执行取决于参数的类型。如果想使用+做加法运算，需确保两个运算数都是整数。
+
 * 浮点数
+
+二进制的浮点数不能正确地处理十进制的小数，因此0.1+0.2不等于0.3。不过，浮点数中的整数运算是精确的，小数可以通过指定精度来避免错误。常见的货币转换，可以先将元乘以100转换为分，然后用分进行计算，最后再除以100转换为元。
+
 * NaN
+NaN是IEEE754中定义的一个特殊的数量值，用于表示不是一个数字，尽管typeof NaN === 'number'返回true。
+
+判断数字和NaN：typeof不能辨别NaN和数字，而且NaN也不等于它自己。如果需要区分数字和NaN，可以使用JS的isNaN函数。
+
+判断数字：判断一个值是否可用作数字的最佳方法是使用isFinite函数，它会筛选掉NaN和Infinity。遗憾的是，isFinite会试图把运算数转换为一个数字，所以如果值事实上不是一个数字，它就不是一个好的测试。
+```javascript
+//自定义isNumber函数
+var isNumber = function isNumber(value){
+    return typeof value === 'number' && isFinite(value);
+};
+```
 * 伪数组
 * 假值
 * hasOwnProperty
+
+hasOwnProperty是方法而不是运算符，这就有hasOwnProperty被其他函数甚至一个非函数的值替换的危险!
+
 * 对象
 
 ### 附录B 糟粕
 
-
-
-
-
+* ==
+* with语句
+* eval
+* continue语句
+* swith穿越
+* 缺少块的语句
+* ++ --
+* 位运算符
+* function语句对比function表达式
+* 类型的包装对象
+* new
+* void
