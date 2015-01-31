@@ -3,7 +3,7 @@ AWK常用命令
 ###文本操作
 * 打包当前目录下的所有文件:
 ```shell
-`ls | awk '{ print "tar zcvf "$0".tar.gz " $0|"/bin/bash" }'
+ls | awk '{ print "tar zcvf "$0".tar.gz " $0|"/bin/bash" }'
 ```
 * 指定分隔符
 ```shell
