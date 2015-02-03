@@ -21,6 +21,7 @@ Study-Step-by-Step
 * [AJAX+REST as the latest architectural mirage](http://stage.vambenepe.com/archives/1801)
 * [Building a REST API with JAXB, Spring Boot and Spring Data](http://raibledesigns.com/rd/entry/building_a_rest_api_with)
 * [自定义Jaxb绑定](http://blog.frankel.ch/customize-your-jaxb-bindings)
+* [RESTful API设计最佳实践](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
 
 ### Http & WebSocket
 * [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
