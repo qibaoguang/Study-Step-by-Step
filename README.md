@@ -24,6 +24,7 @@ Study-Step-by-Step
 * [RESTful API设计最佳实践](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
 * [REST Security](http://bill.burkecentral.com/2011/06/16/brainstorming-rest-security-part-i/)
 * [Roy Thomas的REST论文](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
+* [OData : Open Data Protocol](http://www.odata.org/)
 
 ### Http & WebSocket
 * [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
