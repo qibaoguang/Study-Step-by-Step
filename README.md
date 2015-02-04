@@ -22,6 +22,8 @@ Study-Step-by-Step
 * [Building a REST API with JAXB, Spring Boot and Spring Data](http://raibledesigns.com/rd/entry/building_a_rest_api_with)
 * [自定义Jaxb绑定](http://blog.frankel.ch/customize-your-jaxb-bindings)
 * [RESTful API设计最佳实践](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
+* [REST Security](http://bill.burkecentral.com/2011/06/16/brainstorming-rest-security-part-i/)
+* [Roy Thomas的REST论文](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 
 ### Http & WebSocket
 * [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
@@ -30,7 +32,6 @@ Study-Step-by-Step
 * [WEBSOCKET MESSAGING ARCHITECTURES](http://assets.spring.io/wp/WebSocketBlogPost.html)
 * [HTTP 下午茶](http://happypeter.github.io/tealeaf-http/#chinese)
 * [HTTP 2](http://yuedu.baidu.com/ebook/478d1a62376baf1ffc4fad99?pn=1)
-* [Roy Thomas的REST论文](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 
 ### 前端开发
 * [Javascript语言精粹](读书笔记/javascript_the_good_parts.md)
