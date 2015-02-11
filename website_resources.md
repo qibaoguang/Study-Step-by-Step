@@ -16,3 +16,4 @@
 * [云计算＆大数据：anzhsoft](http://blog.csdn.net/anzhsoft?viewmode=contents)
 * [HAL Browser](http://haltalk.herokuapp.com/explorer/browser.html#/)
 * [Roy T. Fielding : REST架构风格的设计者](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)
+* [Stripe:国外支付平台](https://stripe.com/)
