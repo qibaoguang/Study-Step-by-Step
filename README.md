@@ -36,6 +36,7 @@ Study-Step-by-Step
 
 ### 前端开发
 * [Javascript语言精粹](读书笔记/javascript_the_good_parts.md)
+* [HTML规范](https://html.spec.whatwg.org/multipage/)
 * [Web Directions Code](http://code13melb.webdirections.org/#JulioCesarOdy)
 * [HTML5 高级程序设计](https://github.com/bolasblack/Read-note/blob/master/HTML5%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1.md)
 * [JavaScript核心概念及实践](http://icodeit.org/jsccp/)
