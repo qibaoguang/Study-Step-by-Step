@@ -20,3 +20,4 @@
 * [阿里UED](http://www.aliued.cn/2014/03/02/hybrid-%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84-h5-%E5%BA%94%E7%94%A8%E5%8A%A0%E9%80%9F%E6%96%B9%E6%A1%88.html?utm_source=tuicool)
 * [Simple---强大的XOM工具](http://simple.sourceforge.net/)
 * [WATHWG](https://whatwg.org/)
+* [姜奇平:互联网的女性主义特征](http://www.xinli001.com/info/5386/)
