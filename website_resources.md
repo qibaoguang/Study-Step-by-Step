@@ -21,3 +21,4 @@
 * [Simple---强大的XOM工具](http://simple.sourceforge.net/)
 * [WATHWG](https://whatwg.org/)
 * [姜奇平:互联网的女性主义特征](http://www.xinli001.com/info/5386/)
+* [CSDN CODE:翻译平台](http://code.csdn.net/translations)
