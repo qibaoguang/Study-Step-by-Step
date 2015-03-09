@@ -93,4 +93,4 @@ Study-Step-by-Step
 * [一个合格的程序员应该读过哪些书](http://my.oschina.net/justjavac/blog/66624)
 * [把《编程珠玑》读薄](http://www.hawstein.com/posts/make-thiner-programming-pearls.html)
 * [把《把时间当作朋友》读薄](http://www.hawstein.com/posts/make-thiner-make-friend-with-time.html)
-* [一年365天向开源项目贡献代码所发生的事情](http://code.csdn.net/news/2824125)
+* [一年365天向开源项目贡献代码所发生的事情](http://code.csdn.net/news/2824125)&[原文](http://robert-kowalski.de/blog/what-happened-while-contributing-to-open-source-on-a-daily-basis-for-one-year/)
