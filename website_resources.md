@@ -23,3 +23,4 @@
 * [姜奇平:互联网的女性主义特征](http://www.xinli001.com/info/5386/)
 * [CSDN CODE:翻译平台](http://code.csdn.net/translations)
 * [高煥堂](http://8204129.blog.51cto.com/)
+* [JAVA世界](http://www.javaworld.com/)
