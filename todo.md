@@ -8,3 +8,8 @@
 ### opensource
 * [Spiderman网络爬虫](https://gitcafe.com/laiweiwei/Spiderman/tree/master)
 * [WebMagic网络爬虫](https://github.com/code4craft/webmagic)
+
+
+### docs 
+
+[JCA Reference Guide](http://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html)
