@@ -10,6 +10,12 @@ tar -zxvf memcached-1.x.x.tar.gz
 cd memcached-1.x.x
 ./configure && make && make test && sudo make install
 ````
+**注**：如果出现以下错误则重新运行`make install`
+```shell
+prove ./t
+make: prove: Command not found
+make: *** [test] Error 127
+```
 #### 2. start
 ```shell
 /usr/local/bin/memcached -d -m 200 -u root -l 192.168.1.91 -p 12301 -c 1000 -P /tmp/memcached.pid
