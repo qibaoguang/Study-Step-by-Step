@@ -2,19 +2,20 @@
 ===========
 ### 一. 安装与启动
 #### 1. install
-<pre>
-Debian/Ubuntu: apt-get install libevent-dev Redhat/Centos: yum install libevent-devel
+```shell
+Debian/Ubuntu: apt-get install libevent-dev 
+Redhat/Centos: yum install libevent-devel
 wget http://memcached.org/latest
 tar -zxvf memcached-1.x.x.tar.gz
 cd memcached-1.x.x
 ./configure && make && make test && sudo make install
-</pre>
+````
 #### 2. start
-<pre>
+```shell
 /usr/local/bin/memcached -d -m 200 -u root -l 192.168.1.91 -p 12301 -c 1000 -P /tmp/memcached.pid
-</pre>
+```
 相关解释如下：
-<pre>
+```shell
 -d选项是启动一个守护进程，
 -m是分配给Memcache使用的内存数量，单位是MB，这里是200MB
 -u是运行Memcache的用户，如果当前为 root 的话，需要使用此参数指定用户。
@@ -25,25 +26,25 @@ cd memcached-1.x.x
 停止Memcache进程：
 # kill `cat /tmp/memcached.pid`
 也可以启动多个守护进程，但是端口不能重复.
-</pre>
+```
 一开始说的“-d”参数需要进行进一步的解释:
-<pre>
+```shell
 -d install 安装memcached
 -d uninstall 卸载memcached
 -d start 启动memcached服务
 -d restart 重启memcached服务
 -d stop 停止memcached服务
 -d shutdown 停止memcached服务
-</pre>
+```
 #### 3. 检查服务
 3.1、查看启动的memcache服务：
-<pre>
+```shell
 netstat -lp | grep memcached
-</pre>
+```
 3.2、查看memcache的进程号（根据进程号，可以结束memcache服务：“kill -9 进程号”）
-<pre>
+```shell
 ps -ef | grep memcached 
-</pre>
+```
 
 ### 二. Memcached Java客户端（spymemcached）与Spring整合
 net.spy.memcached.spring.MemcachedClientFactoryBean在net.spy.memcached.MemcachedClient每次使用的时候创建MemcachedClient的新实例。
