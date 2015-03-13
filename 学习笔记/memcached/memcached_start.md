@@ -45,7 +45,11 @@ make: *** [test] Error 127
 #### 3. 检查服务
 3.1、查看启动的memcache服务：
 ```shell
-netstat -lp | grep memcached
+netstat -lp | grep memcached 
+```
+或
+```shell
+netstat -ntlp | grep memcached  #可以查看端口
 ```
 3.2、查看memcache的进程号（根据进程号，可以结束memcache服务：“kill -9 进程号”）
 ```shell
