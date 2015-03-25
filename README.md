@@ -97,3 +97,4 @@ Study-Step-by-Step
 * [把《把时间当作朋友》读薄](http://www.hawstein.com/posts/make-thiner-make-friend-with-time.html)
 * [一年365天向开源项目贡献代码所发生的事情](http://code.csdn.net/news/2824125)&[原文](http://robert-kowalski.de/blog/what-happened-while-contributing-to-open-source-on-a-daily-basis-for-one-year/)
 * [程序员必看的书-互联网](http://www.itjhwd.com/cxybooks-hlw/)
+* [分享一个牛人在群里的聊天记录](http://bbs.csdn.net/topics/390114474)
