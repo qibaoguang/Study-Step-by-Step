@@ -25,3 +25,4 @@
 * [高煥堂](http://8204129.blog.51cto.com/)
 * [JAVA世界](http://www.javaworld.com/)
 * [GMaven](http://docs.codehaus.org/display/GMAVEN/Home)
+* [走向架构师之路](http://blog.csdn.net/cutesource?viewmode=contents)
