@@ -34,3 +34,4 @@ GitHub上感兴趣的组织
 * [Fex-Team : 百度前端](https://github.com/fex-team)
 * [AGI:机器学习语言](https://github.com/opencog)
 * [Silicon Valley Data Science](https://github.com/silicon-valley-data-science)
+* [奇虎360](https://github.com/Qihoo360)
