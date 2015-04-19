@@ -92,6 +92,7 @@ Study-Step-by-Step
 
 ### 工具
 * [GitBook](http://www.phodal.com/blog/use-gitbook-to-make-a-book/)
+* [用Github,Markdown和GitBook写开源书](http://my.oschina.net/waylau/blog/355179)
 
 ### 其他
 * [ISO国际标准组织](http://www.iso.org/iso/home.html)
