@@ -56,6 +56,7 @@ Study-Step-by-Step
 * [Gradle在大型Java项目中的应用](http://www.infoq.com/cn/articles/Gradle-application-in-large-Java-projects/)
 * [Gradle](http://gradle.org/documentation)
 * [YEO MAN](http://yeomanjs.org/)
+* [Git中文版](http://gitbook.liuhui998.com/)
 
 
 ### Docker
@@ -90,7 +91,7 @@ Study-Step-by-Step
 * [B-树和B+树的应用：数据搜索和数据库索引](http://blog.csdn.net/hguisu/article/details/7786014)
 
 ### 工具
-* [GitBook中文版](http://gitbook.liuhui998.com/)
+* [GitBook](http://www.phodal.com/blog/use-gitbook-to-make-a-book/)
 
 ### 其他
 * [ISO国际标准组织](http://www.iso.org/iso/home.html)
