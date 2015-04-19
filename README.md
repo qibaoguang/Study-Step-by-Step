@@ -89,6 +89,9 @@ Study-Step-by-Step
 ### 数据结构与算法
 * [B-树和B+树的应用：数据搜索和数据库索引](http://blog.csdn.net/hguisu/article/details/7786014)
 
+### 工具
+* [GitBook中文版](http://gitbook.liuhui998.com/)
+
 ### 其他
 * [ISO国际标准组织](http://www.iso.org/iso/home.html)
 * [乔布斯的领导艺术](https://www.aspeninstitute.org/sites/default/files/content/docs/about/HBR-Isaacson.pdf)
