@@ -27,3 +27,4 @@
 * [GMaven](http://docs.codehaus.org/display/GMAVEN/Home)
 * [走向架构师之路](http://blog.csdn.net/cutesource?viewmode=contents)
 * [Android](http://blog.csdn.net/lmj623565791?viewmode=contents)
+* [岁月如歌](https://github.com/lifesinger/lifesinger.github.com/issues)
