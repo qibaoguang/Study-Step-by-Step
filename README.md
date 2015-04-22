@@ -50,6 +50,7 @@ Study-Step-by-Step
 * [JS：RSA](http://ohdave.com/rsa/) & [cryptojs](http://cryptojs.altervista.org/)
 * [HTML5 Demos](http://html5demos.com/)
 * [7天学会NodeJS](http://nqdeng.github.io/7-days-nodejs/)
+* [H5移动端页面设计心得](http://www.cychenyue.com/archives/16)
 
 
 ### 项目构建
