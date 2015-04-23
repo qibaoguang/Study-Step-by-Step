@@ -12,6 +12,7 @@ Study-Step-by-Step
 * [Java线程池架构原理和源码解析](http://blog.csdn.net/xieyuooo/article/details/8718741)
 * [实战 Groovy 系列](http://www.ibm.com/developerworks/cn/java/j-pg/)
 * [流行Java类](http://www.javased.com/?action=example-index)
+* [JCP](https://jcp.org/en/jsr/all)
 
 ### J2EE
 * [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
