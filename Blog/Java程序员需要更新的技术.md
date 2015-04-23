@@ -4,6 +4,7 @@
 * [Servlet 3.0 新特性详解](http://www.ibm.com/developerworks/cn/java/j-lo-servlet30/)
 * [Servlet 3特性：异步Servlet](http://www.importnew.com/8864.html)
 * [Java Servlet Technology](http://www.oracle.com/technetwork/java/index-jsp-135475.html)
+* [JSR-000315 JavaTM Servlet 3.0](https://jcp.org/aboutJava/communityprocess/final/jsr315/index.html)
 
 ### Java 7, 8 
 
