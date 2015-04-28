@@ -28,6 +28,9 @@ Study-Step-by-Step
 * [Roy Thomas的REST论文](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 * [OData : Open Data Protocol](http://www.odata.org/)
 * [AXIS2最简单客户端jar包说明及错误对照](http://blog.csdn.net/maotongbin/article/details/10110711)
+* [Netty源码解析](https://github.com/code4craft/netty-learning)
+* [Netty 实战](https://github.com/waylau/essential-netty-in-action)
+* [Netty 4.x 用户指南](https://github.com/waylau/netty-4-user-guide)
 
 ### Http & WebSocket
 * [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
