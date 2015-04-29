@@ -32,6 +32,7 @@ Study-Step-by-Step
 * [Netty 实战](https://github.com/waylau/essential-netty-in-action)
 * [Netty 4.x 用户指南](https://github.com/waylau/netty-4-user-guide)
 * [如何实现XA式、非XA式Spring分布式事务](http://www.importnew.com/15812.html)
+* [Web服务器工作原理概述](http://www.importnew.com/15020.html#comment-408285)
 
 ### Http & WebSocket
 * [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
