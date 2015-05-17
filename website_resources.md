@@ -28,3 +28,4 @@
 * [走向架构师之路](http://blog.csdn.net/cutesource?viewmode=contents)
 * [Android](http://blog.csdn.net/lmj623565791?viewmode=contents)
 * [岁月如歌](https://github.com/lifesinger/lifesinger.github.com/issues)
+* [Editplus注册码在线生成](http://www.jb51.net/tools/editplus/)
