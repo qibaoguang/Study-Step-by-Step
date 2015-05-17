@@ -112,5 +112,5 @@ Study-Step-by-Step
 * [一年365天向开源项目贡献代码所发生的事情](http://code.csdn.net/news/2824125)&[原文](http://robert-kowalski.de/blog/what-happened-while-contributing-to-open-source-on-a-daily-basis-for-one-year/)
 * [程序员必看的书-互联网](http://www.itjhwd.com/cxybooks-hlw/)
 * [分享一个牛人在群里的聊天记录](http://bbs.csdn.net/topics/390114474)
-* [名词王国中的死刑](http://lc-wangchao.iteye.com/blog/1575984)
+* [Steve Yegge：名词王国中的死刑](http://lc-wangchao.iteye.com/blog/1575984)
 * [Steve Yegge：编程的肮脏小秘密](http://blog.jobbole.com/64959/)
