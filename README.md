@@ -59,7 +59,7 @@ Study-Step-by-Step
 * [Node入门](http://www.nodebeginner.org/index-zh-cn.html#javascript-and-nodejs)
 * [H5移动端页面设计心得](http://www.cychenyue.com/archives/16)
 * [JS tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
-* [AngularJS开发指南](http://z.sdutlinux.org/scrapbook_new/data/20130304233407/index.html)
+* [AngularJS开发指南](http://www.angularjs.cn/T008)
 
 
 ### 项目构建
