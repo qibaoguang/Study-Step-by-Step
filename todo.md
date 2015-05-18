@@ -14,3 +14,8 @@
 
 * [JCA Reference Guide](http://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html)
 * [Dubbo](http://dubbo.io/Home-zh.htm)
+
+
+### interest
+
+* [微软ProjectOxford](https://www.projectoxford.ai/)
