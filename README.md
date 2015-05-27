@@ -60,6 +60,7 @@ Study-Step-by-Step
 * [H5移动端页面设计心得](http://www.cychenyue.com/archives/16)
 * [JS tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
 * [AngularJS开发指南](http://www.angularjs.cn/T008)
+* [全面理解面向对象的 JavaScript](http://www.ibm.com/developerworks/cn/web/1304_zengyz_jsoo/)
 
 
 ### 项目构建
