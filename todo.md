@@ -24,3 +24,7 @@
 ### tools
 
 * [代码格式化](http://tool.oschina.net/codeformat/json)
+
+### 自留地
+
+* [开涛Spring4](http://jinnianshilongnian.iteye.com/blog/2102278)
