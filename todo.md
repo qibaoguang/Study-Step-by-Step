@@ -29,5 +29,7 @@
 
 * [开涛Spring4](http://jinnianshilongnian.iteye.com/blog/2102278)
 * [中国近代经济学家：郎咸平、吴敬琏、张维迎、许小年、茅于轼](http://zhidao.baidu.com/link?url=_KrRB__NyLPJafnvsftJWliUl1yc_Ab6e8urjPZAMV9dv5Ni-DMbMz-Ql29PnVj8foz8SRvVfHzJZswFWNdFX1ry5FV_Yu5nGPTVhJJNdgy)
+* [豆瓣评郎咸平](http://www.douban.com/group/topic/15542886/)
 * [文小芒：管理实践与学习](http://www.douban.com/group/542139/)
+* [西西河的wxmang](http://www.zhihu.com/question/21146111)
 
