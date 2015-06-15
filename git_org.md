@@ -37,3 +37,4 @@ GitHub上感兴趣的组织
 * [奇虎360](https://github.com/Qihoo360)
 * [汤姆大叔的博客](http://www.cnblogs.com/TomXu/)
 * [AngularUI](https://github.com/angular-ui)
+* [AlloyTeam：腾讯前端](http://alloyteam.github.io/)
