@@ -42,6 +42,7 @@ Study-Step-by-Step
 * [WEBSOCKET MESSAGING ARCHITECTURES](http://assets.spring.io/wp/WebSocketBlogPost.html)
 * [HTTP 下午茶](http://happypeter.github.io/tealeaf-http/#chinese)
 * [HTTP 2](http://yuedu.baidu.com/ebook/478d1a62376baf1ffc4fad99?pn=1)
+* [短链接-HTTP 301](http://blog.csdn.net/beiyeqingteng/article/details/7706010)
 
 ### 前端开发
 * [Javascript语言精粹](读书笔记/javascript_the_good_parts.md)
