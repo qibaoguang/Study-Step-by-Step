@@ -39,4 +39,4 @@ GitHub上感兴趣的组织
 * [AngularUI](https://github.com/angular-ui)
 * [AlloyTeam：腾讯前端](http://alloyteam.github.io/)
 * [FasterXML：JackSon2.0](https://github.com/FasterXML)
-* [FlyWa:数据库版本管理工具](https://github.com/flyway/flyway)
+* [FlyWay:数据库版本管理工具 -> Liquibase](https://github.com/flyway/flyway)
