@@ -14,6 +14,7 @@ Study-Step-by-Step
 * [流行Java类](http://www.javased.com/?action=example-index)
 * [JCP](https://jcp.org/en/jsr/all)
 * [Java开源大全](http://man.lupaworld.com/content/develop/open-open/open86025.htm)
+* [Java序列化规范](http://docs.oracle.com/javase/7/docs/platform/serialization/spec/serial-arch.html)
 
 ### J2EE
 * [Properties with Spring](http://www.baeldung.com/2012/02/06/properties-with-spring/)
