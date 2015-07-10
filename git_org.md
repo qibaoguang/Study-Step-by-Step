@@ -40,3 +40,4 @@ GitHub上感兴趣的组织
 * [AlloyTeam：腾讯前端](http://alloyteam.github.io/)
 * [FasterXML：JackSon2.0](https://github.com/FasterXML)
 * [FlyWay:数据库版本管理工具 -> Liquibase](https://github.com/flyway/flyway)
+* [Mashape - kong微服务OSS](https://github.com/Mashape)
