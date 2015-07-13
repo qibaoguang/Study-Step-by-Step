@@ -102,6 +102,7 @@ Study-Step-by-Step
 * [Akka Dispatchers](http://doc.akka.io/docs/akka/snapshot/scala/dispatchers.html)
 * [探索微型框架：Spring Boot](http://www.oschina.net/translate/microframeworks1-spring-boot?lang=chs&page=2)
 * [微服务不是免费的午餐](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html)
+* [微服务架构的设计模式](http://www.infoq.com/cn/news/2015/04/micro-service-architecture?utm_source=infoq&utm_medium=related_content_link&utm_campaign=relatedContent_articles_clk&from=groupmessage&isappinstalled=0)
 
 ### 数据结构与算法
 * [B-树和B+树的应用：数据搜索和数据库索引](http://blog.csdn.net/hguisu/article/details/7786014)
