@@ -31,6 +31,7 @@
 * [Editplus注册码在线生成](http://www.jb51.net/tools/editplus/)
 * [AngularJs社区](http://docs.ngnice.com/)
 * [100个高质量Java开发者博客](http://www.importnew.com/7469.html#comment-435257)
+* [Pragmatistic Guy：李鼎](http://oldratlee.com/)
 
 
 ### 软件工具
