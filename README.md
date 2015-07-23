@@ -94,6 +94,10 @@ Study-Step-by-Step
 * [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70587)
 * [HTTP 接口设计](https://github.com/bolasblack/http-api-guide)
 
+### 测试TDD
+* [Java测试的自定义断言](http://www.infoq.com/cn/articles/custom-assertions)
+* [Junit中处理异常的另一种方式：catch-exception](http://www.importnew.com/10922.html)
+
 ### 软件开发
 * [CQRS](http://www.cqrs.nu/)
 * [DDD:Jdon](http://en.jdon.com/)
