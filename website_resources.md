@@ -32,6 +32,7 @@
 * [AngularJs社区](http://docs.ngnice.com/)
 * [100个高质量Java开发者博客](http://www.importnew.com/7469.html#comment-435257)
 * [Pragmatistic Guy：李鼎](http://oldratlee.com/)
+* [PostgreSQL 8.1 中文文档](http://www.php100.com/manual/PostgreSQL8/preface.html)
 
 
 ### 软件工具
