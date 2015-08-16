@@ -73,6 +73,7 @@ Study-Step-by-Step
 * [Gradle](http://gradle.org/documentation)
 * [YEO MAN](http://yeomanjs.org/)
 * [Git中文版](http://gitbook.liuhui998.com/)
+* [maven 管理项目实践指南](http://blog.csdn.net/mindfloating/article/details/8519938)
 
 
 ### Docker
