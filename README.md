@@ -67,6 +67,7 @@ Study-Step-by-Step
 * [AngularJS开发指南](http://www.angularjs.cn/T008)
 * [全面理解面向对象的 JavaScript](http://www.ibm.com/developerworks/cn/web/1304_zengyz_jsoo/)
 * [AngularJs参考指南](http://docs.ngnice.com/guide)
+* [徐飞博客](https://github.com/xufei/blog/tree/master/posts)
 
 
 ### 项目构建
