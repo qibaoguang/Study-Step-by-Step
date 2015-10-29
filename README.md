@@ -37,6 +37,7 @@ Study-Step-by-Step
 * [Web服务器工作原理概述](http://www.importnew.com/15020.html#comment-408285)
 * [30天学习30种新技术系列](http://segmentfault.com/a/1190000000349384)
 * [Jetty服务器架构分析](http://blog.csdn.net/lovingprince/article/details/6202669)
+* [开源中国文档](http://oss.org.cn/ossdocs/framework/spring/)
 
 ### Http & WebSocket
 * [WebSocket协议](https://github.com/zhangkaitao/websocket-protocol)
