@@ -35,6 +35,7 @@
 * [Pragmatistic Guy：李鼎](http://oldratlee.com/)
 * [PostgreSQL 8.1 中文文档](http://www.php100.com/manual/PostgreSQL8/preface.html)
 * [搜索技术博客－淘宝](http://www.searchtb.com/2012/10/introduction_to_disruptor.html)
+* [逍遥冲](http://www.xiaoyaochong.net/wordpress/index.php/2015/01/12/2014%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E9%9B%86%E9%94%A6/)
 
 
 ### 软件工具
