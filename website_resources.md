@@ -37,6 +37,7 @@
 * [搜索技术博客－淘宝](http://www.searchtb.com/2012/10/introduction_to_disruptor.html)
 * [逍遥冲](http://www.xiaoyaochong.net/wordpress/index.php/2015/01/12/2014%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E9%9B%86%E9%94%A6/)
 * [艾伦-前端](https://github.com/jsAaron)
+* [AngularJs社区](http://www.ngnice.com/)
 
 
 ### 软件工具
