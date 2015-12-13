@@ -70,6 +70,7 @@ Study-Step-by-Step
 * [AngularJs参考指南](http://docs.ngnice.com/guide)
 * [徐飞博客](https://github.com/xufei/blog/tree/master/posts)
 * [AngularJS规范](https://github.com/johnpapa/angular-styleguide/blob/master/i18n/zh-CN.md)
+* [Emmet语法](https://github.com/emmetio/emmet/blob/master/lib/snippets.json)
 
 
 ### 项目构建
