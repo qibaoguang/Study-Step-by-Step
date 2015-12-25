@@ -42,3 +42,4 @@ GitHub上感兴趣的组织
 * [FlyWay:数据库版本管理工具 -> Liquibase](https://github.com/flyway/flyway)
 * [Mashape - kong微服务OSS](https://github.com/Mashape)
 * [Reactor：反应堆？](https://github.com/reactor)
+* [Yahoo开源爬虫](https://github.com/yahoo/anthelion)
