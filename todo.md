@@ -9,6 +9,7 @@
 * [Spiderman网络爬虫](https://gitcafe.com/laiweiwei/Spiderman/tree/master)
 * [WebMagic网络爬虫](https://github.com/code4craft/webmagic)
 * [craftcode](http://craftcode.io/)
+* [Vesta通用ID生成器](https://github.com/robertleepeak/vesta-id-generator)
 
 
 ### docs 
