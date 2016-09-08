@@ -38,6 +38,8 @@
 * [逍遥冲](http://www.xiaoyaochong.net/wordpress/index.php/2015/01/12/2014%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E9%9B%86%E9%94%A6/)
 * [艾伦-前端](https://github.com/jsAaron)
 * [AngularJs社区](http://www.ngnice.com/)
+* [Google Dapper](http://duanple.blog.163.com/blog/static/70971767201329113141336/)
+* [分布式系统](http://duanple.blog.163.com/blog/static/709717672011330101333271/)
 
 
 ### 软件工具
