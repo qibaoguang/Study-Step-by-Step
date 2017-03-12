@@ -10,6 +10,7 @@
 * [WebMagic网络爬虫](https://github.com/code4craft/webmagic)
 * [craftcode](http://craftcode.io/)
 * [Vesta通用ID生成器](https://github.com/robertleepeak/vesta-id-generator)
+* [TraceKit:JS异常捕获](https://github.com/csnover/TraceKit)
 
 
 ### docs 
