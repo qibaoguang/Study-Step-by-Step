@@ -99,6 +99,7 @@ Study-Step-by-Step
 * [OSChina 留言表设计说明](http://www.oschina.net/question/12_70252)
 * [OSChina 用户动态设计说明](http://www.oschina.net/question/12_70587)
 * [HTTP 接口设计](https://github.com/bolasblack/http-api-guide)
+* [HTTP API Design Guide](https://github.com/interagent/http-api-design)
 
 ### 测试TDD
 * [Java测试的自定义断言](http://www.infoq.com/cn/articles/custom-assertions)
