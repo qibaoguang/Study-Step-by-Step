@@ -134,3 +134,4 @@ Study-Step-by-Step
 * [Steve Yegge：编程的肮脏小秘密](http://blog.jobbole.com/64959/)
 * [从P1到P7——我在淘宝这7年](http://kb.cnblogs.com/page/132752/)
 * [火龙果](http://www.uml.org.cn/jmshj/jmshj-jm.asp)
+* [BrowserQuest：一个H5小游戏](https://github.com/mozilla/BrowserQuest)
