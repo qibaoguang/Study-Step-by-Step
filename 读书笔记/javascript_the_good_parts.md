@@ -272,7 +272,7 @@ var myObj = { //创建myObj对象，有一个value属性和一个increment方法
 myObj.increment();
 document.writeln(myObj.value) // 1
 
-myObj.increment();
+myObj.increment(2);
 document.writeln(myObj.value) //3
 ```
 
